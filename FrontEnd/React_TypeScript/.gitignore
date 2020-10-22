@@ -1,0 +1,8 @@
+# build 파일
+.next
+
+# modules 파일
+node_modules
+
+# env 파일
+next.config.js
