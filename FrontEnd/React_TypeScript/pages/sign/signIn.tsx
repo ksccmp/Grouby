@@ -8,6 +8,7 @@ import {
     StyledFlex1,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
+    StyledNineDiv1,
 } from '../../api/styled';
 import Router from 'next/router';
 
@@ -16,10 +17,15 @@ const SignIn = (): JSX.Element => {
         Router.push('/sign/signUp');
     };
 
+    const goMainHome = () => {
+        Router.push('/main/mainHome');
+    };
+
     return (
         <>
+            <button onClick={goMainHome}>mainHome</button>
             <StyledFlex1>
-                <StyledMaxDiv1>
+                <StyledNineDiv1>
                     <StyledMaxDiv1>GROUBY</StyledMaxDiv1>
                     <StyledMaxDiv1>
                         <StyledBorderDiv1>
@@ -44,7 +50,7 @@ const SignIn = (): JSX.Element => {
                             </StyledFlex1>
                         </StyledDiv1>
                     </StyledMaxDiv1>
-                </StyledMaxDiv1>
+                </StyledNineDiv1>
             </StyledFlex1>
 
             <style global jsx>

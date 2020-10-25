@@ -5,6 +5,7 @@ export const StyledH1 = styled.p`
     padding: 0;
     font-size: 1.8rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH2 = styled.p`
@@ -12,6 +13,7 @@ export const StyledH2 = styled.p`
     padding: 0;
     font-size: 1.6rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH3 = styled.p`
@@ -19,6 +21,7 @@ export const StyledH3 = styled.p`
     padding: 0;
     font-size: 1.4rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH4 = styled.p`
@@ -26,6 +29,7 @@ export const StyledH4 = styled.p`
     padding: 0;
     font-size: 1.2rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH5 = styled.p`
@@ -33,6 +37,7 @@ export const StyledH5 = styled.p`
     padding: 0;
     font-size: 1rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH6 = styled.p`
@@ -40,6 +45,7 @@ export const StyledH6 = styled.p`
     padding: 0;
     font-size: 0.8rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH7 = styled.p`
@@ -47,6 +53,7 @@ export const StyledH7 = styled.p`
     padding: 0;
     font-size: 0.6rem;
     font-weight: bold;
+    display: inline-block;
 `;
 
 export const StyledH8 = styled.p`
@@ -54,4 +61,31 @@ export const StyledH8 = styled.p`
     padding: 0;
     font-size: 0.4rem;
     font-weight: bold;
+    display: inline-block;
+`;
+
+export const StyledBorderH6 = styled.p`
+    margin: 0;
+    padding: 0.1rem 0.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border: 1px solid black;
+`;
+
+export const StyledLabel5 = styled.label`
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
 `;
