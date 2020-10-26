@@ -32,6 +32,15 @@ export const StyledH4 = styled.p`
     display: inline-block;
 `;
 
+export const StyledH4_1 = styled.p`
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: inline-block;
+    marginleft: 0.7rem;
+`;
+
 export const StyledH5 = styled.p`
     margin: 0;
     padding: 0;

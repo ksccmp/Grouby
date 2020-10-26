@@ -6,6 +6,9 @@ const height1 = '40';
 const height2 = '30';
 const height3 = '120';
 const height4 = '70';
+const height5 = '90';
+const height6 = '20';
+const height7 = '60';
 const external1 = '50';
 const externalButton1 = '42';
 
@@ -68,6 +71,16 @@ export const StyledBorderDiv3 = styled.div`
     position: relative;
 `;
 
+export const StyledBorderDiv4 = styled.div`
+    width: 100%;
+    background-color: blue;
+    min-width: ${minWidth1}px;
+    max-width: ${maxWidth1}px;
+    height: ${height6}px;
+    padding: 1px;
+    margin: 4px auto;
+`;
+
 export const StyledBackgroundDiv1 = styled.div`
     height: ${height1}px;
     overflow: hidden;
@@ -95,6 +108,14 @@ export const StyledBackgroundDiv3 = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-right: ${external1}px;
+`;
+
+export const StyledBackgroundDiv4 = styled.div`
+    height: ${height6}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
 `;
 
 export const StyledButton1 = styled.button`
@@ -150,6 +171,28 @@ export const StyledFlex4 = styled.div`
     align-items: center;
     height: ${(props: IStyledFlex4) => (props.extend ? 'initial' : height4 + 'px')};
     margin-top: 0.5rem;
+`;
+
+export const StyledFlex5 = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: ${height5}px;
+    text-align: center;
+`;
+
+interface IStyledFlex6 {
+    extend: boolean;
+}
+
+export const StyledFlex6 = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: ${(props: IStyledFlex6) => (props.extend ? 'initial' : height7 + 'px')};
+    background-color: green;
+    border: 1px solid green;
+    opacity: 0.7;
 `;
 
 export const StyledGrid1 = styled.div`

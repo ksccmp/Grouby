@@ -2,38 +2,38 @@ import * as React from 'react';
 import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1 } from '../../api/styled';
 import { StyledH4 } from '../../api/styledFont';
 import Router from 'next/router';
-import { goMainHome, goMainFriends, goMainAdd } from '../../api/common';
+import { goGroupHome, goGroupTalk, goGroupAdd } from '../../api/common';
 
-interface ISignLayout {
+interface IGroupLayout {
     children: React.ReactNode;
 }
 
-const SignLayout: React.FC<ISignLayout> = ({ children }): JSX.Element => {
+const GroupLayout: React.FC<IGroupLayout> = ({ children }): JSX.Element => {
     return (
         <>
             <div style={{ paddingBottom: '30px' }}>{children}</div>
-            {Router.pathname.endsWith('mainHome') ||
-            Router.pathname.endsWith('mainFriends') ||
-            Router.pathname.endsWith('mainAdd') ? (
+            {Router.pathname.endsWith('groupHome') ||
+            Router.pathname.endsWith('groupTalk') ||
+            Router.pathname.endsWith('groupAdd') ? (
                 <div>
                     <StyledNineFixedFooter1>
                         <StyledDiv1>
                             <StyledNavUl1>
                                 <StyledNavLi1
-                                    checked={Router.pathname.endsWith('mainHome') ? true : false}
-                                    onClick={goMainHome}
+                                    checked={Router.pathname.endsWith('groupHome') ? true : false}
+                                    onClick={goGroupHome}
                                 >
                                     <StyledH4>홈</StyledH4>
                                 </StyledNavLi1>
                                 <StyledNavLi1
-                                    checked={Router.pathname.endsWith('mainFriends') ? true : false}
-                                    onClick={goMainFriends}
+                                    checked={Router.pathname.endsWith('groupTalk') ? true : false}
+                                    onClick={goGroupTalk}
                                 >
-                                    <StyledH4>친구</StyledH4>
+                                    <StyledH4>채팅</StyledH4>
                                 </StyledNavLi1>
                                 <StyledNavLi1
-                                    checked={Router.pathname.endsWith('mainAdd') ? true : false}
-                                    onClick={goMainAdd}
+                                    checked={Router.pathname.endsWith('groupAdd') ? true : false}
+                                    onClick={goGroupAdd}
                                 >
                                     <StyledH4>더보기</StyledH4>
                                 </StyledNavLi1>
@@ -48,4 +48,4 @@ const SignLayout: React.FC<ISignLayout> = ({ children }): JSX.Element => {
     );
 };
 
-export default SignLayout;
+export default GroupLayout;

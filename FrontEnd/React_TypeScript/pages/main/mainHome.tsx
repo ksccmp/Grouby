@@ -12,7 +12,9 @@ import {
     StyledFlex1,
 } from '../../api/styled';
 import { StyledH4, StyledH5 } from '../../api/styledFont';
+import { StyledPlusCircleOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
+import { goMainRegGroup } from '../../api/common';
 
 const MainHome = (): JSX.Element => {
     return (
@@ -49,15 +51,15 @@ const MainHome = (): JSX.Element => {
                 </StyledDiv1>
             </StyledNineDiv1>
 
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
-            <GroupCard></GroupCard>
+            <StyledNineDiv2>
+                <GroupCard></GroupCard>
+
+                <StyledBorderDiv1 onClick={goMainRegGroup}>
+                    <StyledBackgroundDiv1>
+                        <StyledPlusCircleOutlined1 />
+                    </StyledBackgroundDiv1>
+                </StyledBorderDiv1>
+            </StyledNineDiv2>
         </>
     );
 };

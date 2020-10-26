@@ -28,26 +28,25 @@ const MainFriends = (): JSX.Element => {
                                         <StyledText1 placeholder="검색"></StyledText1>
                                     </StyledBackgroundDiv1>
                                 </StyledBorderDiv1>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
-                                <Friend isAdd={false}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
+                                <Friend external={'delete'}></Friend>
                             </StyledTabDiv1>
                         </StyledTabLi1>
                         <StyledTabLi1>
@@ -59,19 +58,15 @@ const MainFriends = (): JSX.Element => {
                                         <StyledText1 placeholder="검색"></StyledText1>
                                     </StyledBackgroundDiv1>
                                 </StyledBorderDiv1>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
-                                <Friend isAdd={true}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
+                                <Friend external={'add'}></Friend>
                             </StyledTabDiv1>
                         </StyledTabLi1>
                     </StyledTabUl1>
