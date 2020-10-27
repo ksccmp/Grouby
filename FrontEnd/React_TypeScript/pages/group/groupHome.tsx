@@ -14,7 +14,7 @@ import {
     StyledNineDiv2,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { goBack } from '../../api/common';
+import { goBack, goGroupRegSpot } from '../../api/common';
 import { StyledH3, StyledH7, StyledH5 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
 
@@ -28,7 +28,7 @@ const GroupHome = (): JSX.Element => {
                             <StyledLeftOutLined1 onClick={goBack} />
                             <StyledH3>그룹명</StyledH3>
                         </div>
-                        <div>
+                        <div onClick={goGroupRegSpot}>
                             <StyledH3>등록</StyledH3>
                         </div>
                     </StyledFlex2>

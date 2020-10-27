@@ -39,3 +39,7 @@ export const goGroupTalk = (): void => {
 export const goGroupAdd = (): void => {
     Router.push('/group/groupAdd');
 };
+
+export const goGroupRegSpot = (): void => {
+    Router.push('/group/groupRegSpot');
+};

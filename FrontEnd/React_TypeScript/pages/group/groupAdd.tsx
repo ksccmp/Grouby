@@ -8,18 +8,20 @@ import {
     StyledBorderDiv3,
     StyledBackgroundDiv3,
     StyledExternalDiv1,
+    StyledBorderDiv1,
+    StyledBackgroundDiv1,
 } from '../../api/styled';
 import { StyledH4, StyledH5, StyledH4_1 } from '../../api/styledFont';
 import { StyledRightOutlined1 } from '../../api/styledAnt';
 
-const MainAdd = (): JSX.Element => {
+const GroupAdd = (): JSX.Element => {
     return (
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledH4>ksccmp(김성찬)</StyledH4>
+                            <StyledH4>그룹 명</StyledH4>
                         </div>
                     </StyledFlex2>
                 </StyledDiv1>
@@ -29,12 +31,8 @@ const MainAdd = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledFlex5>
                         <div>
-                            <StyledH4>그룹</StyledH4> <br />
-                            <StyledH5>2</StyledH5>
-                        </div>
-                        <div>
-                            <StyledH4>아이템</StyledH4> <br />
-                            <StyledH5>7</StyledH5>
+                            <StyledH4>멤버</StyledH4> <br />
+                            <StyledH5>5</StyledH5>
                         </div>
                     </StyledFlex5>
                 </StyledDiv1>
@@ -42,9 +40,29 @@ const MainAdd = (): JSX.Element => {
 
             <StyledNineDiv2>
                 <StyledDiv1>
+                    <StyledH5>생성자</StyledH5>
+                </StyledDiv1>
+                <StyledBorderDiv1>
+                    <StyledBackgroundDiv1>
+                        <StyledH4>생성자</StyledH4>
+                    </StyledBackgroundDiv1>
+                </StyledBorderDiv1>
+
+                <StyledDiv1>
+                    <StyledH5>생성일자</StyledH5>
+                </StyledDiv1>
+                <StyledBorderDiv1>
+                    <StyledBackgroundDiv1>
+                        <StyledH4>생성일자</StyledH4>
+                    </StyledBackgroundDiv1>
+                </StyledBorderDiv1>
+            </StyledNineDiv2>
+
+            <StyledNineDiv2>
+                <StyledDiv1>
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>정보수정</StyledH4_1>
+                            <StyledH4_1>그룹수정</StyledH4_1>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>
@@ -53,16 +71,7 @@ const MainAdd = (): JSX.Element => {
 
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>로그아웃</StyledH4_1>
-                            <StyledExternalDiv1>
-                                <StyledRightOutlined1 />
-                            </StyledExternalDiv1>
-                        </StyledBackgroundDiv3>
-                    </StyledBorderDiv3>
-
-                    <StyledBorderDiv3>
-                        <StyledBackgroundDiv3>
-                            <StyledH4_1>계정삭제</StyledH4_1>
+                            <StyledH4_1>그룹삭제</StyledH4_1>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>
@@ -74,4 +83,4 @@ const MainAdd = (): JSX.Element => {
     );
 };
 
-export default MainAdd;
+export default GroupAdd;

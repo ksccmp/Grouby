@@ -81,6 +81,16 @@ export const StyledBorderDiv4 = styled.div`
     margin: 4px auto;
 `;
 
+export const StyledBorderDiv5 = styled.div`
+    width: 100%;
+    background-color: blue;
+    min-width: ${minWidth1}px;
+    max-width: ${maxWidth1}px;
+    height: ${height6}px;
+    padding: 1px;
+    margin: 4px auto;
+`;
+
 export const StyledBackgroundDiv1 = styled.div`
     height: ${height1}px;
     overflow: hidden;
@@ -118,6 +128,15 @@ export const StyledBackgroundDiv4 = styled.div`
     align-items: center;
 `;
 
+export const StyledBackgroundDiv5 = styled.div`
+    height: ${height6}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const StyledButton1 = styled.button`
     width: 100%;
     min-width: 70px;
@@ -139,6 +158,11 @@ export const StyledButton2 = styled.button`
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     outline: none;
+`;
+
+export const StyledButton3 = styled.button`
+    width: 50%;
+    height: ${height2}px;
 `;
 
 export const StyledFlex1 = styled.div`
@@ -193,6 +217,22 @@ export const StyledFlex6 = styled.div`
     background-color: green;
     border: 1px solid green;
     opacity: 0.7;
+`;
+
+interface IStyledFlex7 {
+    open: boolean;
+}
+
+export const StyledFlex7 = styled.div`
+    display: ${(props: IStyledFlex7) => (props.open ? 'flex' : 'none')};
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export const StyledGrid1 = styled.div`
