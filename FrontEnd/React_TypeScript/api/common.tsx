@@ -4,16 +4,12 @@ export const goBack = (): void => {
     Router.back();
 };
 
+export const goSignIn = (): void => {
+    Router.push('/sign/signIn');
+};
+
 export const goSignUp = (): void => {
     Router.push('/sign/signUp');
-};
-
-export const goMainRegGroup = (): void => {
-    Router.push('/main/mainRegGroup');
-};
-
-export const goMainModFriends = (): void => {
-    Router.push('/main/mainModFriends');
 };
 
 export const goMainHome = (): void => {
@@ -26,6 +22,14 @@ export const goMainFriends = (): void => {
 
 export const goMainAdd = (): void => {
     Router.push('/main/mainAdd');
+};
+
+export const goMainModFriends = (): void => {
+    Router.push('/main/mainModFriends');
+};
+
+export const goMainRegGroup = (): void => {
+    Router.push('/main/mainRegGroup');
 };
 
 export const goGroupHome = (): void => {
@@ -42,4 +46,8 @@ export const goGroupAdd = (): void => {
 
 export const goGroupRegSpot = (): void => {
     Router.push('/group/groupRegSpot');
+};
+
+export const goGroupSpotRating = (): void => {
+    Router.push('/group/groupSpotRating');
 };

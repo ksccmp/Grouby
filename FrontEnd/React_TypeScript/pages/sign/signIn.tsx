@@ -11,13 +11,12 @@ import {
     StyledNineDiv1,
 } from '../../api/styled';
 import Router from 'next/router';
-import { goSignUp, goMainHome, goGroupHome } from '../../api/common';
 
 const SignIn = (): JSX.Element => {
     return (
         <>
-            <button onClick={goMainHome}>mainHome</button>
-            <button onClick={goGroupHome}>groupHome</button>
+            <button onClick={() => Router.push('/main/mainHome')}>mainHome</button>
+            <button onClick={() => Router.push('/group/groupHome')}>groupHome</button>
             <StyledFlex1>
                 <StyledNineDiv1>
                     <StyledMaxDiv1>GROUBY</StyledMaxDiv1>
@@ -39,7 +38,7 @@ const SignIn = (): JSX.Element => {
                         <StyledDiv1>
                             <StyledFlex1>
                                 <StyledButton1>SignIn</StyledButton1>
-                                <StyledButton1 onClick={goSignUp}>SignUp</StyledButton1>
+                                <StyledButton1 onClick={() => Router.push('/sign/signUp')}>SignUp</StyledButton1>
                                 <StyledButton1>Search</StyledButton1>
                             </StyledFlex1>
                         </StyledDiv1>

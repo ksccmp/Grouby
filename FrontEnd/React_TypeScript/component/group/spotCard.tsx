@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyledDiv1, StyledFlex6, StyledFlex2, StyledBorderDiv5, StyledBackgroundDiv5 } from '../../api/styled';
 import { StyledH5, StyledH6, StyledH4 } from '../../api/styledFont';
+import { goGroupSpotRating } from '../../api/common';
 
 const SpotCard = (): JSX.Element => {
     return (
@@ -34,7 +35,7 @@ const SpotCard = (): JSX.Element => {
                 </StyledFlex2>
             </div>
 
-            <StyledBorderDiv5>
+            <StyledBorderDiv5 onClick={goGroupSpotRating}>
                 <StyledBackgroundDiv5>
                     <StyledH4>평 가</StyledH4>
                 </StyledBackgroundDiv5>

@@ -10,8 +10,8 @@ import {
 } from '../../api/styled';
 import { StyledLeftOutLined1, StyledPlusCircleOutlined2 } from '../../api/styledAnt';
 import { StyledH3, StyledH5 } from '../../api/styledFont';
-import { goBack, goMainModFriends } from '../../api/common';
 import Friend from '../../component/main/friend';
+import Router from 'next/router';
 
 const MainRegGroup = (): JSX.Element => {
     return (
@@ -20,7 +20,7 @@ const MainRegGroup = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
+                            <StyledLeftOutLined1 onClick={() => Router.back()} />
                         </div>
                         <div>
                             <StyledH3>그룹 생성</StyledH3>
@@ -43,7 +43,7 @@ const MainRegGroup = (): JSX.Element => {
             <StyledNineDiv2>
                 <StyledDiv1>
                     <StyledH5>참여 멤버</StyledH5>
-                    <StyledPlusCircleOutlined2 onClick={goMainModFriends} />
+                    <StyledPlusCircleOutlined2 onClick={() => Router.push('/main/mainModFriends')} />
                 </StyledDiv1>
                 <Friend external={'delete'}></Friend>
                 <Friend external={'delete'}></Friend>

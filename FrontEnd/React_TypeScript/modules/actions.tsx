@@ -1,13 +1,17 @@
-export const init = 'init';
+import { IRank } from '../api/interface';
 
-export interface IinitAction {
-    type: typeof init;
+export const rankSetRank = 'rankSetRank';
+
+export interface IRankSetRankAction {
+    type: typeof rankSetRank;
+    payload: IRank;
 }
 
-export const initAction = (): IinitAction => {
+export const RankSetRankAction = (res: IRank): IRankSetRankAction => {
     return {
-        type: init,
+        type: rankSetRank,
+        payload: res,
     };
 };
 
-export type Iactions = IinitAction;
+export type Iactions = IRankSetRankAction;

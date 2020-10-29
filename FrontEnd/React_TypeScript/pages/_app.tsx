@@ -15,13 +15,13 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
             );
         } else if (router.pathname.startsWith('/main/')) {
             return (
-                <MainLayout>
+                <MainLayout router={router}>
                     <Component {...pageProps} />
                 </MainLayout>
             );
         } else if (router.pathname.startsWith('/group/')) {
             return (
-                <GroupLayout>
+                <GroupLayout router={router}>
                     <Component {...pageProps} />
                 </GroupLayout>
             );

@@ -14,7 +14,7 @@ import {
 import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
-import { goMainRegGroup } from '../../api/common';
+import Router from 'next/router';
 
 const MainHome = (): JSX.Element => {
     return (
@@ -54,7 +54,7 @@ const MainHome = (): JSX.Element => {
             <StyledNineDiv2>
                 <GroupCard></GroupCard>
 
-                <StyledBorderDiv1 onClick={goMainRegGroup}>
+                <StyledBorderDiv1 onClick={() => Router.push('/main/mainRegGroup')}>
                     <StyledBackgroundDiv1>
                         <StyledPlusCircleOutlined1 />
                     </StyledBackgroundDiv1>

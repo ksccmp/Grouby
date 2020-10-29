@@ -6,3 +6,9 @@ export interface IUser {
     regDate: string;
     modDate: string;
 }
+
+export interface IRank {
+    index: number;
+    rankName: string;
+    rankScore: number;
+}

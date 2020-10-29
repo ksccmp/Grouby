@@ -91,6 +91,14 @@ export const StyledBorderDiv5 = styled.div`
     margin: 4px auto;
 `;
 
+export const StyledBorderDiv6 = styled.div`
+    width: 100%;
+    background-color: blue;
+    height: ${height2}px;
+    padding: 1px;
+    margin: 4px auto;
+`;
+
 export const StyledBackgroundDiv1 = styled.div`
     height: ${height1}px;
     overflow: hidden;
@@ -130,6 +138,15 @@ export const StyledBackgroundDiv4 = styled.div`
 
 export const StyledBackgroundDiv5 = styled.div`
     height: ${height6}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const StyledBackgroundDiv6 = styled.div`
+    height: ${height2}px;
     overflow: hidden;
     background-color: #ffffff;
     display: flex;
@@ -238,6 +255,18 @@ export const StyledFlex7 = styled.div`
 export const StyledGrid1 = styled.div`
     display: grid;
     grid-template-columns: 4fr 2fr 4fr;
+`;
+
+export const StyledGrid2 = styled.div`
+    display: grid;
+    grid-template-columns: 5fr 1fr 10fr;
+`;
+
+export const StyledGrid3 = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+    margin: 0 2rem;
 `;
 
 export const StyledNineDiv1 = styled.div`

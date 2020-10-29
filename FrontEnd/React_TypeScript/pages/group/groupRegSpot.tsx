@@ -16,7 +16,7 @@ import {
 } from '../../api/styled';
 import { StyledLeftOutLined1, StyledPlusCircleOutlined1 } from '../../api/styledAnt';
 import { StyledH3, StyledH5, StyledLabel5, StyledH4 } from '../../api/styledFont';
-import { goBack } from '../../api/common';
+import Router from 'next/router';
 
 const GroupRegSpot = (): JSX.Element => {
     const [openModal, setOpenModal] = React.useState<boolean>(false);
@@ -31,7 +31,7 @@ const GroupRegSpot = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
+                            <StyledLeftOutLined1 onClick={() => Router.back()} />
                             <StyledH3>그룹 명</StyledH3>
                         </div>
                         <div>

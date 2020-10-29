@@ -15,7 +15,7 @@ import {
 } from '../../api/styled';
 import { StyledH3, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { goBack } from '../../api/common';
+import Router from 'next/router';
 
 const SignUp = (): JSX.Element => {
     return (
@@ -24,7 +24,7 @@ const SignUp = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
+                            <StyledLeftOutLined1 onClick={() => Router.back()} />
                             <StyledH3>회원가입</StyledH3>
                         </div>
                         <div>

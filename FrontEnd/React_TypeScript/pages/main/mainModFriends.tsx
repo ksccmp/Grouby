@@ -9,9 +9,9 @@ import {
     StyledNineDiv2,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { goBack } from '../../api/common';
 import { StyledH3, StyledH5 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
+import Router from 'next/router';
 
 const MainModFriends = (): JSX.Element => {
     return (
@@ -20,7 +20,7 @@ const MainModFriends = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
+                            <StyledLeftOutLined1 onClick={() => Router.back()} />
                         </div>
                         <div>
                             <StyledH3>확인</StyledH3>
