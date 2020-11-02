@@ -9,8 +9,8 @@ const userInitState: IUserInitState = {
     user: {
         userId: 'userId',
         userName: 'userName',
-        password: 'password',
-        phone: 'phone',
+        userPassword: 'userPassword',
+        userPhone: 'userPhone',
         regDate: 'regDate',
         modDate: 'modDate',
     },

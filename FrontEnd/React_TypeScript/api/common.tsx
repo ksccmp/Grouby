@@ -1,5 +1,7 @@
 import Router from 'next/router';
+import moment from 'moment';
 
+// page
 export const goBack = (): void => {
     Router.back();
 };
@@ -50,4 +52,27 @@ export const goGroupRegSpot = (): void => {
 
 export const goGroupSpotRating = (): void => {
     Router.push('/group/groupSpotRating');
+};
+
+export const goSpotItems = (): void => {
+    Router.push('/spot/spotItems');
+};
+
+export const goSpotRanks = (): void => {
+    Router.push('/spot/spotRanks');
+};
+
+export const goSpotAdd = (): void => {
+    Router.push('/spot/spotAdd');
+};
+
+export const goSpotRegItem = (): void => {
+    Router.push('/spot/spotRegItem');
+};
+
+// moment
+moment.locale('ko');
+
+export const getTime = (): string => {
+    return moment(new Date()).format('ll');
 };

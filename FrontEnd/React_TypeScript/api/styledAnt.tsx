@@ -1,5 +1,14 @@
 import styled from 'styled-components';
-import { LeftOutlined, RightOutlined, PlusCircleOutlined, StarOutlined, StarFilled } from '@ant-design/icons';
+import {
+    LeftOutlined,
+    RightOutlined,
+    PlusCircleOutlined,
+    StarOutlined,
+    StarFilled,
+    HeartOutlined,
+    HeartFilled,
+    MessageOutlined,
+} from '@ant-design/icons';
 
 export const StyledLeftOutLined1 = styled(LeftOutlined)`
     margin-right: 0.4rem;
@@ -43,5 +52,26 @@ export const StyledStarFilled1 = styled(StarFilled)`
     & > svg {
         width: 1.1rem;
         height: 1.1rem;
+    }
+`;
+
+export const StyledHeartOutlined1 = styled(HeartOutlined)`
+    & > svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+`;
+
+export const StyledHeartFilled1 = styled(HeartFilled)`
+    & > svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+`;
+
+export const StyledMessageOutlined1 = styled(MessageOutlined)`
+    & > svg {
+        width: 1.4rem;
+        height: 1.4rem;
     }
 `;

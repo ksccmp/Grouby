@@ -14,16 +14,78 @@ import {
 import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
-import Router from 'next/router';
+import { IUser, IGroup, IGroupMember } from '../../api/interface';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import { goMainRegGroup, getTime } from '../../api/common';
+
+interface IChangeGroup extends IGroup {
+    groupMembers: IGroupMember[];
+}
 
 const MainHome = (): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+
+    const [groups, setGroups] = React.useState<IChangeGroup[]>([
+        {
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            regDate: getTime(),
+            modDate: getTime(),
+            groupMembers: [
+                {
+                    groupId: 1,
+                    userId: 'intan',
+                    regDate: getTime(),
+                },
+                {
+                    groupId: 1,
+                    userId: 'ksccmp',
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            groupId: 2,
+            groupName: '친구들',
+            regId: 'ksccmp',
+            regDate: getTime(),
+            modDate: getTime(),
+            groupMembers: [
+                {
+                    groupId: 2,
+                    userId: 'ABC',
+                    regDate: getTime(),
+                },
+                {
+                    groupId: 2,
+                    userId: 'BCD',
+                    regDate: getTime(),
+                },
+                {
+                    groupId: 2,
+                    userId: 'CDE',
+                    regDate: getTime(),
+                },
+            ],
+        },
+    ]);
+    const [searchText, setSearchText] = React.useState<string>('');
+
+    const onSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchText(e.target.value);
+    };
+
     return (
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
                     <StyledFlex2>
                         <div>
-                            <StyledH4>ksccmp(김성찬)</StyledH4>
+                            <StyledH4>
+                                {reduxUser.userId}({reduxUser.userName})
+                            </StyledH4>
                         </div>
                     </StyledFlex2>
                 </StyledDiv1>
@@ -32,7 +94,7 @@ const MainHome = (): JSX.Element => {
             <StyledNineDiv2>
                 <StyledBorderDiv1>
                     <StyledBackgroundDiv1>
-                        <StyledText1 placeholder="검색"></StyledText1>
+                        <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
                     </StyledBackgroundDiv1>
                 </StyledBorderDiv1>
             </StyledNineDiv2>
@@ -43,7 +105,7 @@ const MainHome = (): JSX.Element => {
                         <StyledFlex1>
                             <StyledWidthLine1 />
                         </StyledFlex1>
-                        <StyledH5>2건</StyledH5>
+                        <StyledH5>{groups.length}건</StyledH5>
                         <StyledFlex1>
                             <StyledWidthLine1 />
                         </StyledFlex1>
@@ -52,9 +114,20 @@ const MainHome = (): JSX.Element => {
             </StyledNineDiv1>
 
             <StyledNineDiv2>
-                <GroupCard></GroupCard>
+                {groups
+                    .filter((group) => {
+                        return !group.groupName.indexOf(searchText) ||
+                            group.groupMembers.filter((groupMembers) => {
+                                return !groupMembers.userId.indexOf(searchText);
+                            }).length > 0
+                            ? true
+                            : false;
+                    })
+                    .map((group, key) => {
+                        return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
+                    })}
 
-                <StyledBorderDiv1 onClick={() => Router.push('/main/mainRegGroup')}>
+                <StyledBorderDiv1 onClick={goMainRegGroup}>
                     <StyledBackgroundDiv1>
                         <StyledPlusCircleOutlined1 />
                     </StyledBackgroundDiv1>

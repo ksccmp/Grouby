@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import SignLayout from '../component/layouts/signLayout';
 import MainLayout from '../component/layouts/mainLayout';
 import GroupLayout from '../component/layouts/groupLayout';
+import SpotLayout from '../component/layouts/spotLayout';
 import store from '../modules/store';
 import { Provider } from 'react-redux';
 
@@ -24,6 +25,12 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
                 <GroupLayout router={router}>
                     <Component {...pageProps} />
                 </GroupLayout>
+            );
+        } else if (router.pathname.startsWith('/spot/')) {
+            return (
+                <SpotLayout router={router}>
+                    <Component {...pageProps} />
+                </SpotLayout>
             );
         } else {
             return <Component {...pageProps} />;
