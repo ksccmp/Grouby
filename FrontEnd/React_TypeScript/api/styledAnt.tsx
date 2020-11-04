@@ -8,6 +8,10 @@ import {
     HeartOutlined,
     HeartFilled,
     MessageOutlined,
+    CaretUpOutlined,
+    CaretDownOutlined,
+    CheckCircleOutlined,
+    CheckCircleFilled,
 } from '@ant-design/icons';
 
 export const StyledLeftOutLined1 = styled(LeftOutlined)`
@@ -70,6 +74,46 @@ export const StyledHeartFilled1 = styled(HeartFilled)`
 `;
 
 export const StyledMessageOutlined1 = styled(MessageOutlined)`
+    & > svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+`;
+
+interface IStyledCaretUpOutlined1 {
+    fill: boolean;
+}
+
+export const StyledCaretUpOutlined1 = styled(CaretUpOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
+    }
+`;
+
+export const StyledCaretDownOutlined = styled(CaretDownOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
+    }
+`;
+
+export const StyledCheckCircleOutlined1 = styled(CheckCircleOutlined)`
+    & > svg {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+`;
+
+export const StyledCheckCircleFilled1 = styled(CheckCircleFilled)`
     & > svg {
         width: 1.4rem;
         height: 1.4rem;

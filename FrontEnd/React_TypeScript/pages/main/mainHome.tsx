@@ -116,9 +116,9 @@ const MainHome = (): JSX.Element => {
             <StyledNineDiv2>
                 {groups
                     .filter((group) => {
-                        return !group.groupName.indexOf(searchText) ||
+                        return group.groupName.includes(searchText) ||
                             group.groupMembers.filter((groupMembers) => {
-                                return !groupMembers.userId.indexOf(searchText);
+                                return groupMembers.userId.includes(searchText);
                             }).length > 0
                             ? true
                             : false;

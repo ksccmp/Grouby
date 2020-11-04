@@ -4,10 +4,10 @@ import { StyledH3 } from '../../api/styledFont';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
 import { goBack } from '../../api/common';
 import StarScore from '../../component/group/starScore';
-import { IRank } from '../../api/interface';
+import { IRank1 } from '../../api/interface';
 
 const GroupSpotRating = (): JSX.Element => {
-    const [ranks, setRanks] = React.useState<IRank[]>([
+    const [ranks, setRanks] = React.useState<IRank1[]>([
         {
             index: 0,
             rankName: '음식',
@@ -25,7 +25,7 @@ const GroupSpotRating = (): JSX.Element => {
         },
     ]);
 
-    const onRanks = (rank: IRank) => {
+    const onRanks = (rank: IRank1) => {
         const newRanks = ranks.slice();
         newRanks[rank.index] = rank;
         setRanks(newRanks);

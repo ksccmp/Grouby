@@ -2,11 +2,11 @@ import * as React from 'react';
 import { StyledStarOutlined1, StyledStarFilled1 } from '../../api/styledAnt';
 import { StyledGrid2, StyledBorderDiv6, StyledBackgroundDiv6, StyledGrid3 } from '../../api/styled';
 import { StyledH5 } from '../../api/styledFont';
-import { IRank } from '../../api/interface';
+import { IRank1 } from '../../api/interface';
 
 interface IStarScore {
-    rank: IRank;
-    onRanks: (rank: IRank) => void;
+    rank: IRank1;
+    onRanks: (rank: IRank1) => void;
 }
 
 const StarScore: React.FC<IStarScore> = ({ rank, onRanks }): JSX.Element => {

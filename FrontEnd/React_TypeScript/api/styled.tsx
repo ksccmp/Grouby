@@ -396,6 +396,18 @@ export const StyledExternalDiv2 = styled.div`
     background-color: #ffffff;
 `;
 
+export const StyledExternalDiv3 = styled.div`
+    width: ${external1}px;
+    height: ${height1}px;
+    position: absolute;
+    right: 1px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;
+
 export const StyledWidthLine1 = styled.div`
     width: 100%;
     height: 0;
@@ -488,6 +500,28 @@ export const StyledRadio1 = styled.input.attrs(() => ({
     type: 'radio',
 }))``;
 
+export const StyledRadio2 = styled.input.attrs(() => ({
+    type: 'radio',
+    name: 'filterRadio',
+}))`
+    display: none;
+    & + div label:nth-child(1) {
+        display: inline-block;
+    }
+    & + div label:nth-child(2) {
+        display: none;
+    }
+
+    &:checked {
+        & + div label:nth-child(1) {
+            display: none;
+        }
+        & + div label:nth-child(2) {
+            display: inline-block;
+        }
+    }
+`;
+
 export const StyledTable1 = styled.div`
     width: 100%;
     height: ${height2}px;
@@ -522,6 +556,14 @@ export const StyledFixed2 = styled.div`
     width: 100%;
     left: 0;
     bottom: ${(props: IStyledFixed1) => (props.open ? '0' : '-100%')};
+    z-index: 3;
+`;
+
+export const StyledFixed3 = styled.div`
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: ${(props: IStyledFixed1) => (props.open ? '10%' : '-100%')};
     z-index: 3;
 `;
 
