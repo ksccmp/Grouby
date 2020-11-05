@@ -46,6 +46,7 @@ export const StyledPlusCircleOutlined2 = styled(PlusCircleOutlined)`
 `;
 
 export const StyledStarOutlined1 = styled(StarOutlined)`
+    outline: none;
     & > svg {
         width: 1.1rem;
         height: 1.1rem;
@@ -53,6 +54,7 @@ export const StyledStarOutlined1 = styled(StarOutlined)`
 `;
 
 export const StyledStarFilled1 = styled(StarFilled)`
+    outline: none;
     & > svg {
         width: 1.1rem;
         height: 1.1rem;

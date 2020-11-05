@@ -4,18 +4,18 @@ import {
     StyledFixed1,
     StyledNineDiv2,
     StyledDiv1,
-    StyledBorderDiv2,
-    StyledBackgroundDiv2,
+    StyledBorderDiv13,
+    StyledBackgroundDiv13,
     StyledText1,
     StyledExternalDiv1,
     StyledButton2,
     StyledFixed2,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
 import { StyledH3, StyledH6 } from '../../api/styledFont';
 import Comment from './comment';
+import { IComment } from '../../api/interface';
+import { getTime } from '../../api/common';
 
 interface IComments {
     openComments: boolean;
@@ -23,13 +23,58 @@ interface IComments {
 }
 
 const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.Element => {
-    const refText = React.useRef<HTMLInputElement | null>(null);
+    const [comments, setComments] = React.useState<IComment[]>([
+        {
+            commentId: 1,
+            itemId: 1,
+            regId: 'ksccmp',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '아니 이집 진짜 대박이에요 여러분!!!!!',
+        },
+        {
+            commentId: 2,
+            itemId: 1,
+            regId: 'ksccmp',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '진짜입니다. 속이는거 아니에요!!',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+    ]);
+    const [searchTextComment, setSearchTextComment] = React.useState<string>('');
 
     React.useEffect(() => {
-        if (refText) {
-            (refText.current as HTMLInputElement).focus();
+        if (openComments) {
+            console.log('axios');
         }
-    }, [refText]);
+    }, [openComments]);
+
+    const onSearchTextComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTextComment(e.target.value);
+    };
+
+    const onSaveComment = () => {
+        setComments((prev) => [
+            ...prev,
+            {
+                commentId: 4,
+                itemId: 1,
+                regId: 'ksccmp',
+                regDate: getTime(),
+                modDate: getTime(),
+                comments: searchTextComment,
+            },
+        ]);
+        setSearchTextComment('');
+    };
 
     return (
         <>
@@ -43,43 +88,28 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                             </div>
                         </StyledFlex2>
 
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment />
+                        {comments.map((comment, key) => (
+                            <Comment comment={comment} key={key} />
+                        ))}
                     </StyledDiv1>
                 </StyledNineDiv2>
 
                 <StyledFixed2 open={openComments}>
                     <StyledNineDiv2>
-                        <StyledBorderDiv2 style={{ margin: '0 auto' }}>
-                            <StyledBackgroundDiv2>
-                                <StyledText1 placeholder="아이디" ref={refText}></StyledText1>
-                                <StyledExternalDiv1>
+                        <StyledBorderDiv13>
+                            <StyledBackgroundDiv13>
+                                <StyledText1
+                                    placeholder="내용"
+                                    onChange={onSearchTextComment}
+                                    value={searchTextComment}
+                                ></StyledText1>
+                                <StyledExternalDiv1 onClick={onSaveComment}>
                                     <StyledButton2>
                                         <StyledH6>게시</StyledH6>
                                     </StyledButton2>
                                 </StyledExternalDiv1>
-                            </StyledBackgroundDiv2>
-                        </StyledBorderDiv2>
+                            </StyledBackgroundDiv13>
+                        </StyledBorderDiv13>
                     </StyledNineDiv2>
                 </StyledFixed2>
             </StyledFixed1>

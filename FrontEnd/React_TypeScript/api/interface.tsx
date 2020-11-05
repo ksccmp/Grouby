@@ -53,31 +53,36 @@ export interface IRank {
 export interface IRankComp {
     rankCompId: number;
     rankCompName: string;
-    rankOrder: number;
+    rankCompOrder?: number;
+    rankCompSelect?: boolean;
 }
 
-export interface IRank1 {
-    index: number;
-    rankName: string;
-    rankScore: number;
+export interface ITag {
+    groupId: number;
+    tagName: string;
+    tagSelect: boolean;
 }
 
 export interface IItem {
+    index?: number;
     itemId: number;
     groupId: number;
+    groupName: string;
     spotId: number;
+    spotName: string;
     regId: string;
-    regDate: Date;
-    modDate: Date;
+    regDate: string;
+    modDate: string;
     like: number;
     contents: string;
-    likePress: boolean;
+    likePress?: boolean;
 }
 
 export interface IComment {
+    commentId: number;
     itemId: number;
     regId: string;
-    regDate: Date;
-    modDate: Date;
+    regDate: string;
+    modDate: string;
     comments: string;
 }

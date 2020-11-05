@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const minWidth1 = '300';
 const maxWidth1 = '600';
@@ -146,6 +146,24 @@ export const StyledBorderDiv11 = styled.div`
     margin: 4px auto;
 `;
 
+export const StyledBorderDiv12 = styled.div`
+    background: red;
+    min-width: ${minWidth1}px;
+    max-width: ${maxWidth1}px;
+    height: ${height1}px;
+    padding: 1px;
+    margin: 4px auto;
+`;
+
+export const StyledBorderDiv13 = styled.div`
+    background: red;
+    width: 100%;
+    height: ${height1}px;
+    padding: 1px;
+    margin: 4px auto;
+    position: relative;
+`;
+
 export const StyledBackgroundDiv1 = styled.div`
     height: ${height1}px;
     overflow: hidden;
@@ -234,6 +252,29 @@ export const StyledBackgroundDiv11 = styled.div`
     align-items: center;
 `;
 
+interface IStyledBackgroundDiv12 {
+    select: boolean;
+}
+
+export const StyledBackgroundDiv12 = styled.div`
+    height: ${height1}px;
+    overflow: hidden;
+    background-color: ${(props: IStyledBackgroundDiv12) => (props.select ? '' : '#ffffff')};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const StyledBackgroundDiv13 = styled.div`
+    height: ${height1}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: ${external1}px;
+`;
+
 export const StyledButton1 = styled.button`
     width: 100%;
     min-width: 70px;
@@ -260,6 +301,64 @@ export const StyledButton2 = styled.button`
 export const StyledButton3 = styled.button`
     width: 50%;
     height: ${height2}px;
+`;
+
+const ripple1 = keyframes`
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(10);
+    }
+`;
+
+interface IStyledButton4 {
+    line: string;
+}
+
+export const StyledButton4 = styled.button`
+    width: 100%;
+    height: ${height2}px;
+    ${(props: IStyledButton4) => () => {
+        switch (props.line) {
+            case 'left': {
+                return 'border-top-left-radius: 2rem;border-bottom-left-radius: 2rem;';
+            }
+
+            case 'right': {
+                return 'border-top-right-radius: 2rem;border-bottom-right-radius: 2rem;';
+            }
+        }
+    }}
+
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    border: none;
+
+    &::after {
+        content: '';
+        display: none;
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+
+        width: 100%;
+        height: 100px;
+        margin-top: -50px;
+
+        top: 50%;
+        opacity: 0;
+
+        animation: ${ripple1} 1.5s;
+    }
+
+    &:focus:not(:active)::after {
+        display: block;
+    }
 `;
 
 export const StyledFlex1 = styled.div`
@@ -431,6 +530,16 @@ export const StyledNavUl1 = styled.ul`
     table-layout: fixed;
 `;
 
+export const StyledNavUl2 = styled.ul`
+    width: 100%;
+    height: ${height2}px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    table-layout: fixed;
+`;
+
 interface IStyledNavLi1 {
     checked: boolean;
 }
@@ -439,6 +548,13 @@ export const StyledNavLi1 = styled.li`
     display: table-cell;
     text-align: center;
     border-bottom: ${(props: IStyledNavLi1) => (props.checked ? '2px solid red' : '')};
+`;
+
+export const StyledNavLi2 = styled.li`
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    height: ${height2}px;
 `;
 
 interface IStyledCardDiv1 {

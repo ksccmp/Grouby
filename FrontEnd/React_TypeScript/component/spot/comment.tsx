@@ -3,16 +3,11 @@ import { StyledBorderDiv8, StyledBackgroundDiv8 } from '../../api/styled';
 import { StyledH5, StyledH6 } from '../../api/styledFont';
 import { IComment } from '../../api/interface';
 
-const Comment = (): JSX.Element => {
-    const [comment, setComment] = React.useState<IComment>({
-        itemId: 1,
-        regId: 'asd',
-        regDate: new Date(),
-        modDate: new Date(),
-        comments:
-            '처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!처음 댓글 입니당!!',
-    });
+interface IChangeComment {
+    comment: IComment;
+}
 
+const Comment: React.FC<IChangeComment> = ({ comment }): JSX.Element => {
     return (
         <>
             <div>

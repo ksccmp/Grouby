@@ -42,8 +42,8 @@ const RankComp: React.FC<IChangeRankComp> = ({
                 </div>
                 <StyledH4_1>{rankComp.rankCompName}</StyledH4_1>
                 <StyledExternalDiv3 onClick={() => onOutLine(index)}>
-                    <StyledCaretUpOutlined1 fill={rankComp.rankOrder === 1} />
-                    <StyledCaretDownOutlined fill={rankComp.rankOrder === 2} />
+                    <StyledCaretUpOutlined1 fill={rankComp.rankCompOrder === 1} />
+                    <StyledCaretDownOutlined fill={rankComp.rankCompOrder === 2} />
                 </StyledExternalDiv3>
             </StyledBackgroundDiv3>
         </StyledBorderDiv3>

@@ -2,32 +2,39 @@ import * as React from 'react';
 import { StyledNineDiv1, StyledDiv1, StyledFlex2, StyledNineDiv2 } from '../../api/styled';
 import { StyledH3 } from '../../api/styledFont';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { goBack } from '../../api/common';
+import { goBack, getTime } from '../../api/common';
 import StarScore from '../../component/group/starScore';
-import { IRank1 } from '../../api/interface';
+import { IRank } from '../../api/interface';
 
 const GroupSpotRating = (): JSX.Element => {
-    const [ranks, setRanks] = React.useState<IRank1[]>([
+    const [ranks, setRanks] = React.useState<IRank[]>([
         {
-            index: 0,
-            rankName: '음식',
-            rankScore: 1,
+            spotId: 1,
+            rankCompId: 0,
+            rankCompName: '음식',
+            rank: 1,
+            regDate: getTime(),
         },
         {
-            index: 1,
-            rankName: '친절',
-            rankScore: 1,
+            spotId: 1,
+            rankCompId: 1,
+            rankCompName: '친절',
+            rank: 1,
+            regDate: getTime(),
         },
         {
-            index: 2,
-            rankName: '화장실',
-            rankScore: 1,
+            spotId: 1,
+            rankCompId: 2,
+            rankCompName: '화장실',
+            rank: 1,
+            regDate: getTime(),
         },
     ]);
 
-    const onRanks = (rank: IRank1) => {
-        const newRanks = ranks.slice();
-        newRanks[rank.index] = rank;
+    // 별 클릭 시 해당 점수 부여
+    const onRanks = (index: number, rank: number) => {
+        const newRanks: IRank[] = ranks.slice();
+        newRanks[index].rank = rank;
         setRanks(newRanks);
     };
 

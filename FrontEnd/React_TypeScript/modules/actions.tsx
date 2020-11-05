@@ -1,13 +1,13 @@
-import { IRank1 } from '../api/interface';
+import { IRank } from '../api/interface';
 
 export const rankSetRank = 'rankSetRank';
 
 export interface IRankSetRankAction {
     type: typeof rankSetRank;
-    payload: IRank1;
+    payload: IRank;
 }
 
-export const RankSetRankAction = (res: IRank1): IRankSetRankAction => {
+export const RankSetRankAction = (res: IRank): IRankSetRankAction => {
     return {
         type: rankSetRank,
         payload: res,
