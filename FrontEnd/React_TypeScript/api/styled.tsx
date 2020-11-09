@@ -21,6 +21,7 @@ export const StyledText1 = styled.input.attrs(() => ({
     width: 90%;
     height: ${height2}px;
     border-width: 0;
+    outline: none;
 `;
 
 export const StyledPassword1 = styled.input.attrs(() => ({
@@ -29,6 +30,7 @@ export const StyledPassword1 = styled.input.attrs(() => ({
     width: 90%;
     height: ${height2}px;
     border-width: 0;
+    outline: none;
 `;
 
 export const StyledDiv1 = styled.div`
@@ -303,7 +305,7 @@ export const StyledButton3 = styled.button`
     height: ${height2}px;
 `;
 
-const ripple1 = keyframes`
+const KeyFramesRipple1 = keyframes`
     0% {
         opacity: 1;
         transform: scale(0);
@@ -353,7 +355,7 @@ export const StyledButton4 = styled.button`
         top: 50%;
         opacity: 0;
 
-        animation: ${ripple1} 1.5s;
+        animation: ${KeyFramesRipple1} 1.5s;
     }
 
     &:focus:not(:active)::after {
@@ -687,4 +689,54 @@ export const StyledTextArea1 = styled.textarea`
     width: calc(100% - 0.7rem);
     height: calc(${height5}px - 0.7rem);
     border: none;
+    outline: none;
+`;
+
+export const StyledSlideDiv1 = styled.div`
+    width: 100%;
+    height: ${height9}px;
+    overflow: hidden;
+    position: relative;
+`;
+
+export const StyledSlideDiv2 = styled.div`
+    width: calc(100% - 2px);
+    position: absolute;
+    top: 0;
+`;
+
+export const StyledSlideDiv3 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+interface IStyledSlideUl1 {
+    count: number;
+    index?: number;
+}
+
+export const StyledSlideUl1 = styled.ul`
+    list-style-type: none;
+    width: calc(100% * ${(props: IStyledSlideUl1) => props.count});
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-left: -${(props: IStyledSlideUl1) => (props.index as number) * 100}% !important;
+    transition: 1s;
+`;
+
+export const StyledSlideLi1 = styled.li`
+    width: calc(100% / ${(props: IStyledSlideUl1) => props.count});
+    height: 300px;
+`;
+
+interface IStyledCircle1 {
+    target: boolean;
+}
+
+export const StyledCircle1 = styled.p`
+    margin: 0;
+    padding: 0;
+    font-size: ${(props: IStyledCircle1) => (props.target ? '1rem' : '0.6rem')};
 `;
