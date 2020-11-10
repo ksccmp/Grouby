@@ -3,14 +3,13 @@ import {
     StyledButton1,
     StyledPassword1,
     StyledText1,
-    StyledMaxDiv1,
     StyledDiv1,
     StyledFlex1,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledNineDiv1,
 } from '../../api/styled';
-import Router from 'next/router';
+import { StyledH6 } from '../../api/styledFont';
 import { goMainHome, goGroupHome, goSpotItems, goSignUp } from '../../api/common';
 import { IUser } from '../../api/interface';
 
@@ -83,33 +82,42 @@ const SignIn = (): JSX.Element => {
             <button onClick={goSpotItems}>spotItems</button>
             <StyledFlex1>
                 <StyledNineDiv1>
-                    <StyledMaxDiv1>GROUBY</StyledMaxDiv1>
-                    <StyledMaxDiv1>
-                        <StyledBorderDiv1>
-                            <StyledBackgroundDiv1>
-                                <StyledText1 placeholder="아이디" onChange={setUserIdAction}></StyledText1>
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
-                    </StyledMaxDiv1>
-                    <StyledMaxDiv1>
-                        <StyledBorderDiv1>
-                            <StyledBackgroundDiv1>
-                                <StyledPassword1
-                                    placeholder="비밀번호"
-                                    onChange={setUserPasswordAction}
-                                ></StyledPassword1>
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
-                    </StyledMaxDiv1>
-                    <StyledMaxDiv1>
-                        <StyledDiv1>
+                    <StyledDiv1>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src="/img/GROUBY.png" />
+                        </div>
+
+                        <div>
+                            <StyledBorderDiv1>
+                                <StyledBackgroundDiv1>
+                                    <StyledText1 placeholder="아이디" onChange={setUserIdAction}></StyledText1>
+                                </StyledBackgroundDiv1>
+                            </StyledBorderDiv1>
+
+                            <StyledBorderDiv1>
+                                <StyledBackgroundDiv1>
+                                    <StyledPassword1
+                                        placeholder="비밀번호"
+                                        onChange={setUserPasswordAction}
+                                    ></StyledPassword1>
+                                </StyledBackgroundDiv1>
+                            </StyledBorderDiv1>
+                        </div>
+
+                        <div>
                             <StyledFlex1>
-                                <StyledButton1 onClick={onSignIn}>SignIn</StyledButton1>
-                                <StyledButton1 onClick={goSignUp}>SignUp</StyledButton1>
-                                <StyledButton1>Search</StyledButton1>
+                                <StyledButton1 onClick={onSignIn}>
+                                    <StyledH6>SignIn</StyledH6>
+                                </StyledButton1>
+                                <StyledButton1 onClick={goSignUp}>
+                                    <StyledH6>SignUp</StyledH6>
+                                </StyledButton1>
+                                <StyledButton1>
+                                    <StyledH6>Search</StyledH6>
+                                </StyledButton1>
                             </StyledFlex1>
-                        </StyledDiv1>
-                    </StyledMaxDiv1>
+                        </div>
+                    </StyledDiv1>
                 </StyledNineDiv1>
             </StyledFlex1>
 

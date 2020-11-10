@@ -3,7 +3,6 @@ import {
     StyledDiv1,
     StyledFlex2,
     StyledNineDiv1,
-    StyledNineDiv2,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledText1,
@@ -81,58 +80,58 @@ const MainHome = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledH4>
-                                {reduxUser.userId}({reduxUser.userName})
-                            </StyledH4>
-                        </div>
-                    </StyledFlex2>
+                    <div>
+                        <StyledFlex2>
+                            <div>
+                                <StyledH4>
+                                    {reduxUser.userId}({reduxUser.userName})
+                                </StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
+
+                    <div>
+                        <StyledBorderDiv1>
+                            <StyledBackgroundDiv1>
+                                <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
+                            </StyledBackgroundDiv1>
+                        </StyledBorderDiv1>
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <StyledGrid1>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                            <StyledH5>{groups.length}건</StyledH5>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                        </StyledGrid1>
+                    </div>
+
+                    <div>
+                        {groups
+                            .filter((group) => {
+                                return group.groupName.includes(searchText) ||
+                                    group.groupMembers.filter((groupMembers) => {
+                                        return groupMembers.userId.includes(searchText);
+                                    }).length > 0
+                                    ? true
+                                    : false;
+                            })
+                            .map((group, key) => {
+                                return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
+                            })}
+
+                        <StyledBorderDiv1 onClick={goMainRegGroup}>
+                            <StyledBackgroundDiv1>
+                                <StyledPlusCircleOutlined1 />
+                            </StyledBackgroundDiv1>
+                        </StyledBorderDiv1>
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledBorderDiv1>
-                    <StyledBackgroundDiv1>
-                        <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
-                    </StyledBackgroundDiv1>
-                </StyledBorderDiv1>
-            </StyledNineDiv2>
-
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledGrid1>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                        <StyledH5>{groups.length}건</StyledH5>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                    </StyledGrid1>
-                </StyledDiv1>
-            </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                {groups
-                    .filter((group) => {
-                        return group.groupName.includes(searchText) ||
-                            group.groupMembers.filter((groupMembers) => {
-                                return groupMembers.userId.includes(searchText);
-                            }).length > 0
-                            ? true
-                            : false;
-                    })
-                    .map((group, key) => {
-                        return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
-                    })}
-
-                <StyledBorderDiv1 onClick={goMainRegGroup}>
-                    <StyledBackgroundDiv1>
-                        <StyledPlusCircleOutlined1 />
-                    </StyledBackgroundDiv1>
-                </StyledBorderDiv1>
-            </StyledNineDiv2>
         </>
     );
 };

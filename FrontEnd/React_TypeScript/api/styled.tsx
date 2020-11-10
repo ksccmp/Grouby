@@ -18,19 +18,21 @@ const externalButton1 = '42';
 export const StyledText1 = styled.input.attrs(() => ({
     type: 'text',
 }))`
-    width: 90%;
+    width: 100%;
     height: ${height2}px;
     border-width: 0;
     outline: none;
+    margin: 0 15px;
 `;
 
 export const StyledPassword1 = styled.input.attrs(() => ({
     type: 'password',
 }))`
-    width: 90%;
+    width: 100%;
     height: ${height2}px;
     border-width: 0;
     outline: none;
+    margin: 0 15px;
 `;
 
 export const StyledDiv1 = styled.div`
@@ -59,18 +61,14 @@ export const StyledDiv4 = styled.div`
 `;
 
 export const StyledBorderDiv1 = styled.div`
-    background: red;
-    min-width: ${minWidth1}px;
-    max-width: ${maxWidth1}px;
+    background: #e6951a;
     height: ${height1}px;
     padding: 1px;
     margin: 4px auto;
 `;
 
 export const StyledBorderDiv2 = styled.div`
-    background: red;
-    min-width: ${minWidth1}px;
-    max-width: ${maxWidth1}px;
+    background: #e6951a;
     height: ${height1}px;
     padding: 1px;
     margin: 4px auto;
@@ -164,6 +162,17 @@ export const StyledBorderDiv13 = styled.div`
     padding: 1px;
     margin: 4px auto;
     position: relative;
+`;
+
+interface IStyledBorderDiv14 {
+    same: boolean;
+}
+
+export const StyledBorderDiv14 = styled.div`
+    background: ${(props: IStyledBorderDiv14) => (props.same ? '#e6951a' : 'red')};
+    height: ${height1}px;
+    padding: ${(props: IStyledBorderDiv14) => (props.same ? '1px' : '2px')};
+    margin: 4px auto;
 `;
 
 export const StyledBackgroundDiv1 = styled.div`
@@ -277,6 +286,15 @@ export const StyledBackgroundDiv13 = styled.div`
     margin-right: ${external1}px;
 `;
 
+export const StyledBackgroundDiv14 = styled.div`
+    height: ${height1}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const StyledButton1 = styled.button`
     width: 100%;
     min-width: 70px;
@@ -288,6 +306,11 @@ export const StyledButton1 = styled.button`
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     outline: none;
+    border: 1px solid #e6951a;
+    background-color: #ffffff;
+    &:active {
+        background-color: #e6951a;
+    }
 `;
 
 export const StyledButton2 = styled.button`
@@ -298,6 +321,11 @@ export const StyledButton2 = styled.button`
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     outline: none;
+    border: 1px solid #e6951a;
+    background-color: #ffffff;
+    &:active {
+        background-color: #e6951a;
+    }
 `;
 
 export const StyledButton3 = styled.button`
@@ -363,6 +391,25 @@ export const StyledButton4 = styled.button`
     }
 `;
 
+interface IStyledButton5 {
+    check: boolean;
+}
+
+export const StyledButton5 = styled.button`
+    width: ${externalButton1}px;
+    height: ${height2}px;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    outline: none;
+    border: ${(props: IStyledButton5) => (props.check ? '1px solid #e6951a' : '2px solid red')};
+    background-color: #ffffff;
+    &:active {
+        background-color: #e6951a;
+    }
+`;
+
 export const StyledFlex1 = styled.div`
     display: flex;
     width: 100%;
@@ -375,6 +422,7 @@ export const StyledFlex2 = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0.4rem 0;
 `;
 
 export const StyledFlex3 = styled.div`
@@ -461,7 +509,6 @@ export const StyledGrid3 = styled.div`
 export const StyledNineDiv1 = styled.div`
     width: 90%;
     margin: 0 auto;
-    text-align: center;
 `;
 
 export const StyledNineDiv2 = styled.div`
@@ -564,12 +611,15 @@ interface IStyledCardDiv1 {
 }
 
 export const StyledCardDiv1 = styled.div`
-    background-color: red;
-    opacity: 0.6;
+    background-color: #e6951a;
     min-width: ${minWidth1}px;
     max-width: ${maxWidth1}px;
     height: ${(props: IStyledCardDiv1) => (props.extend ? 'initial' : height3 + 'px')};
     margin: 4px auto;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 `;
 
 export const StyledTabUl1 = styled.ul`

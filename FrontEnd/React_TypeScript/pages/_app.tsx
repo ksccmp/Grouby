@@ -45,7 +45,9 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
                     {`
                         body {
                             margin: 0px;
+                            background-color: #fafafa;
                         }
+                        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nothing+You+Could+Do&family=Noto+Sans+KR&display=swap');
                     `}
                 </style>
             </Provider>

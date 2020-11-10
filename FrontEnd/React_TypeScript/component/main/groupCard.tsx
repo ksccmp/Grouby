@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyledCardDiv1, StyledFlex3, StyledDiv2, StyledFlex4 } from '../../api/styled';
 import { StyledH5, StyledH6, StyledBorderH6 } from '../../api/styledFont';
 import { IGroup, IGroupMember } from '../../api/interface';
-import { getTime } from '../../api/common';
 
 interface IGroupCard {
     group: IGroup;
@@ -15,7 +14,7 @@ const GroupCard: React.FC<IGroupCard> = ({ group, groupMembers }): JSX.Element =
             <StyledDiv2>
                 <StyledFlex3>
                     <StyledH5>{group.groupName}</StyledH5>
-                    <StyledH6>99+</StyledH6>
+                    <StyledH6 style={{ color: 'red', opacity: '0.7' }}>99+</StyledH6>
                 </StyledFlex3>
                 <StyledFlex4 extend={false}>
                     {groupMembers.map((groupMember, key) => {
