@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    StyledNineDiv2,
+    StyledNineDiv1,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledText1,
@@ -52,52 +52,61 @@ const MainFriends = (): JSX.Element => {
 
     return (
         <>
-            <StyledNineDiv2>
+            <StyledNineDiv1>
                 <StyledDiv1>
                     <StyledTabUl1>
                         <StyledTabLi1>
                             <StyledTabRadio1 id="li1" name="radio1" defaultChecked />
                             <StyledLabel5 htmlFor="li1">친구</StyledLabel5>
                             <StyledTabDiv1>
-                                <StyledBorderDiv1>
-                                    <StyledBackgroundDiv1>
-                                        <StyledText1 placeholder="검색" onChange={onSearchTextFriend}></StyledText1>
-                                    </StyledBackgroundDiv1>
-                                </StyledBorderDiv1>
-                                {friends
-                                    .filter(
-                                        (friend) =>
-                                            friend.friendId.includes(searchTextFriend) ||
-                                            friend.friendName.includes(searchTextFriend),
-                                    )
-                                    .map((friend, key) => (
-                                        <Friend friend={friend} external={'delete'} key={key} />
-                                    ))}
+                                <div>
+                                    <StyledBorderDiv1>
+                                        <StyledBackgroundDiv1>
+                                            <StyledText1 placeholder="검색" onChange={onSearchTextFriend}></StyledText1>
+                                        </StyledBackgroundDiv1>
+                                    </StyledBorderDiv1>
+                                </div>
+                                <div>
+                                    {friends
+                                        .filter(
+                                            (friend) =>
+                                                friend.friendId.includes(searchTextFriend) ||
+                                                friend.friendName.includes(searchTextFriend),
+                                        )
+                                        .map((friend, key) => (
+                                            <Friend friend={friend} external={'delete'} key={key} />
+                                        ))}
+                                </div>
                             </StyledTabDiv1>
                         </StyledTabLi1>
                         <StyledTabLi1>
                             <StyledTabRadio1 id="li2" name="radio1" />
                             <StyledLabel5 htmlFor="li2">다른 사용자</StyledLabel5>
                             <StyledTabDiv1>
-                                <StyledBorderDiv1>
-                                    <StyledBackgroundDiv1>
-                                        <StyledText1 placeholder="검색" onChange={onSearchTextOthers}></StyledText1>
-                                    </StyledBackgroundDiv1>
-                                </StyledBorderDiv1>
-                                {friends
-                                    .filter(
-                                        (friend) =>
-                                            friend.friendId.includes(searchTextOthers) ||
-                                            friend.friendName.includes(searchTextOthers),
-                                    )
-                                    .map((friend, key) => (
-                                        <Friend friend={friend} external={'delete'} key={key} />
-                                    ))}
+                                <div>
+                                    <StyledBorderDiv1>
+                                        <StyledBackgroundDiv1>
+                                            <StyledText1 placeholder="검색" onChange={onSearchTextOthers}></StyledText1>
+                                        </StyledBackgroundDiv1>
+                                    </StyledBorderDiv1>
+                                </div>
+
+                                <div>
+                                    {friends
+                                        .filter(
+                                            (friend) =>
+                                                friend.friendId.includes(searchTextOthers) ||
+                                                friend.friendName.includes(searchTextOthers),
+                                        )
+                                        .map((friend, key) => (
+                                            <Friend friend={friend} external={'delete'} key={key} />
+                                        ))}
+                                </div>
                             </StyledTabDiv1>
                         </StyledTabLi1>
                     </StyledTabUl1>
                 </StyledDiv1>
-            </StyledNineDiv2>
+            </StyledNineDiv1>
         </>
     );
 };

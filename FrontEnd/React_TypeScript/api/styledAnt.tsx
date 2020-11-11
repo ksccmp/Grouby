@@ -12,6 +12,9 @@ import {
     CaretDownOutlined,
     CheckCircleOutlined,
     CheckCircleFilled,
+    HomeOutlined,
+    TeamOutlined,
+    MenuOutlined,
 } from '@ant-design/icons';
 
 export const StyledLeftOutLined1 = styled(LeftOutlined)`
@@ -119,5 +122,42 @@ export const StyledCheckCircleFilled1 = styled(CheckCircleFilled)`
     & > svg {
         width: 1.4rem;
         height: 1.4rem;
+    }
+`;
+
+interface INavChoice {
+    choice: string;
+}
+
+export const StyledHomeOutlined1 = styled(HomeOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        fill: ${(props: INavChoice) => (props.choice === 'true' ? '#E6951A' : '')};
+    }
+`;
+
+export const StyeldTeamOutlined1 = styled(TeamOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        fill: ${(props: INavChoice) => (props.choice === 'true' ? '#E6951A' : '')};
+    }
+`;
+
+export const StyledMenuOutlined1 = styled(MenuOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        fill: ${(props: INavChoice) => (props.choice === 'true' ? '#E6951A' : '')};
     }
 `;

@@ -11,7 +11,7 @@ import {
     StyledBorderDiv1,
     StyledBackgroundDiv1,
 } from '../../api/styled';
-import { StyledH4, StyledH5, StyledH4_1 } from '../../api/styledFont';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { StyledRightOutlined1 } from '../../api/styledAnt';
 
 const GroupAdd = (): JSX.Element => {
@@ -62,7 +62,7 @@ const GroupAdd = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>그룹수정</StyledH4_1>
+                            <StyledH4>그룹수정</StyledH4>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>
@@ -71,7 +71,7 @@ const GroupAdd = (): JSX.Element => {
 
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>그룹삭제</StyledH4_1>
+                            <StyledH4>그룹삭제</StyledH4>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>

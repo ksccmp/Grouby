@@ -5,12 +5,14 @@ import {
     StyledNineDiv1,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
+    StyledBorderDiv15,
+    StyledBackgroundDiv15,
     StyledText1,
     StyledGrid1,
     StyledWidthLine1,
     StyledFlex1,
 } from '../../api/styled';
-import { StyledH4, StyledH5 } from '../../api/styledFont';
+import { StyledH4, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
 import { IUser, IGroup, IGroupMember } from '../../api/interface';
@@ -83,9 +85,8 @@ const MainHome = (): JSX.Element => {
                     <div>
                         <StyledFlex2>
                             <div>
-                                <StyledH4>
-                                    {reduxUser.userId}({reduxUser.userName})
-                                </StyledH4>
+                                <StyledH4>{reduxUser.userId}</StyledH4>
+                                <StyledH6>({reduxUser.userName})</StyledH6>
                             </div>
                         </StyledFlex2>
                     </div>
@@ -124,11 +125,11 @@ const MainHome = (): JSX.Element => {
                                 return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
                             })}
 
-                        <StyledBorderDiv1 onClick={goMainRegGroup}>
-                            <StyledBackgroundDiv1>
+                        <StyledBorderDiv15 onClick={goMainRegGroup}>
+                            <StyledBackgroundDiv15>
                                 <StyledPlusCircleOutlined1 />
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
+                            </StyledBackgroundDiv15>
+                        </StyledBorderDiv15>
                     </div>
                 </StyledDiv1>
             </StyledNineDiv1>

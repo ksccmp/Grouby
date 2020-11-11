@@ -1,7 +1,8 @@
 import { Router } from 'next/router';
 import * as React from 'react';
-import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1 } from '../../api/styled';
-import { StyledH4 } from '../../api/styledFont';
+import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
+import { StyledH7 } from '../../api/styledFont';
+import { StyledHomeOutlined1, StyeldTeamOutlined1, StyledMenuOutlined1 } from '../../api/styledAnt';
 
 interface ISignLayout {
     children: React.ReactNode;
@@ -19,23 +20,23 @@ const SignLayout: React.FC<ISignLayout> = ({ children, router }): JSX.Element =>
                     <StyledNineFixedFooter1>
                         <StyledDiv1>
                             <StyledNavUl1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('mainHome') ? true : false}
-                                    onClick={() => router.push('/main/mainHome')}
-                                >
-                                    <StyledH4>홈</StyledH4>
+                                <StyledNavLi1 onClick={() => router.push('/main/mainHome')}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('mainHome'))} />
+                                        <StyledH7>홈</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('mainFriends') ? true : false}
-                                    onClick={() => router.push('/main/mainFriends')}
-                                >
-                                    <StyledH4>친구</StyledH4>
+                                <StyledNavLi1 onClick={() => router.push('/main/mainFriends')}>
+                                    <StyledFlex9>
+                                        <StyeldTeamOutlined1 choice={String(router.pathname.endsWith('mainFriends'))} />
+                                        <StyledH7>친구</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('mainAdd') ? true : false}
-                                    onClick={() => router.push('/main/mainAdd')}
-                                >
-                                    <StyledH4>더보기</StyledH4>
+                                <StyledNavLi1 onClick={() => router.push('/main/mainAdd')}>
+                                    <StyledFlex9>
+                                        <StyledMenuOutlined1 choice={String(router.pathname.endsWith('mainAdd'))} />
+                                        <StyledH7>더보기</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
                             </StyledNavUl1>
                         </StyledDiv1>

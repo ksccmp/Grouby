@@ -76,11 +76,9 @@ export const StyledBorderDiv2 = styled.div`
 `;
 
 export const StyledBorderDiv3 = styled.div`
-    background-color: yellow;
-    min-width: ${minWidth1}px;
-    max-width: ${maxWidth1}px;
+    background-color: rgba(137, 136, 135, 0.3);
     height: ${height1}px;
-    padding: 1px;
+    padding-bottom: 2px;
     margin: 4px auto;
     position: relative;
 `;
@@ -173,6 +171,25 @@ export const StyledBorderDiv14 = styled.div`
     height: ${height1}px;
     padding: ${(props: IStyledBorderDiv14) => (props.same ? '1px' : '2px')};
     margin: 4px auto;
+`;
+
+export const StyledBorderDiv15 = styled.div`
+    background: #e6951a;
+    height: ${height1}px;
+    padding: 1px;
+    margin: 4px auto;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+`;
+
+export const StyledBorderDiv16 = styled.div`
+    background-color: #e6951a;
+    height: ${height1}px;
+    padding-bottom: 1px;
+    margin: 4px auto;
+    position: relative;
 `;
 
 export const StyledBackgroundDiv1 = styled.div`
@@ -293,6 +310,29 @@ export const StyledBackgroundDiv14 = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+export const StyledBackgroundDiv15 = styled.div`
+    height: ${height1}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+`;
+
+export const StyledBackgroundDiv16 = styled.div`
+    height: ${height1}px;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: ${external1}px;
 `;
 
 export const StyledButton1 = styled.button`
@@ -489,6 +529,11 @@ export const StyledFlex8 = styled.div`
     height: ${height2}px;
 `;
 
+export const StyledFlex9 = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const StyledGrid1 = styled.div`
     display: grid;
     grid-template-columns: 4fr 2fr 4fr;
@@ -556,6 +601,17 @@ export const StyledExternalDiv3 = styled.div`
     flex-direction: column;
 `;
 
+export const StyledExternalDiv4 = styled.div`
+    width: ${external1}px;
+    height: ${height1}px;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const StyledWidthLine1 = styled.div`
     width: 100%;
     height: 0;
@@ -589,14 +645,10 @@ export const StyledNavUl2 = styled.ul`
     table-layout: fixed;
 `;
 
-interface IStyledNavLi1 {
-    checked: boolean;
-}
-
 export const StyledNavLi1 = styled.li`
     display: table-cell;
     text-align: center;
-    border-bottom: ${(props: IStyledNavLi1) => (props.checked ? '2px solid red' : '')};
+    vertical-align: middle;
 `;
 
 export const StyledNavLi2 = styled.li`
@@ -625,11 +677,12 @@ export const StyledCardDiv1 = styled.div`
 export const StyledTabUl1 = styled.ul`
     width: 100%;
     list-style-type: none;
-    margin: 0;
+    margin: 0.4rem 0;
     padding: 0;
     display: table;
     table-layout: fixed;
     position: relative;
+    border: 1px solid black;
 `;
 
 export const StyledTabLi1 = styled.li`
@@ -646,8 +699,7 @@ export const StyledTabRadio1 = styled.input.attrs(() => ({
 
     &:checked {
         & + label {
-            background-color: blue;
-            opacity: 0.7;
+            background-color: #e6951a;
         }
 
         & ~ div {

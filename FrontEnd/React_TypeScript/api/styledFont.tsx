@@ -38,16 +38,6 @@ export const StyledH4 = styled.p`
     font-family: ${fontFamily};
 `;
 
-export const StyledH4_1 = styled.p`
-    margin: 0;
-    padding: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: inline-block;
-    marginleft: 0.7rem;
-    font-family: ${fontFamily};
-`;
-
 export const StyledH5 = styled.p`
     margin: 0;
     padding: 0;
@@ -108,7 +98,6 @@ export const StyledLabel5 = styled.label`
     height: 40px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     font-family: ${fontFamily};
 `;
 

@@ -11,7 +11,7 @@ import {
     StyledBorderDiv1,
     StyledBackgroundDiv1,
 } from '../../api/styled';
-import { StyledH4, StyledH5, StyledH4_1 } from '../../api/styledFont';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { StyledRightOutlined1 } from '../../api/styledAnt';
 
 const SpotAdd = (): JSX.Element => {
@@ -66,7 +66,7 @@ const SpotAdd = (): JSX.Element => {
                 <StyledDiv1>
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>스팟수정</StyledH4_1>
+                            <StyledH4>스팟수정</StyledH4>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>
@@ -75,7 +75,7 @@ const SpotAdd = (): JSX.Element => {
 
                     <StyledBorderDiv3>
                         <StyledBackgroundDiv3>
-                            <StyledH4_1>스팟삭제</StyledH4_1>
+                            <StyledH4>스팟삭제</StyledH4>
                             <StyledExternalDiv1>
                                 <StyledRightOutlined1 />
                             </StyledExternalDiv1>

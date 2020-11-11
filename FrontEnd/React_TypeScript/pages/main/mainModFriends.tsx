@@ -12,7 +12,7 @@ import { StyledLeftOutLined1 } from '../../api/styledAnt';
 import { StyledH3, StyledH5 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
 import { IFriend } from '../../api/interface';
-import { getTime, goBack } from '../../api/common';
+import { getTime, goMainRegGroup } from '../../api/common';
 
 const MainModFriends = (): JSX.Element => {
     const [friends, setFriends] = React.useState<IFriend[]>([
@@ -48,37 +48,39 @@ const MainModFriends = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                        </div>
-                        <div>
-                            <StyledH3>확인</StyledH3>
-                        </div>
-                    </StyledFlex2>
+                    <div>
+                        <StyledFlex2>
+                            <div>
+                                <StyledLeftOutLined1 onClick={goMainRegGroup} />
+                                <StyledH3>멤버추가</StyledH3>
+                            </div>
+                            <div>
+                                <StyledH3>확인</StyledH3>
+                            </div>
+                        </StyledFlex2>
+                    </div>
+
+                    <div style={{ marginBottom: '1rem' }}>
+                        <StyledBorderDiv1>
+                            <StyledBackgroundDiv1>
+                                <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
+                            </StyledBackgroundDiv1>
+                        </StyledBorderDiv1>
+                    </div>
+
+                    <div>
+                        <StyledH5>내 친구</StyledH5>
+                        {friends
+                            .filter(
+                                (friend) =>
+                                    friend.friendId.includes(searchText) || friend.friendName.includes(searchText),
+                            )
+                            .map((friend, key) => (
+                                <Friend friend={friend} external={'add'} key={key} />
+                            ))}
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledBorderDiv1>
-                        <StyledBackgroundDiv1>
-                            <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
-                        </StyledBackgroundDiv1>
-                    </StyledBorderDiv1>
-                </StyledDiv1>
-            </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    <StyledH5>내 친구</StyledH5>
-                </StyledDiv1>
-                {friends
-                    .filter((friend) => friend.friendId.includes(searchText) || friend.friendName.includes(searchText))
-                    .map((friend, key) => (
-                        <Friend friend={friend} external={'add'} key={key} />
-                    ))}
-            </StyledNineDiv2>
         </>
     );
 };

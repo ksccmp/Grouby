@@ -1,8 +1,9 @@
 import { Router } from 'next/router';
 import * as React from 'react';
-import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1 } from '../../api/styled';
-import { StyledH4 } from '../../api/styledFont';
+import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
+import { StyledH7 } from '../../api/styledFont';
 import { goGroupHome } from '../../api/common';
+import { StyledHomeOutlined1 } from '../../api/styledAnt';
 
 interface IGroupLayout {
     children: React.ReactNode;
@@ -20,23 +21,23 @@ const GroupLayout: React.FC<IGroupLayout> = ({ children, router }): JSX.Element 
                     <StyledNineFixedFooter1>
                         <StyledDiv1>
                             <StyledNavUl1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('groupHome') ? true : false}
-                                    onClick={goGroupHome}
-                                >
-                                    <StyledH4>홈</StyledH4>
+                                <StyledNavLi1 onClick={goGroupHome}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('groupHome'))} />
+                                        <StyledH7>홈</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('groupTalk') ? true : false}
-                                    onClick={() => router.push('/group/groupTalk')}
-                                >
-                                    <StyledH4>채팅</StyledH4>
+                                <StyledNavLi1 onClick={() => router.push('/group/groupTalk')}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('groupTalk'))} />
+                                        <StyledH7>채팅</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('groupAdd') ? true : false}
-                                    onClick={() => router.push('/group/groupAdd')}
-                                >
-                                    <StyledH4>더보기</StyledH4>
+                                <StyledNavLi1 onClick={() => router.push('/group/groupAdd')}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('groupAdd'))} />
+                                        <StyledH7>더보기</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
                             </StyledNavUl1>
                         </StyledDiv1>

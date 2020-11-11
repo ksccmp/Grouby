@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledBorderDiv3, StyledBackgroundDiv3, StyledExternalDiv3, StyledRadio2 } from '../../api/styled';
-import { StyledH4_1 } from '../../api/styledFont';
+import { StyledH4 } from '../../api/styledFont';
 import {
     StyledCaretUpOutlined1,
     StyledCaretDownOutlined,
@@ -40,7 +40,7 @@ const RankComp: React.FC<IChangeRankComp> = ({
                         <StyledCheckCircleFilled1 />
                     </label>
                 </div>
-                <StyledH4_1>{rankComp.rankCompName}</StyledH4_1>
+                <StyledH4>{rankComp.rankCompName}</StyledH4>
                 <StyledExternalDiv3 onClick={() => onOutLine(index)}>
                     <StyledCaretUpOutlined1 fill={rankComp.rankCompOrder === 1} />
                     <StyledCaretDownOutlined fill={rankComp.rankCompOrder === 2} />

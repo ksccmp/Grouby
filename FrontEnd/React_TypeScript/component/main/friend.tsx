@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyledBorderDiv3, StyledBackgroundDiv3, StyledExternalDiv1, StyledButton2 } from '../../api/styled';
-import { StyledH4_1, StyledH6 } from '../../api/styledFont';
+import { StyledBorderDiv3, StyledBackgroundDiv3, StyledExternalDiv4, StyledButton2 } from '../../api/styled';
+import { StyledH4, StyledH6 } from '../../api/styledFont';
 import { IFriend } from '../../api/interface';
 
 interface IChangeFriend {
@@ -28,10 +28,11 @@ const Friend: React.FC<IChangeFriend> = ({ friend, external }): JSX.Element => {
     return (
         <StyledBorderDiv3>
             <StyledBackgroundDiv3>
-                <StyledH4_1>
-                    {friend.friendId}({friend.friendName})
-                </StyledH4_1>
-                <StyledExternalDiv1>{getExternal()}</StyledExternalDiv1>
+                <div>
+                    <StyledH4>{friend.friendId}</StyledH4>
+                    <StyledH6>({friend.friendName})</StyledH6>
+                </div>
+                <StyledExternalDiv4>{getExternal()}</StyledExternalDiv4>
             </StyledBackgroundDiv3>
         </StyledBorderDiv3>
     );

@@ -1,8 +1,9 @@
 import { Router } from 'next/router';
 import * as React from 'react';
-import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1 } from '../../api/styled';
-import { StyledH4 } from '../../api/styledFont';
+import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
+import { StyledH7 } from '../../api/styledFont';
 import { goSpotItems, goSpotRanks, goSpotAdd } from '../../api/common';
+import { StyledHomeOutlined1 } from '../../api/styledAnt';
 
 interface ISpotLayout {
     children: React.ReactNode;
@@ -20,23 +21,23 @@ const SpotLayout: React.FC<ISpotLayout> = ({ children, router }): JSX.Element =>
                     <StyledNineFixedFooter1>
                         <StyledDiv1>
                             <StyledNavUl1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('spotItems') ? true : false}
-                                    onClick={goSpotItems}
-                                >
-                                    <StyledH4>아이템</StyledH4>
+                                <StyledNavLi1 onClick={goSpotItems}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('spotItems'))} />
+                                        <StyledH7>아이템</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('spotRanks') ? true : false}
-                                    onClick={goSpotRanks}
-                                >
-                                    <StyledH4>평가</StyledH4>
+                                <StyledNavLi1 onClick={goSpotRanks}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('spotRanks'))} />
+                                        <StyledH7>평가</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
-                                <StyledNavLi1
-                                    checked={router.pathname.endsWith('spotAdd') ? true : false}
-                                    onClick={goSpotAdd}
-                                >
-                                    <StyledH4>더보기</StyledH4>
+                                <StyledNavLi1 onClick={goSpotAdd}>
+                                    <StyledFlex9>
+                                        <StyledHomeOutlined1 choice={String(router.pathname.endsWith('spotAdd'))} />
+                                        <StyledH7>더보기</StyledH7>
+                                    </StyledFlex9>
                                 </StyledNavLi1>
                             </StyledNavUl1>
                         </StyledDiv1>
