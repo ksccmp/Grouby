@@ -12,10 +12,10 @@ import {
     StyledFixed2,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH6 } from '../../api/styledFont';
+import { StyledH3, StyledH4, StyledH6 } from '../../api/styledFont';
 import Comment from './comment';
 import { IComment } from '../../api/interface';
-import { getTime } from '../../api/common';
+import { getTime, goSpotItems } from '../../api/common';
 
 interface IComments {
     openComments: boolean;
@@ -48,6 +48,62 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
             modDate: getTime(),
             comments: '정말이요? 저도 여기 가야겠어요',
         },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
+        {
+            commentId: 3,
+            itemId: 1,
+            regId: 'intan',
+            regDate: getTime(),
+            modDate: getTime(),
+            comments: '정말이요? 저도 여기 가야겠어요',
+        },
     ]);
     const [searchTextComment, setSearchTextComment] = React.useState<string>('');
 
@@ -57,10 +113,12 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
         }
     }, [openComments]);
 
+    // 코멘트 내용 저장
     const onSearchTextComment = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTextComment(e.target.value);
     };
 
+    // 코멘트 게시
     const onSaveComment = () => {
         setComments((prev) => [
             ...prev,
@@ -81,16 +139,19 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
             <StyledFixed1 open={openComments}>
                 <StyledNineDiv2 style={{ paddingBottom: '45px', position: 'relative' }}>
                     <StyledDiv1>
-                        <StyledFlex2>
-                            <div>
-                                <StyledLeftOutLined1 onClick={onOpenComments} />
-                                <StyledH3>댓글</StyledH3>
-                            </div>
-                        </StyledFlex2>
-
-                        {comments.map((comment, key) => (
-                            <Comment comment={comment} key={key} />
-                        ))}
+                        <div style={{ margin: '0.5rem 0' }}>
+                            <StyledFlex2>
+                                <div>
+                                    <StyledLeftOutLined1 onClick={onOpenComments} />
+                                    <StyledH4>댓글</StyledH4>
+                                </div>
+                            </StyledFlex2>
+                        </div>
+                        <div>
+                            {comments.map((comment, key) => (
+                                <Comment comment={comment} key={key} />
+                            ))}
+                        </div>
                     </StyledDiv1>
                 </StyledNineDiv2>
 

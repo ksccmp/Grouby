@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledNineDiv1, StyledDiv1, StyledFlex2, StyledNineDiv2 } from '../../api/styled';
-import { StyledH3 } from '../../api/styledFont';
+import { StyledH4 } from '../../api/styledFont';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
 import { goBack, getTime } from '../../api/common';
 import StarScore from '../../component/group/starScore';
@@ -42,27 +42,27 @@ const GroupSpotRating = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                            <StyledH3>그룹 명/스팟 명</StyledH3>
-                        </div>
-                        <div>
-                            <StyledH3>평가</StyledH3>
-                        </div>
-                    </StyledFlex2>
+                    <div style={{ margin: '0.5rem 0' }}>
+                        <StyledFlex2>
+                            <div>
+                                <StyledLeftOutLined1 onClick={goBack} />
+                                <StyledH4>수찬 커플/사당 요란한식당</StyledH4>
+                            </div>
+                            <div>
+                                <StyledH4>평가</StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
+
+                    <div>
+                        {ranks
+                            ? ranks.map((rank, key) => {
+                                  return <StarScore rank={rank} onRanks={onRanks} key={key} />;
+                              })
+                            : ''}
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    {ranks
-                        ? ranks.map((rank, key) => {
-                              return <StarScore rank={rank} onRanks={onRanks} key={key} />;
-                          })
-                        : ''}
-                </StyledDiv1>
-            </StyledNineDiv2>
         </>
     );
 };

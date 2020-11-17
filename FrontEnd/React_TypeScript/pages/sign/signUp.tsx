@@ -14,7 +14,7 @@ import {
     StyledExternalDiv1,
     StyledBorderDiv2,
 } from '../../api/styled';
-import { StyledH3, StyledH5, StyledH6 } from '../../api/styledFont';
+import { StyledH4, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
 import { IUser } from '../../api/interface';
 import { goBack, getTime } from '../../api/common';
@@ -162,14 +162,14 @@ const SignUp = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <div>
+                    <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
                             <div>
                                 <StyledLeftOutLined1 onClick={goBack} />
-                                <StyledH3>회원가입</StyledH3>
+                                <StyledH4>회원가입</StyledH4>
                             </div>
                             <div onClick={onRegUser}>
-                                <StyledH3>생성</StyledH3>
+                                <StyledH4>생성</StyledH4>
                             </div>
                         </StyledFlex2>
                     </div>

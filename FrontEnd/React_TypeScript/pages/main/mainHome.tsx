@@ -82,7 +82,7 @@ const MainHome = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <div>
+                    <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
                             <div>
                                 <StyledH4>{reduxUser.userId}</StyledH4>

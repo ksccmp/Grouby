@@ -10,7 +10,6 @@ import {
     StyledBackgroundDiv11,
     StyledTextArea1,
     StyledExternalDiv2,
-    StyledNineDiv2,
     StyledSlideDiv1,
     StyledSlideUl1,
     StyledSlideLi1,
@@ -18,8 +17,8 @@ import {
     StyledSlideDiv3,
 } from '../../api/styled';
 import { StyledLeftOutLined1, StyledPlusCircleOutlined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH5 } from '../../api/styledFont';
-import { goBack, getTime } from '../../api/common';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
+import { goSpotItems, getTime } from '../../api/common';
 import { IItem } from '../../api/interface';
 
 const SpotRegItem = (): JSX.Element => {
@@ -65,7 +64,6 @@ const SpotRegItem = (): JSX.Element => {
 
     // 사진/동영상 터치 직전
     const onBeforeTouch = (e: React.TouchEvent<HTMLUListElement>) => {
-        console.log(e.targetTouches);
         setTouchGab(e.targetTouches[0].screenX);
     };
 
@@ -77,21 +75,19 @@ const SpotRegItem = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                            <StyledH3>그룹 명/스팟 명</StyledH3>
-                        </div>
-                        <div onClick={onRegItem}>
-                            <StyledH3>생성</StyledH3>
-                        </div>
-                    </StyledFlex2>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                    <div style={{ margin: '0.5rem 0' }}>
+                        <StyledFlex2>
+                            <div>
+                                <StyledLeftOutLined1 onClick={goSpotItems} />
+                                <StyledH4>수찬 커플/요란한식당</StyledH4>
+                            </div>
+                            <div>
+                                <StyledH4>게시</StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
 
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    <div>
+                    <div style={{ marginBottom: '1rem' }}>
                         <StyledH5>사진/동영상</StyledH5>
                         <StyledBorderDiv10>
                             <StyledBackgroundDiv10>
@@ -134,16 +130,17 @@ const SpotRegItem = (): JSX.Element => {
                             </StyledExternalDiv2>
                         </StyledBorderDiv10>
                     </div>
+
                     <div>
-                        <StyledH5>내용</StyledH5>
+                        <StyledH5>리뷰</StyledH5>
                         <StyledBorderDiv11>
                             <StyledBackgroundDiv11>
-                                <StyledTextArea1 onChange={onContents} />
+                                <StyledTextArea1 placeholder="리뷰를 작성해보세요." onChange={onContents} />
                             </StyledBackgroundDiv11>
                         </StyledBorderDiv11>
                     </div>
                 </StyledDiv1>
-            </StyledNineDiv2>
+            </StyledNineDiv1>
         </>
     );
 };

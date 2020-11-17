@@ -60,7 +60,6 @@ export interface IRankComp {
 export interface ITag {
     groupId: number;
     tagName: string;
-    tagSelect: boolean;
 }
 
 export interface IItem {

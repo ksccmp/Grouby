@@ -12,7 +12,7 @@ import {
     StyledWidthLine1,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH5 } from '../../api/styledFont';
+import { StyledH3, StyledH5, StyledH4 } from '../../api/styledFont';
 import { goBack, goSpotRegItem, getTime } from '../../api/common';
 import { IItem } from '../../api/interface';
 import Item from '../../component/spot/item';
@@ -84,47 +84,44 @@ const SpotItems = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                            <StyledH3>그룹 명/스팟 명</StyledH3>
-                        </div>
-                        <div onClick={goSpotRegItem}>
-                            <StyledH3>등록</StyledH3>
-                        </div>
-                    </StyledFlex2>
+                    <div style={{ margin: '0.5rem 0' }}>
+                        <StyledFlex2>
+                            <div>
+                                <StyledH4>수찬 커플/사당 요란한식당</StyledH4>
+                            </div>
+                            <div onClick={goSpotRegItem}>
+                                <StyledH4>등록</StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
+
+                    <div>
+                        <StyledBorderDiv1>
+                            <StyledBackgroundDiv1>
+                                <StyledText1 placeholder="검색"></StyledText1>
+                            </StyledBackgroundDiv1>
+                        </StyledBorderDiv1>
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <StyledGrid1>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                            <StyledH5>1건</StyledH5>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                        </StyledGrid1>
+                    </div>
+
+                    <div>
+                        {items.map((item, key) => (
+                            <Item item={item} onLikePress={onLikePress} onOpenComments={onOpenComments} key={key} />
+                        ))}
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledBorderDiv1>
-                    <StyledBackgroundDiv1>
-                        <StyledText1 placeholder="검색"></StyledText1>
-                    </StyledBackgroundDiv1>
-                </StyledBorderDiv1>
-            </StyledNineDiv2>
-
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledGrid1>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                        <StyledH5>1건</StyledH5>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                    </StyledGrid1>
-                </StyledDiv1>
-            </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    {items.map((item, key) => (
-                        <Item item={item} onLikePress={onLikePress} onOpenComments={onOpenComments} key={key} />
-                    ))}
-                </StyledDiv1>
-            </StyledNineDiv2>
 
             <Comments openComments={openComments} onOpenComments={onOpenComments} />
         </>

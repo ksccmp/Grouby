@@ -17,7 +17,7 @@ const MainAdd = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <div>
+                    <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
                             <div>
                                 <StyledH4>ksccmp</StyledH4>
@@ -26,7 +26,7 @@ const MainAdd = (): JSX.Element => {
                         </StyledFlex2>
                     </div>
 
-                    <div>
+                    <div style={{ marginBottom: '1rem' }}>
                         <StyledFlex5>
                             <StyledFlex9>
                                 <StyledH4>그룹</StyledH4>

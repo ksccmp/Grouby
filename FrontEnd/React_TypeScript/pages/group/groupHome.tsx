@@ -19,10 +19,10 @@ import {
     StyledButton4,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH7, StyledH5 } from '../../api/styledFont';
+import { StyledH3, StyledH4, StyledH7, StyledH5 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
 import { ISpot, IRank, IRankComp } from '../../api/interface';
-import { goBack, goGroupRegSpot, getTime } from '../../api/common';
+import { goGroupRegSpot, getTime } from '../../api/common';
 import RankComp from '../../component/group/rankComp';
 
 export interface IChangeSpot extends ISpot {
@@ -229,76 +229,78 @@ const GroupHome = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                            <StyledH3>그룹명</StyledH3>
-                        </div>
-                        <div onClick={goGroupRegSpot}>
-                            <StyledH3>등록</StyledH3>
-                        </div>
-                    </StyledFlex2>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                    <div style={{ margin: '0.5rem 0' }}>
+                        <StyledFlex2>
+                            <div>
+                                <StyledH4>수찬 커플</StyledH4>
+                            </div>
+                            <div onClick={goGroupRegSpot}>
+                                <StyledH4>등록</StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
 
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledBorderDiv1>
-                        <StyledBackgroundDiv1>
-                            <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
-                        </StyledBackgroundDiv1>
-                    </StyledBorderDiv1>
+                    <div>
+                        <StyledBorderDiv1>
+                            <StyledBackgroundDiv1>
+                                <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
+                            </StyledBackgroundDiv1>
+                        </StyledBorderDiv1>
 
-                    <StyledBorderDiv4 onClick={onOpenFilter}>
-                        <StyledBackgroundDiv4>
-                            {rankComps.map((rankComp, key) =>
-                                rankComp.rankCompOrder !== 0 ? (
-                                    <StyledH7 key={key}>
-                                        #{rankComp.rankCompName}
-                                        {rankComp.rankCompOrder === 2 ? '↓' : '↑'}
-                                    </StyledH7>
-                                ) : (
-                                    ''
+                        <StyledBorderDiv4 onClick={onOpenFilter}>
+                            <StyledBackgroundDiv4>
+                                <StyledBackgroundDiv4 style={{ marginRight: '15px' }}>
+                                    {rankComps
+                                        .filter((rankComp) => rankComp.rankCompOrder !== 0)
+                                        .map((rankComp, key) => (
+                                            <StyledH7 key={key} style={{ marginLeft: '15px' }}>
+                                                #{rankComp.rankCompName}
+                                                {rankComp.rankCompOrder === 2 ? '↓' : '↑'}
+                                            </StyledH7>
+                                        ))}
+                                    {rankComps.filter((rankComp) => rankComp.rankCompOrder !== 0).length === 0 ? (
+                                        <StyledH7 style={{ marginLeft: '15px' }}>필터를 추가하세요.</StyledH7>
+                                    ) : (
+                                        ''
+                                    )}
+                                </StyledBackgroundDiv4>
+                            </StyledBackgroundDiv4>
+                        </StyledBorderDiv4>
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <StyledGrid1>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                            <StyledH5>{spots.length}건</StyledH5>
+                            <StyledFlex1>
+                                <StyledWidthLine1 />
+                            </StyledFlex1>
+                        </StyledGrid1>
+                    </div>
+
+                    <div>
+                        {spots
+                            // 랭크 별 Sort
+                            .sort((a, b) =>
+                                rankComps.reduce(
+                                    (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
+                                    0,
                                 ),
-                            )}
-                        </StyledBackgroundDiv4>
-                    </StyledBorderDiv4>
+                            )
+                            // 검색어가 포함된 것만 Filter
+                            .filter(
+                                (spot) =>
+                                    spot.spotName.includes(searchText) ||
+                                    spot.ranks.filter((rank) => rank.rankCompName.includes(searchText)).length > 0,
+                            )
+                            .map((spot, key) => (
+                                <SpotCard spot={spot} key={key} />
+                            ))}
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledGrid1>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                        <StyledH5>{spots.length}건</StyledH5>
-                        <StyledFlex1>
-                            <StyledWidthLine1 />
-                        </StyledFlex1>
-                    </StyledGrid1>
-                </StyledDiv1>
-            </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                {spots
-                    // 랭크 별 Sort
-                    .sort((a, b) =>
-                        rankComps.reduce(
-                            (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
-                            0,
-                        ),
-                    )
-                    // 검색어가 포함된 것만 Filter
-                    .filter(
-                        (spot) =>
-                            spot.spotName.includes(searchText) ||
-                            spot.ranks.filter((rank) => rank.rankCompName.includes(searchText)).length > 0,
-                    )
-                    .map((spot, key) => (
-                        <SpotCard spot={spot} key={key} />
-                    ))}
-            </StyledNineDiv2>
 
             <StyledFixed1 open={openFilter}>
                 <StyledNineDiv2 style={{ paddingBottom: '45px', position: 'relative' }}>

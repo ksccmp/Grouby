@@ -20,9 +20,9 @@ import { StyledLeftOutLined1, StyledPlusCircleOutlined1 } from '../../api/styled
 import { StyledH3, StyledH5, StyledLabel5, StyledH4 } from '../../api/styledFont';
 import { IRankComp, ITag } from '../../api/interface';
 import { goBack } from '../../api/common';
+import Option from '../../component/group/option';
 
 const GroupRegSpot = (): JSX.Element => {
-    const [openModal, setOpenModal] = React.useState<boolean>(false);
     const [rankComps, setRankComps] = React.useState<IRankComp[]>([
         { rankCompId: 1, rankCompName: '음식', rankCompSelect: false },
         { rankCompId: 2, rankCompName: '가격', rankCompSelect: false },
@@ -30,17 +30,12 @@ const GroupRegSpot = (): JSX.Element => {
         { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
     ]);
     const [tags, setTags] = React.useState<ITag[]>([
-        { groupId: 1, tagName: '광어회', tagSelect: false },
-        { groupId: 1, tagName: '연어회', tagSelect: false },
-        { groupId: 1, tagName: '고등어회', tagSelect: false },
+        { groupId: 1, tagName: '광어회' },
+        { groupId: 1, tagName: '연어회' },
+        { groupId: 1, tagName: '고등어회' },
     ]);
     const [searchTextTag, setSearchTextTag] = React.useState<string>('');
     const [searchTextSpotName, setSearchTextSpotName] = React.useState<string>('');
-
-    // 태그추가 창 열기/닫기
-    const onOpenModal = (): void => {
-        setOpenModal(!openModal);
-    };
 
     // 태그 입력 내용 저장
     const onSearchTextTag = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,9 +68,9 @@ const GroupRegSpot = (): JSX.Element => {
     };
 
     // 태그 클릭
-    const onSelectTag = (index: number) => {
+    const onDeleteTag = (index: number) => {
         const newTags = tags.slice();
-        newTags[index].tagSelect = !newTags[index].tagSelect;
+        newTags.splice(index, 1);
         setTags(newTags);
     };
 
@@ -83,88 +78,68 @@ const GroupRegSpot = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <StyledFlex2>
-                        <div>
-                            <StyledLeftOutLined1 onClick={goBack} />
-                            <StyledH3>그룹 명</StyledH3>
+                    <div style={{ margin: '0.5rem 0' }}>
+                        <StyledFlex2>
+                            <div>
+                                <StyledLeftOutLined1 onClick={goBack} />
+                                <StyledH4>수찬 커플</StyledH4>
+                            </div>
+                            <div>
+                                <StyledH4>생성</StyledH4>
+                            </div>
+                        </StyledFlex2>
+                    </div>
+
+                    <div>
+                        <div style={{ marginBottom: '1rem' }}>
+                            <StyledH5>스팟 명</StyledH5>
+                            <StyledBorderDiv1>
+                                <StyledBackgroundDiv1>
+                                    <StyledText1 placeholder="스팟 명" onChange={onSearchTextSpotName}></StyledText1>
+                                </StyledBackgroundDiv1>
+                            </StyledBorderDiv1>
                         </div>
+
                         <div>
-                            <StyledH3>스팟 생성</StyledH3>
+                            <StyledH5>옵션</StyledH5>
+                            <StyledTabUl1>
+                                <StyledTabLi1>
+                                    <StyledTabRadio1 id="li1" name="radio1" defaultChecked />
+                                    <StyledLabel5 htmlFor="li1">평가항목</StyledLabel5>
+                                    <StyledTabDiv1>
+                                        <div style={{ margin: '0.5rem 0' }}>
+                                            {rankComps.map((rankComp, key) => (
+                                                <Option
+                                                    rankComp={rankComp}
+                                                    onSelectRankComp={onSelectRankComp}
+                                                    index={key}
+                                                    key={key}
+                                                />
+                                            ))}
+                                        </div>
+                                    </StyledTabDiv1>
+                                </StyledTabLi1>
+                                <StyledTabLi1>
+                                    <StyledTabRadio1 id="li2" name="radio1" />
+                                    <StyledLabel5 htmlFor="li2">태그</StyledLabel5>
+                                    <StyledTabDiv1>
+                                        <div style={{ margin: '0.5rem 0' }}>
+                                            {tags.map((tag, key) => (
+                                                <Option tag={tag} onDeleteTag={onDeleteTag} index={key} key={key} />
+                                            ))}
+                                            <Option
+                                                searchTextTag={searchTextTag}
+                                                onSearchTextTag={onSearchTextTag}
+                                                onSaveTag={onSaveTag}
+                                            />
+                                        </div>
+                                    </StyledTabDiv1>
+                                </StyledTabLi1>
+                            </StyledTabUl1>
                         </div>
-                    </StyledFlex2>
+                    </div>
                 </StyledDiv1>
             </StyledNineDiv1>
-
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    <StyledH5>스팟 명</StyledH5>
-                </StyledDiv1>
-                <StyledBorderDiv1>
-                    <StyledBackgroundDiv1>
-                        <StyledText1 placeholder="스팟 명" onChange={onSearchTextSpotName}></StyledText1>
-                    </StyledBackgroundDiv1>
-                </StyledBorderDiv1>
-            </StyledNineDiv2>
-
-            <StyledNineDiv2>
-                <StyledDiv1>
-                    <StyledH5>옵션</StyledH5>
-
-                    <StyledTabUl1>
-                        <StyledTabLi1>
-                            <StyledTabRadio1 id="li1" name="radio1" defaultChecked />
-                            <StyledLabel5 htmlFor="li1">평가항목</StyledLabel5>
-                            <StyledTabDiv1>
-                                {rankComps.map((rankComp, key) => (
-                                    <StyledBorderDiv12 key={key} onClick={() => onSelectRankComp(key)}>
-                                        <StyledBackgroundDiv12 select={rankComp.rankCompSelect as boolean}>
-                                            <StyledH4>{rankComp.rankCompName}</StyledH4>
-                                        </StyledBackgroundDiv12>
-                                    </StyledBorderDiv12>
-                                ))}
-                            </StyledTabDiv1>
-                        </StyledTabLi1>
-                        <StyledTabLi1>
-                            <StyledTabRadio1 id="li2" name="radio1" />
-                            <StyledLabel5 htmlFor="li2">태그</StyledLabel5>
-                            <StyledTabDiv1>
-                                {tags.map((tag, key) => (
-                                    <StyledBorderDiv12 key={key} onClick={() => onSelectTag(key)}>
-                                        <StyledBackgroundDiv12 select={tag.tagSelect}>
-                                            <StyledH4>{tag.tagName}</StyledH4>
-                                        </StyledBackgroundDiv12>
-                                    </StyledBorderDiv12>
-                                ))}
-                                <StyledBorderDiv1 onClick={onOpenModal}>
-                                    <StyledBackgroundDiv1>
-                                        <StyledPlusCircleOutlined1 />
-                                    </StyledBackgroundDiv1>
-                                </StyledBorderDiv1>
-                            </StyledTabDiv1>
-                        </StyledTabLi1>
-                    </StyledTabUl1>
-                </StyledDiv1>
-            </StyledNineDiv2>
-
-            <StyledFlex7 open={openModal}>
-                <StyledNineDiv2>
-                    <StyledDiv1>
-                        <StyledBorderDiv1>
-                            <StyledBackgroundDiv1>
-                                <StyledText1
-                                    placeholder="태그 명"
-                                    onChange={onSearchTextTag}
-                                    value={searchTextTag}
-                                ></StyledText1>
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
-                        <div>
-                            <StyledButton3 onClick={onSaveTag}>확인</StyledButton3>
-                            <StyledButton3 onClick={onOpenModal}>취소</StyledButton3>
-                        </div>
-                    </StyledDiv1>
-                </StyledNineDiv2>
-            </StyledFlex7>
         </>
     );
 };

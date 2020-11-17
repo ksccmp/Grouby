@@ -6,10 +6,9 @@ import {
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledText1,
-    StyledNineDiv2,
 } from '../../api/styled';
 import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH5 } from '../../api/styledFont';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
 import { IFriend } from '../../api/interface';
 import { getTime, goMainRegGroup } from '../../api/common';
@@ -48,14 +47,14 @@ const MainModFriends = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <div>
+                    <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
                             <div>
                                 <StyledLeftOutLined1 onClick={goMainRegGroup} />
-                                <StyledH3>멤버추가</StyledH3>
+                                <StyledH4>멤버추가</StyledH4>
                             </div>
                             <div>
-                                <StyledH3>확인</StyledH3>
+                                <StyledH4>확인</StyledH4>
                             </div>
                         </StyledFlex2>
                     </div>

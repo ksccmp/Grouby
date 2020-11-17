@@ -59,7 +59,7 @@ const MainFriends = (): JSX.Element => {
                             <StyledTabRadio1 id="li1" name="radio1" defaultChecked />
                             <StyledLabel5 htmlFor="li1">친구</StyledLabel5>
                             <StyledTabDiv1>
-                                <div>
+                                <div style={{ margin: '0.5rem 0' }}>
                                     <StyledBorderDiv1>
                                         <StyledBackgroundDiv1>
                                             <StyledText1 placeholder="검색" onChange={onSearchTextFriend}></StyledText1>
@@ -83,7 +83,7 @@ const MainFriends = (): JSX.Element => {
                             <StyledTabRadio1 id="li2" name="radio1" />
                             <StyledLabel5 htmlFor="li2">다른 사용자</StyledLabel5>
                             <StyledTabDiv1>
-                                <div>
+                                <div style={{ margin: '0.5rem 0' }}>
                                     <StyledBorderDiv1>
                                         <StyledBackgroundDiv1>
                                             <StyledText1 placeholder="검색" onChange={onSearchTextOthers}></StyledText1>
@@ -99,7 +99,7 @@ const MainFriends = (): JSX.Element => {
                                                 friend.friendName.includes(searchTextOthers),
                                         )
                                         .map((friend, key) => (
-                                            <Friend friend={friend} external={'delete'} key={key} />
+                                            <Friend friend={friend} external={'add'} key={key} />
                                         ))}
                                 </div>
                             </StyledTabDiv1>

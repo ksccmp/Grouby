@@ -3,13 +3,12 @@ import {
     StyledNineDiv1,
     StyledDiv1,
     StyledFlex2,
-    StyledNineDiv2,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledText1,
 } from '../../api/styled';
 import { StyledLeftOutLined1, StyledPlusCircleOutlined2 } from '../../api/styledAnt';
-import { StyledH3, StyledH5 } from '../../api/styledFont';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
 import { IFriend } from '../../api/interface';
 import { goMainHome, goMainModFriends, getTime } from '../../api/common';
@@ -43,14 +42,14 @@ const MainRegGroup = (): JSX.Element => {
         <>
             <StyledNineDiv1>
                 <StyledDiv1>
-                    <div>
+                    <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
                             <div>
                                 <StyledLeftOutLined1 onClick={goMainHome} />
-                                <StyledH3>그룹생성</StyledH3>
+                                <StyledH4>그룹생성</StyledH4>
                             </div>
                             <div>
-                                <StyledH3>생성</StyledH3>
+                                <StyledH4>생성</StyledH4>
                             </div>
                         </StyledFlex2>
                     </div>

@@ -1,6 +1,6 @@
 import { Router } from 'next/router';
 import * as React from 'react';
-import { StyledNineFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
+import { StyledFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
 import { StyledH7 } from '../../api/styledFont';
 import { StyledHomeOutlined1, StyeldTeamOutlined1, StyledMenuOutlined1 } from '../../api/styledAnt';
 
@@ -17,7 +17,7 @@ const SignLayout: React.FC<ISignLayout> = ({ children, router }): JSX.Element =>
             router.pathname.endsWith('mainFriends') ||
             router.pathname.endsWith('mainAdd') ? (
                 <div>
-                    <StyledNineFixedFooter1>
+                    <StyledFixedFooter1>
                         <StyledDiv1>
                             <StyledNavUl1>
                                 <StyledNavLi1 onClick={() => router.push('/main/mainHome')}>
@@ -40,7 +40,7 @@ const SignLayout: React.FC<ISignLayout> = ({ children, router }): JSX.Element =>
                                 </StyledNavLi1>
                             </StyledNavUl1>
                         </StyledDiv1>
-                    </StyledNineFixedFooter1>
+                    </StyledFixedFooter1>
                 </div>
             ) : (
                 ''
