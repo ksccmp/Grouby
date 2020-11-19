@@ -2,28 +2,28 @@ import * as React from 'react';
 import { StyledFlex16, StyledFlex17 } from '../../api/styled';
 import { StyledH5, StyledH7 } from '../../api/styledFont';
 import { IFriend } from '../../api/interface';
-import { StyledMinusCircleFilled2 } from '../../api/styledAnt';
+import { StyledPlusCircleFilled1 } from '../../api/styledAnt';
 
 interface IChangeFriend {
-    friend: IFriend;
+    other: IFriend;
     index: number;
-    onDeleteFriend: (index: number) => void;
+    onInsertFriend: () => void;
 }
 
-const Friend: React.FC<IChangeFriend> = ({ friend, index, onDeleteFriend }): JSX.Element => {
+const Other: React.FC<IChangeFriend> = ({ other, index, onInsertFriend }): JSX.Element => {
     return (
         <>
             <StyledFlex16>
                 <StyledFlex17>
-                    <StyledH5>{friend.friendId}</StyledH5>
-                    <StyledH7>({friend.friendName})</StyledH7>
+                    <StyledH5>{other.friendId}</StyledH5>
+                    <StyledH7>({other.friendName})</StyledH7>
                 </StyledFlex17>
                 <div>
-                    <StyledMinusCircleFilled2 onClick={() => onDeleteFriend(index)} />
+                    <StyledPlusCircleFilled1 onClick={() => onInsertFriend()} />
                 </div>
             </StyledFlex16>
         </>
     );
 };
 
-export default Friend;
+export default Other;

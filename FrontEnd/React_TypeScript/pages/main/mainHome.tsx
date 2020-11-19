@@ -2,23 +2,20 @@ import * as React from 'react';
 import {
     StyledDiv1,
     StyledFlex2,
-    StyledNineDiv1,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledBorderDiv15,
-    StyledBackgroundDiv15,
-    StyledText1,
-    StyledGrid1,
-    StyledWidthLine1,
-    StyledFlex1,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex13,
+    StyledText3,
+    StyledBorderDiv18,
+    StyledBackgroundDiv18,
 } from '../../api/styled';
-import { StyledH4, StyledH5, StyledH6 } from '../../api/styledFont';
-import { StyledPlusCircleOutlined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
+import { StyledPlusCircleOutlined4, StyledSearchOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
 import { IUser, IGroup, IGroupMember } from '../../api/interface';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
-import { goMainRegGroup, getTime } from '../../api/common';
+import { goMainRegGroup, getTime, color3 } from '../../api/common';
 
 interface IChangeGroup extends IGroup {
     groupMembers: IGroupMember[];
@@ -72,67 +69,69 @@ const MainHome = (): JSX.Element => {
             ],
         },
     ]);
-    const [searchText, setSearchText] = React.useState<string>('');
+    const [searchGroup, setSearchGroup] = React.useState<string>('');
+    const [openSearchGroup, setOpenSearchGroup] = React.useState<boolean>(false);
 
-    const onSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchText(e.target.value);
+    const onSearchGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchGroup(e.target.value);
+    };
+
+    const onOpenSearchGroup = () => {
+        setOpenSearchGroup(!openSearchGroup);
+    };
+
+    const getFilterGroups = (): IChangeGroup[] => {
+        return groups.filter((group) => {
+            return group.groupName.includes(searchGroup) ||
+                group.groupMembers.filter((groupMembers) => {
+                    return groupMembers.userId.includes(searchGroup);
+                }).length > 0
+                ? true
+                : false;
+        });
     };
 
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex2>
-                            <div>
-                                <StyledH4>{reduxUser.userId}</StyledH4>
-                                <StyledH6>({reduxUser.userName})</StyledH6>
+                            <div style={{ width: '100%', marginRight: '10px' }}>
+                                {openSearchGroup ? (
+                                    <StyledBorderDiv18>
+                                        <StyledBackgroundDiv18>
+                                            <StyledText3 placeholder="그룹 검색" onChange={onSearchGroup} />
+                                        </StyledBackgroundDiv18>
+                                    </StyledBorderDiv18>
+                                ) : (
+                                    <StyledH4>{reduxUser.userId}</StyledH4>
+                                )}
                             </div>
+                            <StyledFlex13>
+                                <StyledSearchOutlined1 onClick={onOpenSearchGroup} />
+                                <StyledPlusCircleOutlined4 onClick={goMainRegGroup} />
+                            </StyledFlex13>
                         </StyledFlex2>
-                    </div>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                    <div>
-                        <StyledBorderDiv1>
-                            <StyledBackgroundDiv1>
-                                <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
-                    </div>
+                <StyledDiv5>
+                    <StyledDiv6>
+                        <div>
+                            {getFilterGroups().length > 0 && (
+                                <StyledH7 style={{ color: color3 }}>그룹 {getFilterGroups().length}</StyledH7>
+                            )}
+                        </div>
 
-                    <div style={{ textAlign: 'center' }}>
-                        <StyledGrid1>
-                            <StyledFlex1>
-                                <StyledWidthLine1 />
-                            </StyledFlex1>
-                            <StyledH5>{groups.length}건</StyledH5>
-                            <StyledFlex1>
-                                <StyledWidthLine1 />
-                            </StyledFlex1>
-                        </StyledGrid1>
-                    </div>
-
-                    <div>
-                        {groups
-                            .filter((group) => {
-                                return group.groupName.includes(searchText) ||
-                                    group.groupMembers.filter((groupMembers) => {
-                                        return groupMembers.userId.includes(searchText);
-                                    }).length > 0
-                                    ? true
-                                    : false;
-                            })
-                            .map((group, key) => {
+                        <div>
+                            {getFilterGroups().map((group, key) => {
                                 return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
                             })}
-
-                        <StyledBorderDiv15 onClick={goMainRegGroup}>
-                            <StyledBackgroundDiv15>
-                                <StyledPlusCircleOutlined1 />
-                            </StyledBackgroundDiv15>
-                        </StyledBorderDiv15>
-                    </div>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
         </>
     );
 };

@@ -20,7 +20,23 @@ import {
     MinusCircleFilled,
     FormOutlined,
     FileDoneOutlined,
+    SearchOutlined,
+    UsergroupAddOutlined,
+    PlusCircleFilled,
+    SettingOutlined,
 } from '@ant-design/icons';
+import { color1, color2, color3, color4, color5 } from './common';
+
+const topIcon = `
+    background-color: ${color1};
+    border-radius: 50%;
+    padding: 4px;
+
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+`;
 
 export const StyledLeftOutLined1 = styled(LeftOutlined)`
     margin-right: 0.4rem;
@@ -30,10 +46,17 @@ export const StyledLeftOutLined1 = styled(LeftOutlined)`
     }
 `;
 
+export const StyledLeftOutlined2 = styled(LeftOutlined)`
+    ${topIcon}
+`;
+
 export const StyledRightOutlined1 = styled(RightOutlined)`
     & > svg {
-        width: 1.4rem;
-        height: 1.4rem;
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+    & > svg > path {
+        fill: ${color3};
     }
 `;
 
@@ -41,6 +64,9 @@ export const StyledPlusCircleOutlined1 = styled(PlusCircleOutlined)`
     & > svg {
         width: 1.7rem;
         height: 1.7rem;
+    }
+    & > svg > path {
+        fill: #1976d2;
     }
 `;
 
@@ -52,7 +78,7 @@ export const StyledPlusCircleOutlined2 = styled(PlusCircleOutlined)`
         height: 1rem;
     }
     & > svg > path {
-        fill: #e6951a;
+        fill: #1976d2;
     }
 `;
 
@@ -64,6 +90,21 @@ export const StyledPlusCircleOutlined3 = styled(PlusCircleOutlined)`
 
     & > svg > path {
         fill: #1976d2;
+    }
+`;
+
+export const StyledPlusCircleOutlined4 = styled(PlusCircleOutlined)`
+    ${topIcon}
+`;
+
+export const StyledPlusCircleFilled1 = styled(PlusCircleFilled)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    & > svg > path {
+        fill: ${color5};
     }
 `;
 
@@ -268,4 +309,27 @@ export const StyledMinusCircleFilled1 = styled(MinusCircleFilled)`
     & > svg > path {
         fill: rgba(255, 0, 0, 0.7);
     }
+`;
+
+export const StyledMinusCircleFilled2 = styled(MinusCircleFilled)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    & > svg > path {
+        fill: ${color4};
+    }
+`;
+
+export const StyledSearchOutlined1 = styled(SearchOutlined)`
+    ${topIcon}
+`;
+
+export const StyledUsergroupAddOutlined1 = styled(UsergroupAddOutlined)`
+    ${topIcon}
+`;
+
+export const StyledSettingOutlined1 = styled(SettingOutlined)`
+    ${topIcon}
 `;

@@ -253,8 +253,8 @@ const GroupHome = (): JSX.Element => {
                                     {rankComps
                                         .filter((rankComp) => rankComp.rankCompOrder !== 0)
                                         .map((rankComp, key) => (
-                                            <StyledH7 key={key} style={{ marginLeft: '15px' }}>
-                                                #{rankComp.rankCompName}
+                                            <StyledH7 key={key} style={{ marginLeft: key === 0 ? '15px' : '5px' }}>
+                                                {rankComp.rankCompName}
                                                 {rankComp.rankCompOrder === 2 ? '↓' : '↑'}
                                             </StyledH7>
                                         ))}

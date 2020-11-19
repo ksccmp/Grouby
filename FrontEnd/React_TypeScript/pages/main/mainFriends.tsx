@@ -1,21 +1,26 @@
 import * as React from 'react';
 import {
-    StyledNineDiv1,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledText1,
-    StyledTabUl1,
-    StyledTabLi1,
-    StyledTabRadio1,
-    StyledTabDiv1,
     StyledDiv1,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex2,
+    StyledBorderDiv18,
+    StyledBackgroundDiv18,
+    StyledText3,
+    StyledFlex13,
 } from '../../api/styled';
-import { StyledLabel5 } from '../../api/styledFont';
+import { StyledSearchOutlined1, StyledUsergroupAddOutlined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
-import { IFriend } from '../../api/interface';
-import { getTime } from '../../api/common';
+import { IFriend, IUser } from '../../api/interface';
+import { getTime, color3 } from '../../api/common';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import { useSelector } from 'react-redux';
+import Others from '../../component/main/others';
 
 const MainFriends = (): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+
     const [friends, setFriends] = React.useState<IFriend[]>([
         {
             userId: 'ksccmp',
@@ -38,75 +43,176 @@ const MainFriends = (): JSX.Element => {
             friendPhone: '010-3333-4444',
             regDate: getTime(),
         },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
+        {
+            userId: 'ksccmp',
+            friendId: 'CDE',
+            friendName: '씨디이',
+            friendPhone: '010-3333-4444',
+            regDate: getTime(),
+        },
     ]);
-    const [searchTextFriend, setSearchTextFriend] = React.useState<string>('');
-    const [searchTextOthers, setSearchTextOthers] = React.useState<string>('');
+    const [searchFriend, setSearchFriend] = React.useState<string>('');
+    const [openSearchFriend, setOpenSearchFriend] = React.useState<boolean>(false);
+    const [openOthers, setOpenOthers] = React.useState<boolean>(false);
 
-    const onSearchTextFriend = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTextFriend(e.target.value);
+    const onSearchFriend = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchFriend(e.target.value);
     };
 
-    const onSearchTextOthers = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTextOthers(e.target.value);
+    const onOpenSearchFriend = () => {
+        setOpenSearchFriend(!openSearchFriend);
+    };
+
+    const onDeleteFriend = (index: number) => {
+        const newFriends = friends.slice();
+        newFriends.splice(index, 1);
+        setFriends(newFriends);
+    };
+
+    const onOpenOthers = () => {
+        setOpenOthers(!openOthers);
+    };
+
+    const getFilterFriends = (): IFriend[] => {
+        return friends.filter(
+            (friend) => friend.friendId.includes(searchFriend) || friend.friendName.includes(searchFriend),
+        );
     };
 
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <StyledTabUl1>
-                        <StyledTabLi1>
-                            <StyledTabRadio1 id="li1" name="radio1" defaultChecked />
-                            <StyledLabel5 htmlFor="li1">친구</StyledLabel5>
-                            <StyledTabDiv1>
-                                <div style={{ margin: '0.5rem 0' }}>
-                                    <StyledBorderDiv1>
-                                        <StyledBackgroundDiv1>
-                                            <StyledText1 placeholder="검색" onChange={onSearchTextFriend}></StyledText1>
-                                        </StyledBackgroundDiv1>
-                                    </StyledBorderDiv1>
-                                </div>
-                                <div>
-                                    {friends
-                                        .filter(
-                                            (friend) =>
-                                                friend.friendId.includes(searchTextFriend) ||
-                                                friend.friendName.includes(searchTextFriend),
-                                        )
-                                        .map((friend, key) => (
-                                            <Friend friend={friend} external={'delete'} key={key} />
-                                        ))}
-                                </div>
-                            </StyledTabDiv1>
-                        </StyledTabLi1>
-                        <StyledTabLi1>
-                            <StyledTabRadio1 id="li2" name="radio1" />
-                            <StyledLabel5 htmlFor="li2">다른 사용자</StyledLabel5>
-                            <StyledTabDiv1>
-                                <div style={{ margin: '0.5rem 0' }}>
-                                    <StyledBorderDiv1>
-                                        <StyledBackgroundDiv1>
-                                            <StyledText1 placeholder="검색" onChange={onSearchTextOthers}></StyledText1>
-                                        </StyledBackgroundDiv1>
-                                    </StyledBorderDiv1>
-                                </div>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
+                        <StyledFlex2>
+                            <div style={{ width: '100%', marginRight: '10px' }}>
+                                {openSearchFriend ? (
+                                    <StyledBorderDiv18>
+                                        <StyledBackgroundDiv18>
+                                            <StyledText3 placeholder="친구 검색" onChange={onSearchFriend} />
+                                        </StyledBackgroundDiv18>
+                                    </StyledBorderDiv18>
+                                ) : (
+                                    <StyledH4>{reduxUser.userId}</StyledH4>
+                                )}
+                            </div>
+                            <StyledFlex13>
+                                <StyledSearchOutlined1 onClick={onOpenSearchFriend} />
+                                <StyledUsergroupAddOutlined1 onClick={onOpenOthers} />
+                            </StyledFlex13>
+                        </StyledFlex2>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                                <div>
-                                    {friends
-                                        .filter(
-                                            (friend) =>
-                                                friend.friendId.includes(searchTextOthers) ||
-                                                friend.friendName.includes(searchTextOthers),
-                                        )
-                                        .map((friend, key) => (
-                                            <Friend friend={friend} external={'add'} key={key} />
-                                        ))}
-                                </div>
-                            </StyledTabDiv1>
-                        </StyledTabLi1>
-                    </StyledTabUl1>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                <StyledDiv5>
+                    <StyledDiv6>
+                        <div>
+                            {getFilterFriends().length > 0 && (
+                                <StyledH7 style={{ color: color3 }}>친구 {getFilterFriends().length}</StyledH7>
+                            )}
+                        </div>
+
+                        <div>
+                            {getFilterFriends().map((friend, key) => (
+                                <Friend friend={friend} index={key} onDeleteFriend={onDeleteFriend} key={key} />
+                            ))}
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
+
+            <Others openOthers={openOthers} onOpenOthers={onOpenOthers} />
         </>
     );
 };

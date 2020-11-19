@@ -76,18 +76,17 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
 
                         <StyledSlideDiv2>
                             <StyledSlideDiv3>
-                                <StyledCircle1 target={slideIndex === 0} onClick={() => onClickCircle(0)}>
-                                    ●
-                                </StyledCircle1>
-                                <StyledCircle1 target={slideIndex === 1} onClick={() => onClickCircle(1)}>
-                                    ●
-                                </StyledCircle1>
-                                <StyledCircle1 target={slideIndex === 2} onClick={() => onClickCircle(2)}>
-                                    ●
-                                </StyledCircle1>
-                                <StyledCircle1 target={slideIndex === 3} onClick={() => onClickCircle(3)}>
-                                    ●
-                                </StyledCircle1>
+                                {[...Array(4)].map((temp, index) => {
+                                    return (
+                                        <StyledCircle1
+                                            target={slideIndex === index}
+                                            onClick={() => onClickCircle(index)}
+                                            key={index}
+                                        >
+                                            ●
+                                        </StyledCircle1>
+                                    );
+                                })}
                             </StyledSlideDiv3>
                         </StyledSlideDiv2>
                     </div>
@@ -95,6 +94,7 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                     <div
                         style={{
                             borderTop: '1px solid rgba(137, 136, 135, 0.3)',
+                            borderBottom: '1px solid rgba(137, 136, 135, 0.3)',
                         }}
                     >
                         <StyledDiv4>
@@ -102,7 +102,7 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                         </StyledDiv4>
                     </div>
 
-                    <div style={{ borderBottom: '1px solid rgba(137, 136, 135, 0.3)' }}>
+                    <div>
                         <StyledFlex11>
                             <StyledFlex11>
                                 <div style={{ marginRight: '5px' }}>

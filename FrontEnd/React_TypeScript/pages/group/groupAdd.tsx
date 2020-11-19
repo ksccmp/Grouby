@@ -4,12 +4,9 @@ import {
     StyledDiv1,
     StyledFlex2,
     StyledFlex5,
-    StyledBorderDiv3,
-    StyledBackgroundDiv3,
-    StyledExternalDiv1,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
-    StyledFlex9,
+    StyledFlex12,
     StyledBorderDiv16,
     StyledBackgroundDiv16,
     StyledExternalDiv4,
@@ -32,10 +29,10 @@ const GroupAdd = (): JSX.Element => {
 
                     <div style={{ marginBottom: '1rem' }}>
                         <StyledFlex5>
-                            <StyledFlex9>
+                            <StyledFlex12>
                                 <StyledH4>멤버</StyledH4>
                                 <StyledH5 style={{ color: '#E6951A' }}>5</StyledH5>
-                            </StyledFlex9>
+                            </StyledFlex12>
                         </StyledFlex5>
                     </div>
 

@@ -6,7 +6,7 @@ import {
     StyledFlex5,
     StyledBorderDiv1,
     StyledBackgroundDiv1,
-    StyledFlex9,
+    StyledFlex12,
     StyledBorderDiv16,
     StyledBackgroundDiv16,
     StyledExternalDiv4,
@@ -29,15 +29,15 @@ const SpotAdd = (): JSX.Element => {
 
                     <div style={{ marginBottom: '1rem' }}>
                         <StyledFlex5>
-                            <StyledFlex9>
+                            <StyledFlex12>
                                 <StyledH4>아이템</StyledH4>
                                 <StyledH5 style={{ color: '#E6951A' }}>5</StyledH5>
-                            </StyledFlex9>
+                            </StyledFlex12>
 
-                            <StyledFlex9>
+                            <StyledFlex12>
                                 <StyledH4>평가</StyledH4>
                                 <StyledH5 style={{ color: '#E6951A' }}>7</StyledH5>
-                            </StyledFlex9>
+                            </StyledFlex12>
                         </StyledFlex5>
                     </div>
 

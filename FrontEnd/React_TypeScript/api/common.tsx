@@ -1,6 +1,13 @@
 import Router from 'next/router';
 import moment from 'moment';
 
+//color
+export const color1 = '#f2f2f2'; // 배경색
+export const color2 = '#B8B8B8'; // 친구 숫자
+export const color3 = '#E6951A'; // 메인색
+export const color4 = '#FF5C5C'; // 삭제하기 색
+export const color5 = '#358BFF'; // 추가하기 색
+
 // page
 export const goBack = (): void => {
     Router.back();

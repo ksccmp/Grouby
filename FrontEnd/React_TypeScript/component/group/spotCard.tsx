@@ -66,7 +66,7 @@ const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {
                         </div>
                     </div>
 
-                    <div style={{ backgroundColor: 'rgba(230, 149, 26, 0.7)' }}>
+                    <div style={{ backgroundColor: 'rgba(230, 149, 26, 0.9)' }}>
                         <StyledBorderDiv5 onClick={goGroupSpotRating}>
                             <StyledBackgroundDiv5>
                                 <StyledH4>평 가</StyledH4>
