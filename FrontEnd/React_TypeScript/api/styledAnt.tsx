@@ -24,6 +24,8 @@ import {
     UsergroupAddOutlined,
     PlusCircleFilled,
     SettingOutlined,
+    AppstoreAddOutlined,
+    CheckOutlined,
 } from '@ant-design/icons';
 import { color1, color2, color3, color4, color5 } from './common';
 
@@ -219,6 +221,10 @@ export const StyledCheckCircleFilled2 = styled(CheckCircleFilled)`
     }
 `;
 
+export const StyledCheckOutlined1 = styled(CheckOutlined)`
+    ${topIcon}
+`;
+
 interface INavChoice {
     choice: string;
 }
@@ -331,5 +337,9 @@ export const StyledUsergroupAddOutlined1 = styled(UsergroupAddOutlined)`
 `;
 
 export const StyledSettingOutlined1 = styled(SettingOutlined)`
+    ${topIcon}
+`;
+
+export const StyledAppstoreAddOutlined1 = styled(AppstoreAddOutlined)`
     ${topIcon}
 `;

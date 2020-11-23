@@ -4,7 +4,7 @@ import { color1, color2 } from './common';
 const minWidth1 = '300';
 const maxWidth1 = '600';
 const height1 = 40;
-const height2 = '30';
+const height2 = 30;
 const height3 = '120';
 const height4 = '70';
 const height5 = '90';
@@ -91,6 +91,12 @@ export const StyledDiv6 = styled.div`
     margin: 0 5px;
 `;
 
+export const StyledDiv7 = styled.div`
+    & > div {
+        border-bottom: 1px solid ${color1};
+    }
+`;
+
 export const StyledBorderDiv1 = styled.div`
     background: #e6951a;
     height: ${height1}px;
@@ -114,10 +120,13 @@ export const StyledBorderDiv3 = styled.div`
 `;
 
 export const StyledBorderDiv4 = styled.div`
-    background-color: rgba(137, 136, 135, 0.3);
+    background-color: ${color1};
+    width: 100%;
     height: ${height6}px;
-    padding: 1px;
-    margin: 4px auto;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 export const StyledBorderDiv5 = styled.div`
@@ -237,6 +246,12 @@ export const StyledBorderDiv18 = styled.div`
     border-bottom-left-radius: 0.8rem;
 `;
 
+export const StyledBorderDiv19 = styled.div`
+    background-color: ${color1};
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+`;
+
 export const StyledBackgroundDiv1 = styled.div`
     height: ${height1}px;
     overflow: hidden;
@@ -267,11 +282,16 @@ export const StyledBackgroundDiv3 = styled.div`
 `;
 
 export const StyledBackgroundDiv4 = styled.div`
+    width: 100%;
     height: ${height6}px;
     overflow: hidden;
-    background-color: #fafafa;
+    background-color: ${color1};
     display: flex;
     align-items: center;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 export const StyledBackgroundDiv5 = styled.div`
@@ -398,10 +418,26 @@ export const StyledBackgroundDiv18 = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+`;
+
+export const StyledBackgroundDiv19_1 = styled.div`
+    overflow: hidden;
+    background-color: ${color1};
+    display: inline-block;
+    margin: 0 5px;
+`;
+
+export const StyledBackgroundDiv19_2 = styled.div`
+    overflow: hidden;
+    background-color: ${color1};
+    display: inline-block;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    margin: 0 5px;
 `;
 
 export const StyledButton1 = styled.button`
@@ -676,6 +712,19 @@ export const StyledFlex18 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height1}px;
+`;
+
+export const StyledFlex19 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: ${height2}px;
+`;
+
+export const StyledFlex20 = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 `;
 
 export const StyledGrid1 = styled.div`

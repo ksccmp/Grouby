@@ -17,12 +17,20 @@ import {
     StyledNavUl2,
     StyledNavLi2,
     StyledButton4,
+    StyledDiv5,
+    StyledDiv6,
+    StyledBorderDiv18,
+    StyledBackgroundDiv18,
+    StyledText3,
+    StyledFlex13,
+    StyledFlex19,
+    StyledDiv7,
 } from '../../api/styled';
-import { StyledLeftOutLined1 } from '../../api/styledAnt';
+import { StyledLeftOutLined1, StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
 import { StyledH3, StyledH4, StyledH7, StyledH5 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
 import { ISpot, IRank, IRankComp } from '../../api/interface';
-import { goGroupRegSpot, getTime } from '../../api/common';
+import { goGroupRegSpot, getTime, color3 } from '../../api/common';
 import RankComp from '../../component/group/rankComp';
 
 export interface IChangeSpot extends ISpot {
@@ -133,6 +141,252 @@ const GroupHome = (): JSX.Element => {
                 },
             ],
         },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
+        {
+            spotId: 3,
+            spotName: '안양 다코야끼',
+            groupId: 1,
+            groupName: '수찬 커플',
+            regId: 'ksccmp',
+            totalRank: 14,
+            todayRank: 0,
+            regDate: getTime(),
+            modDate: getTime(),
+            ranks: [
+                {
+                    spotId: 1,
+                    rankCompId: 1,
+                    rankCompName: '음식',
+                    rank: 5,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 2,
+                    rankCompName: '친절',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 3,
+                    rankCompName: '화장실',
+                    rank: 2,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+            ],
+        },
     ]);
     const [rankComps, setRankComps] = React.useState<IRankComp[]>([
         // rankCompOrder => 0: 소트 x / 1: 오름차순 / 2: 내림차순
@@ -147,9 +401,10 @@ const GroupHome = (): JSX.Element => {
             rankCompOrder: 0,
         },
     ]);
-    const [searchText, setSearchTest] = React.useState<string>('');
+    const [searchSpot, setSearchSpot] = React.useState<string>('');
     const [openFilter, setOpenFilter] = React.useState<boolean>(false);
     const [checkCircle, setCheckCircle] = React.useState<number>(-1);
+    const [openSearchSpot, setOpenSearchSpot] = React.useState<boolean>(false);
 
     // 필터창 열기/닫기
     const onOpenFilter = () => {
@@ -157,8 +412,8 @@ const GroupHome = (): JSX.Element => {
     };
 
     // 검색어 저장
-    const onSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTest(e.target.value);
+    const onSearchSpot = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchSpot(e.target.value);
     };
 
     // 화살표 클릭 시 Rank별 오름/내림 차순 변경
@@ -225,82 +480,96 @@ const GroupHome = (): JSX.Element => {
         }
     };
 
+    const onOpenSearchSpot = () => {
+        setOpenSearchSpot(!openSearchSpot);
+    };
+
+    const getFilterSpots = (): IChangeSpot[] => {
+        return (
+            spots
+                // 랭크 별 Sort
+                .sort((a, b) =>
+                    rankComps.reduce(
+                        (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
+                        0,
+                    ),
+                )
+                // 검색어가 포함된 것만 Filter
+                .filter(
+                    (spot) =>
+                        spot.spotName.includes(searchSpot) ||
+                        spot.ranks.filter((rank) => rank.rankCompName.includes(searchSpot)).length > 0,
+                )
+        );
+    };
+
+    const getFilterRankComps = (): IRankComp[] => {
+        return rankComps.filter((rankComp) => rankComp.rankCompOrder !== 0);
+    };
+
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex2>
-                            <div>
-                                <StyledH4>수찬 커플</StyledH4>
+                            <div style={{ width: '100%', marginRight: '10px' }}>
+                                {openSearchSpot ? (
+                                    <StyledBorderDiv18>
+                                        <StyledBackgroundDiv18>
+                                            <StyledText3 placeholder="스팟 검색" onChange={onSearchSpot} />
+                                        </StyledBackgroundDiv18>
+                                    </StyledBorderDiv18>
+                                ) : (
+                                    <StyledH4>수찬 커플</StyledH4>
+                                )}
                             </div>
-                            <div onClick={goGroupRegSpot}>
-                                <StyledH4>등록</StyledH4>
-                            </div>
+                            <StyledFlex13>
+                                <StyledSearchOutlined1 onClick={onOpenSearchSpot} />
+                                <StyledAppstoreAddOutlined1 onClick={goGroupRegSpot} />
+                            </StyledFlex13>
                         </StyledFlex2>
-                    </div>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                    <div>
-                        <StyledBorderDiv1>
-                            <StyledBackgroundDiv1>
-                                <StyledText1 placeholder="검색" onChange={onSearchText}></StyledText1>
-                            </StyledBackgroundDiv1>
-                        </StyledBorderDiv1>
-
-                        <StyledBorderDiv4 onClick={onOpenFilter}>
-                            <StyledBackgroundDiv4>
-                                <StyledBackgroundDiv4 style={{ marginRight: '15px' }}>
-                                    {rankComps
-                                        .filter((rankComp) => rankComp.rankCompOrder !== 0)
-                                        .map((rankComp, key) => (
-                                            <StyledH7 key={key} style={{ marginLeft: key === 0 ? '15px' : '5px' }}>
-                                                {rankComp.rankCompName}
-                                                {rankComp.rankCompOrder === 2 ? '↓' : '↑'}
-                                            </StyledH7>
-                                        ))}
-                                    {rankComps.filter((rankComp) => rankComp.rankCompOrder !== 0).length === 0 ? (
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
+                        <StyledFlex19>
+                            <StyledBorderDiv4 onClick={onOpenFilter}>
+                                <StyledBackgroundDiv4>
+                                    {getFilterRankComps().map((rankComp, key) => (
+                                        <StyledH7 key={key} style={{ marginLeft: key === 0 ? '15px' : '5px' }}>
+                                            {rankComp.rankCompName}
+                                            {rankComp.rankCompOrder === 2 ? '↓' : '↑'}
+                                        </StyledH7>
+                                    ))}
+                                    {getFilterRankComps().length === 0 ? (
                                         <StyledH7 style={{ marginLeft: '15px' }}>필터를 추가하세요.</StyledH7>
                                     ) : (
                                         ''
                                     )}
                                 </StyledBackgroundDiv4>
-                            </StyledBackgroundDiv4>
-                        </StyledBorderDiv4>
-                    </div>
+                            </StyledBorderDiv4>
+                        </StyledFlex19>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                    <div style={{ textAlign: 'center' }}>
-                        <StyledGrid1>
-                            <StyledFlex1>
-                                <StyledWidthLine1 />
-                            </StyledFlex1>
-                            <StyledH5>{spots.length}건</StyledH5>
-                            <StyledFlex1>
-                                <StyledWidthLine1 />
-                            </StyledFlex1>
-                        </StyledGrid1>
-                    </div>
+                <StyledDiv5>
+                    <StyledDiv6>
+                        <div>
+                            {getFilterSpots().length > 0 && (
+                                <StyledH7 style={{ color: color3 }}>스팟 {getFilterSpots().length}</StyledH7>
+                            )}
+                        </div>
 
-                    <div>
-                        {spots
-                            // 랭크 별 Sort
-                            .sort((a, b) =>
-                                rankComps.reduce(
-                                    (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
-                                    0,
-                                ),
-                            )
-                            // 검색어가 포함된 것만 Filter
-                            .filter(
-                                (spot) =>
-                                    spot.spotName.includes(searchText) ||
-                                    spot.ranks.filter((rank) => rank.rankCompName.includes(searchText)).length > 0,
-                            )
-                            .map((spot, key) => (
-                                <SpotCard spot={spot} key={key} />
-                            ))}
-                    </div>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                        <StyledDiv7>
+                            {getFilterSpots().map((spot, key) => {
+                                return <SpotCard spot={spot} key={key} />;
+                            })}
+                        </StyledDiv7>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
 
             <StyledFixed1 open={openFilter}>
                 <StyledNineDiv2 style={{ paddingBottom: '45px', position: 'relative' }}>
