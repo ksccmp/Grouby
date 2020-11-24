@@ -6,7 +6,7 @@ import {
     StyledHomeOutlined1,
     StyledAppstoreOutlined1,
     StyledCommentOutlined1,
-    StyledMenuOutlined1,
+    StyledSettingOutlined2,
 } from '../../api/styledAnt';
 import { goMainHome, goGroupHome, goGroupTalk, goGroupAdd } from '../../api/common';
 
@@ -50,8 +50,8 @@ const GroupLayout: React.FC<IGroupLayout> = ({ children, router }): JSX.Element 
                                 </StyledNavLi1>
                                 <StyledNavLi1 onClick={goGroupAdd}>
                                     <StyledFlex9>
-                                        <StyledMenuOutlined1 choice={String(router.pathname.endsWith('groupAdd'))} />
-                                        <StyledH7>더보기</StyledH7>
+                                        <StyledSettingOutlined2 choice={String(router.pathname.endsWith('groupAdd'))} />
+                                        <StyledH7>그룹설정</StyledH7>
                                     </StyledFlex9>
                                 </StyledNavLi1>
                             </StyledNavUl1>

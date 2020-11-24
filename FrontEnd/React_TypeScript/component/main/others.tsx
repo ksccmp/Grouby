@@ -56,6 +56,10 @@ const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => 
         console.log('onInsertFriend');
     };
 
+    const getFilterOthers = () => {
+        return others.filter((other) => other.friendId.includes(searchOther) || other.friendName.includes(searchOther));
+    };
+
     return (
         <>
             <StyledFixed1 open={openOthers}>
@@ -80,22 +84,15 @@ const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => 
                     <StyledDiv5>
                         <StyledDiv6>
                             <div>
-                                {others.filter(
-                                    (other) =>
-                                        other.friendId.includes(searchOther) || other.friendName.includes(searchOther),
-                                ).length > 0 && <StyledH7 style={{ color: color3 }}>다른 사용자</StyledH7>}
+                                {getFilterOthers().length > 0 && (
+                                    <StyledH7 style={{ color: color3 }}>다른 사용자</StyledH7>
+                                )}
                             </div>
 
                             <div>
-                                {others
-                                    .filter(
-                                        (other) =>
-                                            other.friendId.includes(searchOther) ||
-                                            other.friendName.includes(searchOther),
-                                    )
-                                    .map((other, key) => (
-                                        <Other other={other} index={key} onInsertFriend={onInsertFriend} key={key} />
-                                    ))}
+                                {getFilterOthers().map((other, key) => (
+                                    <Other other={other} index={key} onInsertFriend={onInsertFriend} key={key} />
+                                ))}
                             </div>
                         </StyledDiv6>
                     </StyledDiv5>

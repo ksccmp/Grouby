@@ -26,8 +26,13 @@ import {
     SettingOutlined,
     AppstoreAddOutlined,
     CheckOutlined,
+    EditOutlined,
 } from '@ant-design/icons';
 import { color1, color2, color3, color4, color5 } from './common';
+
+interface INavChoice {
+    choice: string;
+}
 
 const topIcon = `
     background-color: ${color1};
@@ -99,6 +104,8 @@ export const StyledPlusCircleOutlined4 = styled(PlusCircleOutlined)`
     ${topIcon}
 `;
 
+export const StyledPlusCircleOutlined5 = styled(PlusCircleOutlined)``;
+
 export const StyledPlusCircleFilled1 = styled(PlusCircleFilled)`
     & > svg {
         width: 1.1rem;
@@ -168,7 +175,7 @@ export const StyledCaretUpOutlined1 = styled(CaretUpOutlined)`
 
     & > svg > path {
         opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
-        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? '#e6951a' : '#000000')};
+        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? color3 : '#000000')};
     }
 `;
 
@@ -180,7 +187,7 @@ export const StyledCaretDownOutlined = styled(CaretDownOutlined)`
 
     & > svg > path {
         opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
-        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? '#e6951a' : '#000000')};
+        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? color3 : '#000000')};
     }
 `;
 
@@ -198,6 +205,13 @@ export const StyledCheckCircleOutlined2 = styled(CheckCircleOutlined)`
     }
     & > svg > path {
         fill: rgba(137, 136, 135, 0.8);
+    }
+`;
+
+export const StyledCheckCircleOutlined3 = styled(CheckCircleOutlined)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
     }
 `;
 
@@ -221,13 +235,20 @@ export const StyledCheckCircleFilled2 = styled(CheckCircleFilled)`
     }
 `;
 
+export const StyledCheckCircleFilled3 = styled(CheckCircleFilled)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    & > svg > path {
+        fill: ${color5};
+    }
+`;
+
 export const StyledCheckOutlined1 = styled(CheckOutlined)`
     ${topIcon}
 `;
-
-interface INavChoice {
-    choice: string;
-}
 
 export const StyledHomeOutlined1 = styled(HomeOutlined)`
     & > svg {
@@ -247,7 +268,7 @@ export const StyeldTeamOutlined1 = styled(TeamOutlined)`
     }
 
     & > svg > path {
-        fill: ${(props: INavChoice) => props.choice === 'true' && '#E6951A'};
+        fill: ${(props: INavChoice) => props.choice === 'true' && color3};
     }
 `;
 
@@ -258,7 +279,7 @@ export const StyledMenuOutlined1 = styled(MenuOutlined)`
     }
 
     & > svg > path {
-        fill: ${(props: INavChoice) => props.choice === 'true' && '#E6951A'};
+        fill: ${(props: INavChoice) => props.choice === 'true' && color3};
     }
 `;
 
@@ -340,6 +361,21 @@ export const StyledSettingOutlined1 = styled(SettingOutlined)`
     ${topIcon}
 `;
 
+export const StyledSettingOutlined2 = styled(SettingOutlined)`
+    & > svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    & > svg > path {
+        fill: ${(props: INavChoice) => props.choice === 'true' && color3};
+    }
+`;
+
 export const StyledAppstoreAddOutlined1 = styled(AppstoreAddOutlined)`
+    ${topIcon}
+`;
+
+export const StyledEditOutlined1 = styled(EditOutlined)`
     ${topIcon}
 `;

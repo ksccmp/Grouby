@@ -1,22 +1,9 @@
 import * as React from 'react';
 import {
-    StyledNineDiv1,
     StyledDiv1,
     StyledFlex2,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledText1,
     StyledBorderDiv4,
     StyledBackgroundDiv4,
-    StyledGrid1,
-    StyledFlex1,
-    StyledWidthLine1,
-    StyledNineDiv2,
-    StyledFixed1,
-    StyledFixed3,
-    StyledNavUl2,
-    StyledNavLi2,
-    StyledButton4,
     StyledDiv5,
     StyledDiv6,
     StyledBorderDiv18,
@@ -26,12 +13,12 @@ import {
     StyledFlex19,
     StyledDiv7,
 } from '../../api/styled';
-import { StyledLeftOutLined1, StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
-import { StyledH3, StyledH4, StyledH7, StyledH5 } from '../../api/styledFont';
+import { StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
 import { ISpot, IRank, IRankComp } from '../../api/interface';
 import { goGroupRegSpot, getTime, color3 } from '../../api/common';
-import RankComp from '../../component/group/rankComp';
+import FilterRankComp from '../../component/group/filterRankComp';
 
 export interface IChangeSpot extends ISpot {
     ranks: IRank[];
@@ -385,6 +372,62 @@ const GroupHome = (): JSX.Element => {
                     rank: 1,
                     regDate: getTime(),
                 },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
+                {
+                    spotId: 1,
+                    rankCompId: 4,
+                    rankCompName: '가격',
+                    rank: 1,
+                    regDate: getTime(),
+                },
             ],
         },
     ]);
@@ -402,57 +445,17 @@ const GroupHome = (): JSX.Element => {
         },
     ]);
     const [searchSpot, setSearchSpot] = React.useState<string>('');
-    const [openFilter, setOpenFilter] = React.useState<boolean>(false);
-    const [checkCircle, setCheckCircle] = React.useState<number>(-1);
+    const [openFilterRankComp, setOpenFilterRankComp] = React.useState<boolean>(false);
     const [openSearchSpot, setOpenSearchSpot] = React.useState<boolean>(false);
 
     // 필터창 열기/닫기
-    const onOpenFilter = () => {
-        setOpenFilter(!openFilter);
+    const onOpenFilterRankComp = () => {
+        setOpenFilterRankComp(!openFilterRankComp);
     };
 
     // 검색어 저장
     const onSearchSpot = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchSpot(e.target.value);
-    };
-
-    // 화살표 클릭 시 Rank별 오름/내림 차순 변경
-    const onOutLine = (index: number) => {
-        const newRankComps = rankComps.slice();
-        newRankComps[index].rankCompOrder = ((newRankComps[index].rankCompOrder as number) + 1) % 3;
-        setRankComps(newRankComps);
-    };
-
-    // Rank 클릭 시 선택된 Rank 저장
-    const onCheckCircle = (index: number) => {
-        if (checkCircle === index) {
-            setCheckCircle(-1);
-        } else {
-            setCheckCircle(index);
-        }
-    };
-
-    // 위로 버튼 클릭 시 Rank 위치 변경
-    const onUpRankComp = () => {
-        const newRankComps = rankComps.slice();
-        // 클릭 된 위치와 상위에 있는 위치 변경, 클릭 된 위치가 최상위 일때는 원래 위치로
-        const temp = newRankComps[checkCircle];
-        newRankComps[checkCircle] = newRankComps[checkCircle === 0 ? 0 : checkCircle - 1];
-        newRankComps[checkCircle === 0 ? 0 : checkCircle - 1] = temp;
-        setRankComps(newRankComps);
-        setCheckCircle(checkCircle === 0 ? 0 : checkCircle - 1);
-    };
-
-    // 아래로 버튼 클릭 시 Rank 위치 변경
-    const onDownRankComp = () => {
-        const newRankComps = rankComps.slice();
-        // 클릭 된 위치와 하위에 있는 위치 변경, 클릭 된 위치가 최하위 일때는 원래 위치로
-        const temp = newRankComps[checkCircle];
-        newRankComps[checkCircle] =
-            newRankComps[checkCircle === newRankComps.length - 1 ? newRankComps.length - 1 : checkCircle + 1];
-        newRankComps[checkCircle === newRankComps.length - 1 ? newRankComps.length - 1 : checkCircle + 1] = temp;
-        setRankComps(newRankComps);
-        setCheckCircle(checkCircle === newRankComps.length - 1 ? newRankComps.length - 1 : checkCircle + 1);
     };
 
     // Sort함수에 들어갈 Rank별 상수값 구하기
@@ -480,10 +483,12 @@ const GroupHome = (): JSX.Element => {
         }
     };
 
+    // 검색 창 오픈
     const onOpenSearchSpot = () => {
         setOpenSearchSpot(!openSearchSpot);
     };
 
+    // 필터 된 spot 값 리턴
     const getFilterSpots = (): IChangeSpot[] => {
         return (
             spots
@@ -503,7 +508,9 @@ const GroupHome = (): JSX.Element => {
         );
     };
 
+    // 필터 된 rankComp 값 리턴
     const getFilterRankComps = (): IRankComp[] => {
+        // 오름/내림차순이 정해져있는 것만 Filter
         return rankComps.filter((rankComp) => rankComp.rankCompOrder !== 0);
     };
 
@@ -535,7 +542,7 @@ const GroupHome = (): JSX.Element => {
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex19>
-                            <StyledBorderDiv4 onClick={onOpenFilter}>
+                            <StyledBorderDiv4 onClick={onOpenFilterRankComp}>
                                 <StyledBackgroundDiv4>
                                     {getFilterRankComps().map((rankComp, key) => (
                                         <StyledH7 key={key} style={{ marginLeft: key === 0 ? '15px' : '5px' }}>
@@ -571,44 +578,12 @@ const GroupHome = (): JSX.Element => {
                 </StyledDiv5>
             </StyledDiv1>
 
-            <StyledFixed1 open={openFilter}>
-                <StyledNineDiv2 style={{ paddingBottom: '45px', position: 'relative' }}>
-                    <StyledDiv1>
-                        <StyledFlex2>
-                            <div>
-                                <StyledLeftOutLined1 onClick={onOpenFilter} />
-                                <StyledH3>필터</StyledH3>
-                            </div>
-                        </StyledFlex2>
-
-                        {rankComps.map((rankComp, key) => (
-                            <RankComp
-                                rankComp={rankComp}
-                                onOutLine={onOutLine}
-                                onCheckCircle={onCheckCircle}
-                                index={key}
-                                checkCircle={checkCircle}
-                                key={key}
-                            />
-                        ))}
-                    </StyledDiv1>
-                </StyledNineDiv2>
-
-                <StyledFixed3 open={openFilter && checkCircle !== -1}>
-                    <StyledNineDiv2>
-                        <StyledDiv1>
-                            <StyledNavUl2>
-                                <StyledNavLi2 onClick={onUpRankComp}>
-                                    <StyledButton4 line="left">위로</StyledButton4>
-                                </StyledNavLi2>
-                                <StyledNavLi2 onClick={onDownRankComp}>
-                                    <StyledButton4 line="right">아래로</StyledButton4>
-                                </StyledNavLi2>
-                            </StyledNavUl2>
-                        </StyledDiv1>
-                    </StyledNineDiv2>
-                </StyledFixed3>
-            </StyledFixed1>
+            <FilterRankComp
+                openFilterRankComp={openFilterRankComp}
+                onOpenFilterRankComp={onOpenFilterRankComp}
+                rankComps={rankComps}
+                setRankComps={setRankComps}
+            />
         </>
     );
 };

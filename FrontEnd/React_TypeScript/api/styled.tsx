@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { color1, color2 } from './common';
+import { color1, color2, color3, color4, color5 } from './common';
 
 const minWidth1 = '300';
 const maxWidth1 = '600';
@@ -48,6 +48,17 @@ export const StyledText3 = styled.input.attrs(() => ({
     margin: 0 10px;
 `;
 
+export const StyledText4 = styled.input.attrs(() => ({
+    type: 'text',
+}))`
+    width: 100%;
+    height: ${height2}px;
+    border: none;
+    outline: none;
+    background-color: ${color1};
+    margin: 0 10px;
+`;
+
 export const StyledPassword1 = styled.input.attrs(() => ({
     type: 'password',
 }))`
@@ -56,6 +67,32 @@ export const StyledPassword1 = styled.input.attrs(() => ({
     border-width: 0;
     outline: none;
     margin: 0 15px;
+`;
+
+export const StyledCheckBox1 = styled.input.attrs(() => ({
+    type: 'checkbox',
+}))`
+    display: none;
+
+    & + label > div > div {
+        left: 3px;
+        right: initial;
+    }
+
+    & + label > div {
+        background-color: ${color2};
+    }
+
+    &:checked {
+        & + label > div > div {
+            left: initial;
+            right: 3px;
+        }
+
+        & + label > div {
+            background-color: ${color3};
+        }
+    }
 `;
 
 export const StyledDiv1 = styled.div`
@@ -95,6 +132,26 @@ export const StyledDiv7 = styled.div`
     & > div {
         border-bottom: 1px solid ${color1};
     }
+`;
+
+export const StyledToggleDiv1 = styled.div`
+    width: 2.2rem;
+    height: 1.1rem;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+    position: relative;
+`;
+
+export const StyledToggleDiv2 = styled.div`
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #ffffff;
 `;
 
 export const StyledBorderDiv1 = styled.div`
@@ -250,6 +307,23 @@ export const StyledBorderDiv19 = styled.div`
     background-color: ${color1};
     border-top-right-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
+`;
+
+export const StyledBorderDiv20 = styled.div`
+    display: inline-block;
+    background-color: ${color1};
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+`;
+
+export const StyledBorderDiv21 = styled.div`
+    width: 100%;
+    height: ${height2}px;
+    background-color: ${color1};
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 export const StyledBackgroundDiv1 = styled.div`
@@ -440,6 +514,28 @@ export const StyledBackgroundDiv19_2 = styled.div`
     margin: 0 5px;
 `;
 
+export const StyledBackgroundDiv20 = styled.div`
+    overflow: hidden;
+    background-color: ${color1};
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    margin: 0 5px;
+`;
+
+export const StyledBackgroundDiv21 = styled.div`
+    overflow: hidden;
+    width: 100%;
+    height: ${height2}px;
+    background-color: ${color1};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+`;
+
 export const StyledButton1 = styled.button`
     width: 100%;
     min-width: 70px;
@@ -513,7 +609,8 @@ export const StyledButton4 = styled.button`
     overflow: hidden;
     outline: none;
     border: none;
-    background-color: rgba(230, 149, 26, 0.9);
+    background-color: ${color3};
+    color: ${color1};
 
     &::after {
         content: '';
@@ -984,7 +1081,7 @@ export const StyledFixed1 = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
     z-index: 2;
     overflow: auto;
 `;
@@ -1001,7 +1098,7 @@ export const StyledFixed3 = styled.div`
     position: fixed;
     width: 100%;
     left: 0;
-    bottom: ${(props: IStyledFixed1) => (props.open ? '10%' : '-100%')};
+    bottom: ${(props: IStyledFixed1) => (props.open ? '5%' : '-100%')};
     z-index: 3;
 `;
 

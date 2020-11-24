@@ -31,7 +31,7 @@ const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {
                     </StyledFlex20>
                     <StyledFlex20>
                         {spot.ranks.map((rank, key) => (
-                            <StyledBorderDiv19 key={key} style={{ marginRight: '0.5rem' }}>
+                            <StyledBorderDiv19 key={key} style={{ marginRight: '0.5rem', marginBottom: '0.2rem' }}>
                                 <StyledBackgroundDiv19_1>
                                     <StyledH6>{rank.rankCompName}</StyledH6>
                                 </StyledBackgroundDiv19_1>
