@@ -5,6 +5,7 @@ import {
     StyledBorderDiv19,
     StyledBackgroundDiv19_1,
     StyledBackgroundDiv19_2,
+    StyledDiv9,
 } from '../../api/styled';
 import { StyledH6, StyledH4, StyledH7 } from '../../api/styledFont';
 import { color2, color3, color4, color5 } from '../../api/common';
@@ -17,7 +18,7 @@ interface ISpotCard {
 const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {
     return (
         <>
-            <div>
+            <StyledDiv9>
                 <StyledFlex9 style={{ margin: '0.5rem 0' }}>
                     <StyledFlex20>
                         {spot.ranks.map((rank, key) => (
@@ -50,7 +51,7 @@ const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {
                         ))}
                     </StyledFlex20>
                 </StyledFlex9>
-            </div>
+            </StyledDiv9>
         </>
     );
 };

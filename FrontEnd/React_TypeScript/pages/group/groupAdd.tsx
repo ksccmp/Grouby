@@ -11,8 +11,9 @@ import {
     StyledToggleDiv2,
     StyledFlex17,
     StyledText2,
+    StyledDiv8,
 } from '../../api/styled';
-import { StyledH4, StyledH5, StyledH6 } from '../../api/styledFont';
+import { StyledH4_1, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledEditOutlined1, StyledRightOutlined1, StyledCheckOutlined1 } from '../../api/styledAnt';
 import { color2 } from '../../api/common';
 
@@ -34,13 +35,13 @@ const GroupAdd = (): JSX.Element => {
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex2>
-                            <div style={{ width: '100%', marginRight: '10px' }}>
+                            <StyledDiv8>
                                 {modGroupName ? (
                                     <StyledText2 value={title} onChange={onTitle} />
                                 ) : (
-                                    <StyledH4>{title}</StyledH4>
+                                    <StyledH4_1>{title}</StyledH4_1>
                                 )}
-                            </div>
+                            </StyledDiv8>
                             <StyledFlex13>
                                 {modGroupName ? (
                                     <StyledCheckOutlined1 onClick={onModGroupName} />
@@ -62,7 +63,7 @@ const GroupAdd = (): JSX.Element => {
                                 <StyledCheckBox1 id="toggle1" />
                                 <label htmlFor="toggle1">
                                     <StyledToggleDiv1>
-                                        <StyledToggleDiv2></StyledToggleDiv2>
+                                        <StyledToggleDiv2 />
                                     </StyledToggleDiv1>
                                 </label>
                             </div>
@@ -75,7 +76,7 @@ const GroupAdd = (): JSX.Element => {
                                 <StyledCheckBox1 id="toggle2" />
                                 <label htmlFor="toggle2">
                                     <StyledToggleDiv1>
-                                        <StyledToggleDiv2></StyledToggleDiv2>
+                                        <StyledToggleDiv2 />
                                     </StyledToggleDiv1>
                                 </label>
                             </div>

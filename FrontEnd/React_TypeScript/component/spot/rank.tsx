@@ -1,7 +1,17 @@
 import * as React from 'react';
-import { StyledFlex8, StyledFlex2, StyledBorderDiv9, StyledBackgroundDiv9 } from '../../api/styled';
-import { StyledH5, StyledH6 } from '../../api/styledFont';
+import {
+    StyledFlex8,
+    StyledFlex9,
+    StyledDiv5,
+    StyledDiv6,
+    StyledBorderDiv19,
+    StyledBackgroundDiv19_1,
+    StyledBackgroundDiv19_2,
+    StyledFlex20,
+} from '../../api/styled';
+import { StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { IChangeRank } from '../../pages/spot/spotRanks';
+import { color2, color4, color5, getTime } from '../../api/common';
 
 interface IChangeRank2 {
     changeRank: IChangeRank;
@@ -10,32 +20,37 @@ interface IChangeRank2 {
 const Rank: React.FC<IChangeRank2> = ({ changeRank }): JSX.Element => {
     return (
         <>
-            <StyledBorderDiv9>
-                <StyledBackgroundDiv9>
-                    <div style={{ borderBottom: '1px solid rgba(137, 136, 135, 0.3)' }}>
+            <StyledFlex9>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex8>
                             <StyledH5>{changeRank.regId}</StyledH5>
+                            <StyledH7 style={{ opacity: '0.6' }}>{getTime()}</StyledH7>
                         </StyledFlex8>
-                    </div>
 
-                    <div style={{ margin: '0 5px' }}>
-                        {changeRank.ranks.map((rank, key) => (
-                            <StyledFlex2 key={key}>
-                                <StyledH6>{rank.rankCompName}</StyledH6>
-                                <div>
-                                    {rank.rank >= 3 ? (
-                                        <StyledH6 style={{ color: '#1976d2' }}>{rank.rank}</StyledH6>
-                                    ) : (
-                                        <StyledH6 style={{ color: 'rgba(255, 0, 0, 0.7)' }}>{rank.rank}</StyledH6>
-                                    )}
-                                    <StyledH6>/</StyledH6>
-                                    <StyledH6>5</StyledH6>
-                                </div>
-                            </StyledFlex2>
-                        ))}
-                    </div>
-                </StyledBackgroundDiv9>
-            </StyledBorderDiv9>
+                        <StyledFlex20>
+                            {changeRank.ranks.map((rank, key) => (
+                                <StyledBorderDiv19 key={key} style={{ marginRight: '0.5rem', marginBottom: '0.2rem' }}>
+                                    <StyledBackgroundDiv19_1>
+                                        <StyledH6>{rank.rankCompName}</StyledH6>
+                                    </StyledBackgroundDiv19_1>
+                                    <StyledBackgroundDiv19_2>
+                                        {rank.rank >= 3 ? (
+                                            rank.rank === 3 ? (
+                                                <StyledH6 style={{ color: color2 }}>{rank.rank}</StyledH6>
+                                            ) : (
+                                                <StyledH6 style={{ color: color5 }}>{rank.rank}</StyledH6>
+                                            )
+                                        ) : (
+                                            <StyledH6 style={{ color: color4 }}>{rank.rank}</StyledH6>
+                                        )}
+                                    </StyledBackgroundDiv19_2>
+                                </StyledBorderDiv19>
+                            ))}
+                        </StyledFlex20>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledFlex9>
         </>
     );
 };

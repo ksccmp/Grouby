@@ -10,6 +10,7 @@ import {
     StyledText3,
     StyledBorderDiv20,
     StyledBackgroundDiv20,
+    StyledDiv8,
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined5 } from '../../api/styledAnt';
 import { StyledH4, StyledH7, StyledH6 } from '../../api/styledFont';
@@ -61,9 +62,9 @@ const GroupRegSpot = (): JSX.Element => {
                             <StyledFlex13>
                                 <StyledLeftOutlined2 onClick={goGroupHome} />
                             </StyledFlex13>
-                            <div style={{ width: '100%', margin: '0 10px' }}>
+                            <StyledDiv8>
                                 <StyledH4>스팟 생성</StyledH4>
-                            </div>
+                            </StyledDiv8>
                             <StyledFlex13>
                                 <StyledCheckOutlined1 />
                             </StyledFlex13>

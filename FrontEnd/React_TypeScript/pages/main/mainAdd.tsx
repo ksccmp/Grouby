@@ -9,6 +9,7 @@ import {
     StyledTr1,
     StyledTd1,
     StyledFlex18,
+    StyledDiv8,
 } from '../../api/styled';
 import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { StyledRightOutlined1, StyledSettingOutlined1 } from '../../api/styledAnt';
@@ -26,9 +27,9 @@ const MainAdd = (): JSX.Element => {
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex2>
-                            <div style={{ width: '100%', marginRight: '10px' }}>
+                            <StyledDiv8>
                                 <StyledH4>{reduxUser.userId}</StyledH4>
-                            </div>
+                            </StyledDiv8>
                             <StyledFlex13>
                                 <StyledSettingOutlined1 />
                             </StyledFlex13>

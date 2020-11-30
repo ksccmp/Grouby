@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-    StyledNineDiv1,
     StyledDiv1,
     StyledFlex2,
     StyledBorderDiv10,
@@ -9,16 +8,20 @@ import {
     StyledBorderDiv11,
     StyledBackgroundDiv11,
     StyledTextArea1,
-    StyledExternalDiv2,
     StyledSlideDiv1,
     StyledSlideUl1,
     StyledSlideLi1,
     StyledCircle1,
     StyledSlideDiv3,
+    StyledDiv5,
+    StyledDiv6,
+    StyledDiv8,
+    StyledFlex13,
+    StyledFlex22,
 } from '../../api/styled';
-import { StyledLeftOutLined1, StyledPlusCircleOutlined1 } from '../../api/styledAnt';
-import { StyledH4, StyledH5 } from '../../api/styledFont';
-import { goSpotItems, getTime } from '../../api/common';
+import { StyledLeftOutlined2, StyledCheckOutlined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
+import { goSpotItems, getTime, color3 } from '../../api/common';
 import { IItem } from '../../api/interface';
 
 const SpotRegItem = (): JSX.Element => {
@@ -73,7 +76,82 @@ const SpotRegItem = (): JSX.Element => {
 
     return (
         <>
-            <StyledNineDiv1>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
+                        <StyledFlex2>
+                            <StyledFlex13>
+                                <StyledLeftOutlined2 onClick={goSpotItems} />
+                            </StyledFlex13>
+                            <StyledDiv8>
+                                <StyledH4>아이템 생성</StyledH4>
+                            </StyledDiv8>
+                            <StyledFlex13>
+                                <StyledCheckOutlined1 />
+                            </StyledFlex13>
+                        </StyledFlex2>
+                    </StyledDiv6>
+                </StyledDiv5>
+
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
+                        <StyledH7 style={{ color: color3 }}>사진/동영상</StyledH7>
+                    </StyledDiv6>
+                    <StyledBorderDiv10>
+                        <StyledBackgroundDiv10>
+                            <StyledSlideDiv1>
+                                <StyledSlideUl1
+                                    count={4}
+                                    index={slideIndex}
+                                    onTouchStart={onBeforeTouch}
+                                    onTouchEnd={onAfterTouch}
+                                >
+                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'red' }} />
+                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'blue' }} />
+                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'green' }} />
+                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'yellow' }} />
+                                </StyledSlideUl1>
+                            </StyledSlideDiv1>
+
+                            <StyledSlideDiv2>
+                                <StyledSlideDiv3>
+                                    <StyledCircle1 target={slideIndex === 0} onClick={() => onClickCircle(0)}>
+                                        ●
+                                    </StyledCircle1>
+                                    <StyledCircle1 target={slideIndex === 1} onClick={() => onClickCircle(1)}>
+                                        ●
+                                    </StyledCircle1>
+                                    <StyledCircle1 target={slideIndex === 2} onClick={() => onClickCircle(2)}>
+                                        ●
+                                    </StyledCircle1>
+                                    <StyledCircle1 target={slideIndex === 3} onClick={() => onClickCircle(3)}>
+                                        ●
+                                    </StyledCircle1>
+                                </StyledSlideDiv3>
+                            </StyledSlideDiv2>
+                        </StyledBackgroundDiv10>
+                    </StyledBorderDiv10>
+                </StyledDiv5>
+
+                <StyledDiv5>
+                    <StyledDiv6>
+                        <div>
+                            <StyledH7 style={{ color: color3 }}>리뷰</StyledH7>
+                        </div>
+                        <div>
+                            <StyledFlex22>
+                                <StyledBorderDiv11>
+                                    <StyledBackgroundDiv11>
+                                        <StyledTextArea1 placeholder="리뷰를 작성해보세요." onChange={onContents} />
+                                    </StyledBackgroundDiv11>
+                                </StyledBorderDiv11>
+                            </StyledFlex22>
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
+
+            {/* <StyledNineDiv1>
                 <StyledDiv1>
                     <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
@@ -140,7 +218,7 @@ const SpotRegItem = (): JSX.Element => {
                         </StyledBorderDiv11>
                     </div>
                 </StyledDiv1>
-            </StyledNineDiv1>
+            </StyledNineDiv1> */}
         </>
     );
 };

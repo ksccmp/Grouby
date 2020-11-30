@@ -10,8 +10,15 @@ import {
     StyledExternalDiv1,
     StyledButton2,
     StyledFixed2,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex13,
+    StyledFlex16,
+    StyledBorderDiv21,
+    StyledBackgroundDiv21,
+    StyledText4,
 } from '../../api/styled';
-import { StyledLeftOutLined1 } from '../../api/styledAnt';
+import { StyledLeftOutLined1, StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
 import { StyledH3, StyledH4, StyledH6 } from '../../api/styledFont';
 import Comment from './comment';
 import { IComment } from '../../api/interface';
@@ -105,7 +112,7 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
             comments: '정말이요? 저도 여기 가야겠어요',
         },
     ]);
-    const [searchTextComment, setSearchTextComment] = React.useState<string>('');
+    const [searchComment, setSearchComment] = React.useState<string>('');
 
     React.useEffect(() => {
         if (openComments) {
@@ -113,9 +120,15 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
         }
     }, [openComments]);
 
+    // 댓글 입력 시 하단으로 위치 조정
+    // React.useEffect(() => {
+    //     const fixed1: HTMLDivElement = document.getElementById('fixed1') as HTMLDivElement;
+    //     fixed1.scrollTop = fixed1.scrollHeight;
+    // }, [comments]);
+
     // 코멘트 내용 저장
-    const onSearchTextComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTextComment(e.target.value);
+    const onSearchComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchComment(e.target.value);
     };
 
     // 코멘트 게시
@@ -128,50 +141,59 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                 regId: 'ksccmp',
                 regDate: getTime(),
                 modDate: getTime(),
-                comments: searchTextComment,
+                comments: searchComment,
             },
         ]);
-        setSearchTextComment('');
+        setSearchComment('');
     };
 
     return (
         <>
-            <StyledFixed1 open={openComments}>
-                <StyledNineDiv2 style={{ paddingBottom: '45px', position: 'relative' }}>
-                    <StyledDiv1>
-                        <div style={{ margin: '0.5rem 0' }}>
+            <StyledFixed1 open={openComments} id="fixed1">
+                <StyledDiv1 style={{ paddingBottom: '30px', position: 'relative' }}>
+                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                        <StyledDiv6>
                             <StyledFlex2>
-                                <div>
-                                    <StyledLeftOutLined1 onClick={onOpenComments} />
+                                <StyledFlex13>
+                                    <StyledLeftOutlined2 onClick={onOpenComments} />
+                                </StyledFlex13>
+                                <div style={{ width: '100%', marginLeft: '10px' }}>
                                     <StyledH4>댓글</StyledH4>
                                 </div>
                             </StyledFlex2>
-                        </div>
-                        <div>
+                        </StyledDiv6>
+                    </StyledDiv5>
+
+                    <StyledDiv5>
+                        <StyledDiv6>
                             {comments.map((comment, key) => (
                                 <Comment comment={comment} key={key} />
                             ))}
-                        </div>
-                    </StyledDiv1>
-                </StyledNineDiv2>
+                        </StyledDiv6>
+                    </StyledDiv5>
+                </StyledDiv1>
 
                 <StyledFixed2 open={openComments}>
-                    <StyledNineDiv2>
-                        <StyledBorderDiv13>
-                            <StyledBackgroundDiv13>
-                                <StyledText1
-                                    placeholder="내용"
-                                    onChange={onSearchTextComment}
-                                    value={searchTextComment}
-                                ></StyledText1>
-                                <StyledExternalDiv1 onClick={onSaveComment}>
-                                    <StyledButton2>
-                                        <StyledH6>게시</StyledH6>
-                                    </StyledButton2>
-                                </StyledExternalDiv1>
-                            </StyledBackgroundDiv13>
-                        </StyledBorderDiv13>
-                    </StyledNineDiv2>
+                    <StyledDiv5>
+                        <StyledDiv6>
+                            <StyledFlex16>
+                                <div style={{ width: '100%', marginRight: '10px' }}>
+                                    <StyledBorderDiv21>
+                                        <StyledBackgroundDiv21>
+                                            <StyledText4
+                                                placeholder="댓글을 입력하세요."
+                                                onChange={onSearchComment}
+                                                value={searchComment}
+                                            />
+                                        </StyledBackgroundDiv21>
+                                    </StyledBorderDiv21>
+                                </div>
+                                <div onClick={onSaveComment}>
+                                    <StyledPlusCircleFilled1 />
+                                </div>
+                            </StyledFlex16>
+                        </StyledDiv6>
+                    </StyledDiv5>
                 </StyledFixed2>
             </StyledFixed1>
         </>

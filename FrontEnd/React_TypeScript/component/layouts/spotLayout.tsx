@@ -2,11 +2,10 @@ import { Router } from 'next/router';
 import * as React from 'react';
 import { StyledFixedFooter1, StyledDiv1, StyledNavUl1, StyledNavLi1, StyledFlex9 } from '../../api/styled';
 import { StyledH7 } from '../../api/styledFont';
-import { goSpotItems, goSpotRanks, goSpotAdd, goMainHome, goGroupHome } from '../../api/common';
+import { goSpotItems, goSpotRanks, goMainHome, goGroupHome } from '../../api/common';
 import {
     StyledHomeOutlined1,
     StyledAppstoreOutlined1,
-    StyledMenuOutlined1,
     StyledFormOutlined1,
     StyledFileDoneOutlined1,
 } from '../../api/styledAnt';
@@ -51,12 +50,6 @@ const SpotLayout: React.FC<ISpotLayout> = ({ children, router }): JSX.Element =>
                                             choice={String(router.pathname.endsWith('spotRanks'))}
                                         />
                                         <StyledH7>평가</StyledH7>
-                                    </StyledFlex9>
-                                </StyledNavLi1>
-                                <StyledNavLi1 onClick={goSpotAdd}>
-                                    <StyledFlex9>
-                                        <StyledMenuOutlined1 choice={String(router.pathname.endsWith('spotAdd'))} />
-                                        <StyledH7>더보기</StyledH7>
                                     </StyledFlex9>
                                 </StyledNavLi1>
                             </StyledNavUl1>

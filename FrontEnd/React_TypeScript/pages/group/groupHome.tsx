@@ -12,6 +12,7 @@ import {
     StyledFlex13,
     StyledFlex19,
     StyledDiv7,
+    StyledDiv8,
 } from '../../api/styled';
 import { StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
@@ -520,7 +521,7 @@ const GroupHome = (): JSX.Element => {
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex2>
-                            <div style={{ width: '100%', marginRight: '10px' }}>
+                            <StyledDiv8>
                                 {openSearchSpot ? (
                                     <StyledBorderDiv18>
                                         <StyledBackgroundDiv18>
@@ -530,7 +531,7 @@ const GroupHome = (): JSX.Element => {
                                 ) : (
                                     <StyledH4>수찬 커플</StyledH4>
                                 )}
-                            </div>
+                            </StyledDiv8>
                             <StyledFlex13>
                                 <StyledSearchOutlined1 onClick={onOpenSearchSpot} />
                                 <StyledAppstoreAddOutlined1 onClick={goGroupRegSpot} />

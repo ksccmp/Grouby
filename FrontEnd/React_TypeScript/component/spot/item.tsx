@@ -12,10 +12,14 @@ import {
     StyledCircle1,
     StyledFlex10,
     StyledFlex11,
+    StyledFlex9,
+    StyledDiv5,
+    StyledDiv6,
 } from '../../api/styled';
 import { StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { IItem } from '../../api/interface';
 import { StyledHeartOutlined1, StyledHeartFilled1, StyledMessageOutlined1 } from '../../api/styledAnt';
+import { color1, color3, color4 } from '../../api/common';
 
 interface IChangeItem {
     item: IItem;
@@ -51,13 +55,13 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
 
     return (
         <>
-            <StyledBorderDiv7>
-                <StyledBackgroundDiv7>
-                    <div>
+            <StyledFlex9>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex8>
                             <StyledH5>{item.regId}</StyledH5>
                         </StyledFlex8>
-                    </div>
+                    </StyledDiv6>
 
                     <div style={{ position: 'relative' }}>
                         <StyledSlideDiv1>
@@ -91,48 +95,55 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                         </StyledSlideDiv2>
                     </div>
 
-                    <div
+                    <StyledDiv6
                         style={{
-                            borderTop: '1px solid rgba(137, 136, 135, 0.3)',
-                            borderBottom: '1px solid rgba(137, 136, 135, 0.3)',
+                            borderTop: `1px solid ${color1}`,
+                            borderBottom: `1px solid ${color1}`,
                         }}
                     >
                         <StyledDiv4>
                             <StyledH6>{item.contents}</StyledH6>
                         </StyledDiv4>
-                    </div>
+                    </StyledDiv6>
 
-                    <div>
-                        <StyledFlex11>
+                    <StyledDiv6>
+                        <div>
                             <StyledFlex11>
-                                <div style={{ marginRight: '5px' }}>
-                                    <StyledH7>좋아요({item.like})</StyledH7>
-                                </div>
-                                <div style={{ marginRight: '5px' }}>
-                                    <StyledH7>댓글(5)</StyledH7>
+                                <StyledFlex11>
+                                    <div style={{ marginRight: '5px' }}>
+                                        <StyledH7 style={{ marginRight: '1px' }}>좋아요</StyledH7>
+                                        <StyledH7 style={{ color: color4 }}>{item.like}</StyledH7>
+                                    </div>
+                                    <div style={{ marginRight: '5px' }}>
+                                        <StyledH7 style={{ marginRight: '1px' }}>댓글</StyledH7>
+                                        <StyledH7 style={{ color: color3 }}>5</StyledH7>
+                                    </div>
+                                </StyledFlex11>
+                                <div>
+                                    <StyledH7 style={{ opacity: '0.6' }}>{item.regDate}</StyledH7>
                                 </div>
                             </StyledFlex11>
-                            <div>
-                                <StyledH7>{item.regDate}</StyledH7>
-                            </div>
-                        </StyledFlex11>
-                    </div>
+                        </div>
 
-                    <div>
-                        <StyledFlex10>
+                        <div>
                             <StyledFlex10>
-                                <div style={{ marginRight: '5px' }} onClick={() => onLikePress(item.index as number)}>
-                                    {item.likePress ? <StyledHeartFilled1 /> : <StyledHeartOutlined1 />}
-                                </div>
-                                <div style={{ marginRight: '5px' }} onClick={onOpenComments}>
-                                    <StyledMessageOutlined1 />
-                                </div>
+                                <StyledFlex10>
+                                    <div
+                                        style={{ marginRight: '5px' }}
+                                        onClick={() => onLikePress(item.index as number)}
+                                    >
+                                        {item.likePress ? <StyledHeartFilled1 /> : <StyledHeartOutlined1 />}
+                                    </div>
+                                    <div style={{ marginRight: '5px' }} onClick={onOpenComments}>
+                                        <StyledMessageOutlined1 />
+                                    </div>
+                                </StyledFlex10>
+                                <div></div>
                             </StyledFlex10>
-                            <div></div>
-                        </StyledFlex10>
-                    </div>
-                </StyledBackgroundDiv7>
-            </StyledBorderDiv7>
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledFlex9>
         </>
     );
 };

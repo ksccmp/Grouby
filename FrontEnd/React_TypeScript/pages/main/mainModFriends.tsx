@@ -6,12 +6,24 @@ import {
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledText1,
+    StyledDiv5,
+    StyledDiv6,
+    StyledDiv8,
+    StyledFlex13,
+    StyledBorderDiv18,
+    StyledBackgroundDiv18,
+    StyledText3,
 } from '../../api/styled';
-import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { StyledH4, StyledH5 } from '../../api/styledFont';
-import Friend from '../../component/main/friend';
+import {
+    StyledLeftOutLined1,
+    StyledLeftOutlined2,
+    StyledCheckOutlined1,
+    StyledSearchOutlined1,
+} from '../../api/styledAnt';
+import { StyledH4, StyledH5, StyledH7 } from '../../api/styledFont';
+import Other from '../../component/main/other';
 import { IFriend } from '../../api/interface';
-import { getTime, goMainRegGroup } from '../../api/common';
+import { getTime, goMainRegGroup, color3 } from '../../api/common';
 
 const MainModFriends = (): JSX.Element => {
     const [friends, setFriends] = React.useState<IFriend[]>([
@@ -37,15 +49,72 @@ const MainModFriends = (): JSX.Element => {
             regDate: getTime(),
         },
     ]);
-    const [searchText, setSearchTest] = React.useState<string>('');
+    const [searchMember, setSearchMember] = React.useState<string>('');
+    const [openSearchMember, setOpenSearchMember] = React.useState<boolean>(false);
 
-    const onSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTest(e.target.value);
+    const onSearchMember = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchMember(e.target.value);
+    };
+
+    const onOpenSearchMember = () => {
+        setOpenSearchMember(!openSearchMember);
+    };
+
+    const onInsertFriend = () => {
+        console.log('onInsertFriend');
+    };
+
+    const getFilterFriends = () => {
+        return friends.filter(
+            (friend) => friend.friendId.includes(searchMember) || friend.friendName.includes(searchMember),
+        );
     };
 
     return (
         <>
-            <StyledNineDiv1>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
+                        <StyledFlex2>
+                            <StyledFlex13>
+                                <StyledLeftOutlined2 onClick={goMainRegGroup} />
+                            </StyledFlex13>
+                            <StyledDiv8>
+                                {openSearchMember ? (
+                                    <StyledBorderDiv18>
+                                        <StyledBackgroundDiv18>
+                                            <StyledText3 placeholder="멤버 검색" onChange={onSearchMember} />
+                                        </StyledBackgroundDiv18>
+                                    </StyledBorderDiv18>
+                                ) : (
+                                    <StyledH4>멤버 편집</StyledH4>
+                                )}
+                            </StyledDiv8>
+                            <StyledFlex13>
+                                <StyledSearchOutlined1 onClick={onOpenSearchMember} />
+                                <StyledCheckOutlined1 />
+                            </StyledFlex13>
+                        </StyledFlex2>
+                    </StyledDiv6>
+                </StyledDiv5>
+
+                <StyledDiv5>
+                    <StyledDiv6>
+                        <div>
+                            {getFilterFriends().length > 0 && (
+                                <StyledH7 style={{ color: color3 }}>친구 {getFilterFriends().length}</StyledH7>
+                            )}
+                        </div>
+                        <div>
+                            {getFilterFriends().map((friend, key) => (
+                                <Other other={friend} index={key} onInsertFriend={onInsertFriend} key={key} />
+                            ))}
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
+
+            {/* <StyledNineDiv1>
                 <StyledDiv1>
                     <div style={{ margin: '0.5rem 0' }}>
                         <StyledFlex2>
@@ -79,7 +148,7 @@ const MainModFriends = (): JSX.Element => {
                             ))}
                     </div>
                 </StyledDiv1>
-            </StyledNineDiv1>
+            </StyledNineDiv1> */}
         </>
     );
 };

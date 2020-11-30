@@ -8,6 +8,7 @@ import {
     StyledText3,
     StyledBorderDiv18,
     StyledBackgroundDiv18,
+    StyledDiv8,
 } from '../../api/styled';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined4, StyledSearchOutlined1 } from '../../api/styledAnt';
@@ -97,7 +98,7 @@ const MainHome = (): JSX.Element => {
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex2>
-                            <div style={{ width: '100%', marginRight: '10px' }}>
+                            <StyledDiv8>
                                 {openSearchGroup ? (
                                     <StyledBorderDiv18>
                                         <StyledBackgroundDiv18>
@@ -107,7 +108,7 @@ const MainHome = (): JSX.Element => {
                                 ) : (
                                     <StyledH4>{reduxUser.userId}</StyledH4>
                                 )}
-                            </div>
+                            </StyledDiv8>
                             <StyledFlex13>
                                 <StyledSearchOutlined1 onClick={onOpenSearchGroup} />
                                 <StyledPlusCircleOutlined4 onClick={goMainRegGroup} />

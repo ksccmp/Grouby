@@ -57,10 +57,6 @@ export const goGroupRegSpot = (): void => {
     Router.push('/group/groupRegSpot');
 };
 
-export const goGroupSpotRating = (): void => {
-    Router.push('/group/groupSpotRating');
-};
-
 export const goSpotItems = (): void => {
     Router.push('/spot/spotItems');
 };
@@ -75,6 +71,10 @@ export const goSpotAdd = (): void => {
 
 export const goSpotRegItem = (): void => {
     Router.push('/spot/spotRegItem');
+};
+
+export const goSpotRating = (): void => {
+    Router.push('/spot/spotRating');
 };
 
 // moment

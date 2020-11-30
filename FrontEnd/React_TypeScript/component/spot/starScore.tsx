@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { StyledStarOutlined1, StyledStarFilled1 } from '../../api/styledAnt';
-import { StyledGrid2, StyledBorderDiv6, StyledBackgroundDiv6, StyledGrid3 } from '../../api/styled';
+import {
+    StyledGrid2,
+    StyledBorderDiv6_1,
+    StyledBorderDiv6_2,
+    StyledBackgroundDiv6,
+    StyledGrid3,
+} from '../../api/styled';
 import { StyledH5 } from '../../api/styledFont';
 import { IRank } from '../../api/interface';
 
@@ -33,19 +39,17 @@ const StarScore: React.FC<IStarScore> = ({ rank, onRanks }): JSX.Element => {
     return (
         <>
             <StyledGrid2>
-                <StyledBorderDiv6>
+                <StyledBorderDiv6_1>
                     <StyledBackgroundDiv6>
                         <StyledH5>{rank.rankCompName}</StyledH5>
                     </StyledBackgroundDiv6>
-                </StyledBorderDiv6>
+                </StyledBorderDiv6_1>
 
-                <div></div>
-
-                <StyledBorderDiv6>
+                <StyledBorderDiv6_2>
                     <StyledBackgroundDiv6>
                         <StyledGrid3>{stars.map((star, key) => getStar(star, key))}</StyledGrid3>
                     </StyledBackgroundDiv6>
-                </StyledBorderDiv6>
+                </StyledBorderDiv6_2>
             </StyledGrid2>
         </>
     );

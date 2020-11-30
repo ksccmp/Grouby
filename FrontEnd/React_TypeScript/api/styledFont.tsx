@@ -38,6 +38,18 @@ export const StyledH4 = styled.p`
     font-family: ${fontFamily};
 `;
 
+export const StyledH4_1 = styled.p`
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    font-family: ${fontFamily};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`;
+
 export const StyledH5 = styled.p`
     margin: 0;
     padding: 0;

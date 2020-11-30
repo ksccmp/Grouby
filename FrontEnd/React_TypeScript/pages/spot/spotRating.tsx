@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { StyledNineDiv1, StyledDiv1, StyledFlex2, StyledNineDiv2 } from '../../api/styled';
+import { StyledDiv1, StyledFlex2, StyledDiv5, StyledDiv6, StyledFlex13, StyledDiv8 } from '../../api/styled';
 import { StyledH4 } from '../../api/styledFont';
-import { StyledLeftOutLined1 } from '../../api/styledAnt';
-import { goBack, getTime } from '../../api/common';
-import StarScore from '../../component/group/starScore';
+import { StyledLeftOutlined2, StyledCheckOutlined1 } from '../../api/styledAnt';
+import { getTime, goSpotRanks } from '../../api/common';
+import StarScore from '../../component/spot/starScore';
 import { IRank } from '../../api/interface';
 
-const GroupSpotRating = (): JSX.Element => {
+const spotRating = (): JSX.Element => {
     const [ranks, setRanks] = React.useState<IRank[]>([
         {
             spotId: 1,
@@ -40,31 +40,35 @@ const GroupSpotRating = (): JSX.Element => {
 
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex2>
-                            <div>
-                                <StyledLeftOutLined1 onClick={goBack} />
-                                <StyledH4>수찬 커플/사당 요란한식당</StyledH4>
-                            </div>
-                            <div>
+                            <StyledFlex13>
+                                <StyledLeftOutlined2 onClick={goSpotRanks} />
+                            </StyledFlex13>
+                            <StyledDiv8>
                                 <StyledH4>평가</StyledH4>
-                            </div>
+                            </StyledDiv8>
+                            <StyledFlex13>
+                                <StyledCheckOutlined1 />
+                            </StyledFlex13>
                         </StyledFlex2>
-                    </div>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                    <div>
+                <StyledDiv5>
+                    <StyledDiv6>
                         {ranks
                             ? ranks.map((rank, key) => {
                                   return <StarScore rank={rank} onRanks={onRanks} key={key} />;
                               })
                             : ''}
-                    </div>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
         </>
     );
 };
 
-export default GroupSpotRating;
+export default spotRating;

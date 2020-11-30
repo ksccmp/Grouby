@@ -27,6 +27,7 @@ import {
     AppstoreAddOutlined,
     CheckOutlined,
     EditOutlined,
+    FileAddOutlined,
 } from '@ant-design/icons';
 import { color1, color2, color3, color4, color5 } from './common';
 
@@ -149,7 +150,7 @@ export const StyledHeartFilled1 = styled(HeartFilled)`
         height: 1.4rem;
     }
     & > svg > path {
-        fill: rgba(255, 0, 0, 0.7);
+        fill: ${color4};
     }
 `;
 
@@ -159,12 +160,12 @@ export const StyledMessageOutlined1 = styled(MessageOutlined)`
         height: 1.4rem;
     }
     & > svg > path {
-        fill: #e6951a;
+        fill: ${color3};
     }
 `;
 
 interface IStyledCaretUpOutlined1 {
-    fill: boolean;
+    fill: string;
 }
 
 export const StyledCaretUpOutlined1 = styled(CaretUpOutlined)`
@@ -174,8 +175,8 @@ export const StyledCaretUpOutlined1 = styled(CaretUpOutlined)`
     }
 
     & > svg > path {
-        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
-        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? color3 : '#000000')};
+        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill === 'true' ? 1 : 0.2)};
+        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill === 'true' ? color3 : '#000000')};
     }
 `;
 
@@ -186,8 +187,8 @@ export const StyledCaretDownOutlined = styled(CaretDownOutlined)`
     }
 
     & > svg > path {
-        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill ? 1 : 0.2)};
-        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill ? color3 : '#000000')};
+        opacity: ${(props: IStyledCaretUpOutlined1) => (props.fill === 'true' ? 1 : 0.2)};
+        fill: ${(props: IStyledCaretUpOutlined1) => (props.fill === 'true' ? color3 : '#000000')};
     }
 `;
 
@@ -377,5 +378,9 @@ export const StyledAppstoreAddOutlined1 = styled(AppstoreAddOutlined)`
 `;
 
 export const StyledEditOutlined1 = styled(EditOutlined)`
+    ${topIcon}
+`;
+
+export const StyledFileAddOutlined1 = styled(FileAddOutlined)`
     ${topIcon}
 `;

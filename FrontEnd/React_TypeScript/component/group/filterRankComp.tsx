@@ -5,9 +5,6 @@ import {
     StyledDiv5,
     StyledDiv6,
     StyledFlex2,
-    StyledBorderDiv18,
-    StyledBackgroundDiv18,
-    StyledText3,
     StyledFlex13,
     StyledFlex16,
     StyledFlex17,
@@ -82,6 +79,10 @@ const FilterRankComp: React.FC<IFilterRankComp> = ({
         setCheckCircle(checkCircle === newRankComps.length - 1 ? newRankComps.length - 1 : checkCircle + 1);
     };
 
+    const changeTest = () => {
+        console.log('change');
+    };
+
     return (
         <>
             <StyledFixed1 open={openFilterRankComp}>
@@ -105,7 +106,11 @@ const FilterRankComp: React.FC<IFilterRankComp> = ({
                                 {rankComps.map((rankComp, key) => (
                                     <StyledFlex16 key={key}>
                                         <StyledFlex17>
-                                            <StyledRadio2 id={String(key)} checked={checkCircle === key} />
+                                            <StyledRadio2
+                                                id={String(key)}
+                                                checked={checkCircle === key}
+                                                onChange={changeTest}
+                                            />
                                             <div onClick={() => onCheckCircle(key)}>
                                                 <label htmlFor={String(key)}>
                                                     <StyledCheckCircleOutlined3 />
@@ -117,8 +122,8 @@ const FilterRankComp: React.FC<IFilterRankComp> = ({
                                             <StyledH5 style={{ margin: '0 0.3rem' }}>{rankComp.rankCompName}</StyledH5>
                                         </StyledFlex17>
                                         <StyledFlex9 onClick={() => onOutLine(key)}>
-                                            <StyledCaretUpOutlined1 fill={rankComp.rankCompOrder === 1} />
-                                            <StyledCaretDownOutlined fill={rankComp.rankCompOrder === 2} />
+                                            <StyledCaretUpOutlined1 fill={String(rankComp.rankCompOrder === 1)} />
+                                            <StyledCaretDownOutlined fill={String(rankComp.rankCompOrder === 2)} />
                                         </StyledFlex9>
                                     </StyledFlex16>
                                 ))}

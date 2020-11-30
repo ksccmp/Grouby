@@ -7,13 +7,14 @@ const height1 = 40;
 const height2 = 30;
 const height3 = '120';
 const height4 = '70';
-const height5 = '90';
+const height5 = 90;
 const height6 = 20;
 const height7 = 50;
 const height8 = '420';
 const height9 = '250';
 const height10 = 35;
 const height11 = 25;
+const height12 = 100;
 const external1 = '50';
 const external2 = '40';
 const externalButton1 = '42';
@@ -117,7 +118,6 @@ export const StyledDiv3 = styled.div`
 
 export const StyledDiv4 = styled.div`
     height: ${height5}px;
-    margin: 0 5px;
 `;
 
 export const StyledDiv5 = styled.div`
@@ -131,6 +131,32 @@ export const StyledDiv6 = styled.div`
 export const StyledDiv7 = styled.div`
     & > div {
         border-bottom: 1px solid ${color1};
+    }
+`;
+
+export const StyledDiv8 = styled.div`
+    width: 100%;
+    margin-right: 10px;
+    overflow: hidden;
+`;
+
+const KeyFramesRipple2 = keyframes`
+    0% {
+        background: linear-gradient(0deg, #ffffff 0%, ${color1} 100%)
+    }
+
+    100% {
+        background: linear-gradient(300deg, #ffffff 0%, ${color1} 100%)
+    }
+`;
+
+export const StyledDiv9 = styled.div`
+    position: relative;
+    overflow: hidden;
+
+    &:active {
+        display: block;
+        animation: ${KeyFramesRipple2} 0.5s;
     }
 `;
 
@@ -193,12 +219,15 @@ export const StyledBorderDiv5 = styled.div`
     margin: 4px auto;
 `;
 
-export const StyledBorderDiv6 = styled.div`
+export const StyledBorderDiv6_1 = styled.div`
     width: 100%;
-    background-color: rgba(137, 136, 135, 0.3);
     height: ${height2}px;
-    padding: 1px;
-    margin: 4px auto;
+    border-right: 1px solid ${color1};
+`;
+
+export const StyledBorderDiv6_2 = styled.div`
+    width: 100%;
+    height: ${height2}px;
 `;
 
 export const StyledBorderDiv7 = styled.div`
@@ -223,18 +252,18 @@ export const StyledBorderDiv9 = styled.div`
 `;
 
 export const StyledBorderDiv10 = styled.div`
-    background-color: rgba(137, 136, 135, 0.3);
-    height: ${Number(height9) + Number(external2)}px;
-    padding: 1px;
-    margin: 4px auto;
+    height: ${height9}px;
     position: relative;
 `;
 
 export const StyledBorderDiv11 = styled.div`
-    background-color: rgba(137, 136, 135, 0.3);
+    width: 100%;
     height: ${height5}px;
-    padding: 1px;
-    margin: 4px auto;
+    background-color: ${color1};
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 export const StyledBorderDiv12 = styled.div`
@@ -247,11 +276,13 @@ export const StyledBorderDiv12 = styled.div`
 `;
 
 export const StyledBorderDiv13 = styled.div`
-    background: #e6951a;
+    background: ${color1};
     width: 100%;
     height: ${height1}px;
-    padding: 1px;
-    position: relative;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 interface IStyledBorderDiv14 {
@@ -379,7 +410,6 @@ export const StyledBackgroundDiv5 = styled.div`
 export const StyledBackgroundDiv6 = styled.div`
     height: ${height2}px;
     overflow: hidden;
-    background-color: #fafafa;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -406,16 +436,20 @@ export const StyledBackgroundDiv10 = styled.div`
     height: ${height9}px;
     overflow: hidden;
     background-color: #fafafa;
-    margin-bottom: ${external2}px;
 `;
 
 export const StyledBackgroundDiv11 = styled.div`
-    height: ${height5}px;
     overflow: hidden;
-    background-color: #fafafa;
+    width: 100%;
+    height: ${height5}px;
+    background-color: ${color1};
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 interface IStyledBackgroundDiv12 {
@@ -729,7 +763,6 @@ export const StyledFlex8 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height2}px;
-    margin: 0 5px;
 `;
 
 export const StyledFlex9 = styled.div`
@@ -742,7 +775,6 @@ export const StyledFlex10 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height2}px;
-    margin: 0 5px;
 `;
 
 export const StyledFlex11 = styled.div`
@@ -750,7 +782,6 @@ export const StyledFlex11 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height6}px;
-    margin: 0 5px;
 `;
 
 export const StyledFlex12 = styled.div`
@@ -824,6 +855,19 @@ export const StyledFlex20 = styled.div`
     flex-wrap: wrap;
 `;
 
+export const StyledFlex21 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const StyledFlex22 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: ${height12}px;
+`;
+
 export const StyledGrid1 = styled.div`
     display: grid;
     grid-template-columns: 4fr 2fr 4fr;
@@ -831,7 +875,7 @@ export const StyledGrid1 = styled.div`
 
 export const StyledGrid2 = styled.div`
     display: grid;
-    grid-template-columns: 5fr 1fr 10fr;
+    grid-template-columns: 5fr 10fr;
 `;
 
 export const StyledGrid3 = styled.div`
@@ -1081,7 +1125,7 @@ export const StyledFixed1 = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
     z-index: 2;
     overflow: auto;
 `;
@@ -1103,10 +1147,13 @@ export const StyledFixed3 = styled.div`
 `;
 
 export const StyledTextArea1 = styled.textarea`
-    width: calc(100% - 0.7rem);
-    height: calc(${height5}px - 0.7rem);
+    width: 100%;
+    height: ${Number(height5 - 5)}px;
     border: none;
     outline: none;
+    background-color: ${color1};
+    margin: 0 10px;
+    resize: none;
 `;
 
 export const StyledSlideDiv1 = styled.div`

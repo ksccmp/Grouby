@@ -1,9 +1,18 @@
 import * as React from 'react';
-import { StyledNineDiv1, StyledDiv1, StyledFlex2 } from '../../api/styled';
-import { StyledH4 } from '../../api/styledFont';
+import {
+    StyledDiv1,
+    StyledFlex2,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex13,
+    StyledText2,
+    StyledDiv8,
+} from '../../api/styled';
+import { StyledH4_1 } from '../../api/styledFont';
 import Rank from '../../component/spot/rank';
 import { IRank } from '../../api/interface';
-import { getTime, goGroupSpotRating } from '../../api/common';
+import { getTime, goSpotRating } from '../../api/common';
+import { StyledCheckOutlined1, StyledEditOutlined1, StyledFileAddOutlined1 } from '../../api/styledAnt';
 
 export interface IChangeRank {
     regId: string;
@@ -75,27 +84,50 @@ const SpotRanks = (): JSX.Element => {
             ],
         },
     ]);
+    const [title, setTitle] = React.useState<string>('사당 요란한식당');
+    const [modSpotName, setModSpoName] = React.useState<boolean>(false);
+
+    const onTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+    };
+
+    const onModSpotName = () => {
+        setModSpoName(!modSpotName);
+    };
 
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex2>
-                            <div>
-                                <StyledH4>수찬 커플/사당 요란한식당</StyledH4>
-                            </div>
-                            <div onClick={goGroupSpotRating}>
-                                <StyledH4>등록</StyledH4>
-                            </div>
+                            <StyledDiv8>
+                                {modSpotName ? (
+                                    <StyledText2 value={title} onChange={onTitle} />
+                                ) : (
+                                    <StyledH4_1>수찬커플/{title}</StyledH4_1>
+                                )}
+                            </StyledDiv8>
+                            {modSpotName ? (
+                                <StyledFlex13>
+                                    <StyledCheckOutlined1 onClick={onModSpotName} />
+                                </StyledFlex13>
+                            ) : (
+                                <StyledFlex13>
+                                    <StyledEditOutlined1 onClick={onModSpotName} />
+                                    <StyledFileAddOutlined1 onClick={goSpotRating} />
+                                </StyledFlex13>
+                            )}
                         </StyledFlex2>
-                    </div>
+                    </StyledDiv6>
+                </StyledDiv5>
 
+                <div>
                     {changeRanks.map((changeRank, key) => (
                         <Rank changeRank={changeRank} key={key} />
                     ))}
-                </StyledDiv1>
-            </StyledNineDiv1>
+                </div>
+            </StyledDiv1>
         </>
     );
 };
