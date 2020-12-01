@@ -18,7 +18,7 @@ interface IGroupLayout {
 const GroupLayout: React.FC<IGroupLayout> = ({ children, router }): JSX.Element => {
     return (
         <>
-            <div style={{ paddingBottom: '30px' }}>{children}</div>
+            <div style={{ paddingBottom: '40px' }}>{children}</div>
             {router.pathname.endsWith('groupHome') ||
             router.pathname.endsWith('groupTalk') ||
             router.pathname.endsWith('groupAdd') ? (

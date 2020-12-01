@@ -28,6 +28,8 @@ import {
     CheckOutlined,
     EditOutlined,
     FileAddOutlined,
+    LockOutlined,
+    UnlockOutlined,
 } from '@ant-design/icons';
 import { color1, color2, color3, color4, color5 } from './common';
 
@@ -383,4 +385,26 @@ export const StyledEditOutlined1 = styled(EditOutlined)`
 
 export const StyledFileAddOutlined1 = styled(FileAddOutlined)`
     ${topIcon}
+`;
+
+export const StyledLockOutlined1 = styled(LockOutlined)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    & > svg > path {
+        fill: ${color5};
+    }
+`;
+
+export const StyledUnlockOutlined1 = styled(UnlockOutlined)`
+    & > svg {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    & > svg > path {
+        fill: ${color4};
+    }
 `;

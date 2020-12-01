@@ -2,22 +2,25 @@ import * as React from 'react';
 import {
     StyledFlex2,
     StyledDiv1,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledBorderDiv14,
-    StyledBackgroundDiv14,
-    StyledText1,
-    StyledNineDiv1,
-    StyledPassword1,
-    StyledButton5,
-    StyledBackgroundDiv2,
-    StyledExternalDiv1,
-    StyledBorderDiv2,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex13,
+    StyledDiv8,
+    StyledText4,
+    StyledFlex16_1,
+    StyledBorderDiv21,
+    StyledBackgroundDiv21,
+    StyledPassword2,
 } from '../../api/styled';
-import { StyledH4, StyledH5, StyledH6 } from '../../api/styledFont';
-import { StyledLeftOutLined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
+import {
+    StyledLeftOutlined2,
+    StyledCheckOutlined1,
+    StyledLockOutlined1,
+    StyledUnlockOutlined1,
+} from '../../api/styledAnt';
 import { IUser } from '../../api/interface';
-import { goBack, getTime } from '../../api/common';
+import { getTime, goSignIn, color3 } from '../../api/common';
 
 interface ISignUp extends IUser {
     userCheckPassword: string;
@@ -160,76 +163,112 @@ const SignUp = (): JSX.Element => {
 
     return (
         <>
-            <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
+            <StyledDiv1>
+                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv6>
                         <StyledFlex2>
-                            <div>
-                                <StyledLeftOutLined1 onClick={goBack} />
+                            <StyledFlex13>
+                                <StyledLeftOutlined2 onClick={goSignIn} />
+                            </StyledFlex13>
+                            <StyledDiv8>
                                 <StyledH4>회원가입</StyledH4>
-                            </div>
-                            <div onClick={onRegUser}>
-                                <StyledH4>생성</StyledH4>
-                            </div>
+                            </StyledDiv8>
+                            <StyledFlex13 onClick={onRegUser}>
+                                <StyledCheckOutlined1 />
+                            </StyledFlex13>
                         </StyledFlex2>
-                    </div>
+                    </StyledDiv6>
+                </StyledDiv5>
 
-                    <div>
-                        <div style={{ marginBottom: '1rem' }}>
-                            <StyledH5>아이디</StyledH5>
-                            <StyledBorderDiv2>
-                                <StyledBackgroundDiv2>
-                                    <StyledText1 placeholder="아이디" onChange={setUserIdAction}></StyledText1>
-                                    <StyledExternalDiv1 onClick={setUserCheckIdAction}>
-                                        <StyledButton5 check={localReducer.userCheckId}>
-                                            <StyledH6>중복</StyledH6>
-                                        </StyledButton5>
-                                    </StyledExternalDiv1>
-                                </StyledBackgroundDiv2>
-                            </StyledBorderDiv2>
-                        </div>
-
-                        <div style={{ marginBottom: '1rem' }}>
-                            <StyledH5>비밀번호</StyledH5>
-                            <StyledBorderDiv1>
-                                <StyledBackgroundDiv1>
-                                    <StyledPassword1
-                                        placeholder="비밀번호"
-                                        onChange={setUserPasswordAction}
-                                    ></StyledPassword1>
-                                </StyledBackgroundDiv1>
-                            </StyledBorderDiv1>
-
-                            <StyledBorderDiv14 same={localReducer.userPassword === localReducer.userCheckPassword}>
-                                <StyledBackgroundDiv14>
-                                    <StyledPassword1
-                                        placeholder="비밀번호 확인"
-                                        onChange={setUserCheckPasswordAction}
-                                    ></StyledPassword1>
-                                </StyledBackgroundDiv14>
-                            </StyledBorderDiv14>
-                        </div>
-
-                        <div style={{ marginBottom: '1rem' }}>
-                            <StyledH5>이름</StyledH5>
-                            <StyledBorderDiv1>
-                                <StyledBackgroundDiv1>
-                                    <StyledText1 placeholder="이름" onChange={setUserNameAction}></StyledText1>
-                                </StyledBackgroundDiv1>
-                            </StyledBorderDiv1>
-                        </div>
-
+                <StyledDiv5>
+                    <StyledDiv6>
                         <div>
-                            <StyledH5>전화번호</StyledH5>
-                            <StyledBorderDiv1>
-                                <StyledBackgroundDiv1>
-                                    <StyledText1 placeholder="전화번호" onChange={setUserPhoneAction}></StyledText1>
-                                </StyledBackgroundDiv1>
-                            </StyledBorderDiv1>
+                            <StyledH7 style={{ color: color3 }}>아이디</StyledH7>
                         </div>
-                    </div>
-                </StyledDiv1>
-            </StyledNineDiv1>
+                        <div>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledText4 placeholder="아이디" onChange={setUserIdAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </div>
+                    </StyledDiv6>
+
+                    <StyledDiv6>
+                        <div>
+                            <StyledH7 style={{ color: color3 }}>비밀번호</StyledH7>
+                        </div>
+                        <div>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledPassword2 placeholder="비밀번호" onChange={setUserPasswordAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </div>
+                    </StyledDiv6>
+
+                    <StyledDiv6>
+                        <div>
+                            <StyledH7 style={{ color: color3 }}>비밀번호 확인</StyledH7>
+                        </div>
+                        <div>
+                            <StyledFlex16_1>
+                                <div style={{ width: '100%', marginRight: '10px' }}>
+                                    <StyledBorderDiv21>
+                                        <StyledBackgroundDiv21>
+                                            <StyledPassword2
+                                                placeholder="비밀번호 확인"
+                                                onChange={setUserCheckPasswordAction}
+                                            />
+                                        </StyledBackgroundDiv21>
+                                    </StyledBorderDiv21>
+                                </div>
+                                <div>
+                                    {localReducer.userPassword === localReducer.userCheckPassword ? (
+                                        <StyledLockOutlined1 />
+                                    ) : (
+                                        <StyledUnlockOutlined1 />
+                                    )}
+                                </div>
+                            </StyledFlex16_1>
+                        </div>
+                    </StyledDiv6>
+
+                    <StyledDiv6>
+                        <div>
+                            <StyledH7 style={{ color: color3 }}>이름</StyledH7>
+                        </div>
+                        <div>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledText4 placeholder="이름" onChange={setUserNameAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </div>
+                    </StyledDiv6>
+
+                    <StyledDiv6>
+                        <div>
+                            <StyledH7 style={{ color: color3 }}>전화번호</StyledH7>
+                        </div>
+                        <div>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledText4 placeholder="전화번호" onChange={setUserPhoneAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </div>
+                    </StyledDiv6>
+                </StyledDiv5>
+            </StyledDiv1>
         </>
     );
 };

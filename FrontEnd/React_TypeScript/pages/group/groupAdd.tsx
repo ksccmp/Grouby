@@ -5,13 +5,14 @@ import {
     StyledDiv5,
     StyledDiv6,
     StyledFlex13,
-    StyledFlex18,
+    StyledFlex16,
     StyledCheckBox1,
     StyledToggleDiv1,
     StyledToggleDiv2,
     StyledFlex17,
     StyledText2,
     StyledDiv8,
+    StyledFlex18,
 } from '../../api/styled';
 import { StyledH4_1, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledEditOutlined1, StyledRightOutlined1, StyledCheckOutlined1 } from '../../api/styledAnt';
@@ -81,7 +82,7 @@ const GroupAdd = (): JSX.Element => {
                                 </label>
                             </div>
                         </StyledFlex18>
-                        <StyledFlex18>
+                        <StyledFlex16>
                             <StyledFlex17>
                                 <StyledH5 style={{ marginRight: '5px' }}>멤버</StyledH5>
                                 <StyledH6 style={{ color: color2 }}>3</StyledH6>
@@ -89,15 +90,15 @@ const GroupAdd = (): JSX.Element => {
                             <div>
                                 <StyledRightOutlined1 />
                             </div>
-                        </StyledFlex18>
-                        <StyledFlex18>
+                        </StyledFlex16>
+                        <StyledFlex16>
                             <div>
                                 <StyledH5>그룹탈퇴</StyledH5>
                             </div>
                             <div>
                                 <StyledRightOutlined1 />
                             </div>
-                        </StyledFlex18>
+                        </StyledFlex16>
                     </StyledDiv6>
                 </StyledDiv5>
             </StyledDiv1>

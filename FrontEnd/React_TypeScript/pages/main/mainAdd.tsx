@@ -8,7 +8,7 @@ import {
     StyledTable2,
     StyledTr1,
     StyledTd1,
-    StyledFlex18,
+    StyledFlex16,
     StyledDiv8,
 } from '../../api/styled';
 import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
@@ -76,7 +76,7 @@ const MainAdd = (): JSX.Element => {
 
                 <StyledDiv5>
                     <StyledDiv6>
-                        <StyledFlex18>
+                        <StyledFlex16>
                             <div>
                                 <StyledH5>공지사항</StyledH5>
                                 <StyledH7 style={{ color: color4, marginLeft: '5px' }}>오픈예정</StyledH7>
@@ -84,8 +84,8 @@ const MainAdd = (): JSX.Element => {
                             <div>
                                 <StyledRightOutlined1 />
                             </div>
-                        </StyledFlex18>
-                        <StyledFlex18>
+                        </StyledFlex16>
+                        <StyledFlex16>
                             <div>
                                 <StyledH5>고객센터</StyledH5>
                                 <StyledH7 style={{ color: color4, marginLeft: '5px' }}>오픈예정</StyledH7>
@@ -93,15 +93,15 @@ const MainAdd = (): JSX.Element => {
                             <div>
                                 <StyledRightOutlined1 />
                             </div>
-                        </StyledFlex18>
-                        <StyledFlex18>
+                        </StyledFlex16>
+                        <StyledFlex16>
                             <div>
                                 <StyledH5>현재버전</StyledH5>
                             </div>
                             <div>
                                 <StyledH6 style={{ color: color3 }}>Beta</StyledH6>
                             </div>
-                        </StyledFlex18>
+                        </StyledFlex16>
                     </StyledDiv6>
                 </StyledDiv5>
             </StyledDiv1>

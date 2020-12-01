@@ -8,10 +8,19 @@ import {
     StyledBorderDiv1,
     StyledBackgroundDiv1,
     StyledNineDiv1,
+    StyledDiv5,
+    StyledDiv6,
+    StyledFlex16_1,
+    StyledBorderDiv21,
+    StyledBackgroundDiv21,
+    StyledText4,
+    StyledPassword2,
+    StyledFlex24,
 } from '../../api/styled';
-import { StyledH6 } from '../../api/styledFont';
+import { StyledH6, StyledH7, StyledMainTitle1, StyledSubTitle1 } from '../../api/styledFont';
 import { goMainHome, goGroupHome, goSpotItems, goSignUp } from '../../api/common';
 import { IUser } from '../../api/interface';
+import Link from 'next/link';
 
 type ISignIn = IUser;
 
@@ -81,29 +90,55 @@ const SignIn = (): JSX.Element => {
             <button onClick={goGroupHome}>groupHome</button>
             <button onClick={goSpotItems}>spotItems</button>
             <StyledFlex1>
-                <StyledNineDiv1>
+                <StyledDiv1>
+                    <div style={{ textAlign: 'center' }}>
+                        <img src="/img/GROUBY.png" />
+                    </div>
+                    <StyledDiv5>
+                        <StyledDiv6>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledText4 placeholder="아이디" onChange={setUserIdAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </StyledDiv6>
+
+                        <StyledDiv6>
+                            <StyledFlex16_1>
+                                <StyledBorderDiv21>
+                                    <StyledBackgroundDiv21>
+                                        <StyledPassword2 placeholder="비밀번호" onChange={setUserPasswordAction} />
+                                    </StyledBackgroundDiv21>
+                                </StyledBorderDiv21>
+                            </StyledFlex16_1>
+                        </StyledDiv6>
+
+                        <StyledDiv6 style={{ marginBottom: '0.2rem' }}>
+                            <StyledFlex16_1>
+                                <StyledButton1 onClick={onSignIn}>
+                                    <StyledH6>로그인</StyledH6>
+                                </StyledButton1>
+                            </StyledFlex16_1>
+                        </StyledDiv6>
+
+                        <StyledDiv6>
+                            <StyledFlex24>
+                                <div onClick={goSignUp}>
+                                    <StyledH7>회원가입</StyledH7>
+                                </div>
+
+                                <div>
+                                    <StyledH7>계정찾기</StyledH7>
+                                </div>
+                            </StyledFlex24>
+                        </StyledDiv6>
+                    </StyledDiv5>
+                </StyledDiv1>
+
+                {/* <StyledNineDiv1>
                     <StyledDiv1>
-                        <div style={{ textAlign: 'center' }}>
-                            <img src="/img/GROUBY.png" />
-                        </div>
-
-                        <div>
-                            <StyledBorderDiv1>
-                                <StyledBackgroundDiv1>
-                                    <StyledText1 placeholder="아이디" onChange={setUserIdAction}></StyledText1>
-                                </StyledBackgroundDiv1>
-                            </StyledBorderDiv1>
-
-                            <StyledBorderDiv1>
-                                <StyledBackgroundDiv1>
-                                    <StyledPassword1
-                                        placeholder="비밀번호"
-                                        onChange={setUserPasswordAction}
-                                    ></StyledPassword1>
-                                </StyledBackgroundDiv1>
-                            </StyledBorderDiv1>
-                        </div>
-
                         <div>
                             <StyledFlex1>
                                 <StyledButton1 onClick={onSignIn}>
@@ -118,14 +153,14 @@ const SignIn = (): JSX.Element => {
                             </StyledFlex1>
                         </div>
                     </StyledDiv1>
-                </StyledNineDiv1>
+                </StyledNineDiv1> */}
             </StyledFlex1>
 
             <style global jsx>
                 {`
                     html,
                     body {
-                        height: 98%;
+                        height: 100%;
                     }
                     div#__next,
                     div#__next > div,

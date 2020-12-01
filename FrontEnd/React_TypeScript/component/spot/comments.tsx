@@ -2,27 +2,21 @@ import * as React from 'react';
 import {
     StyledFlex2,
     StyledFixed1,
-    StyledNineDiv2,
     StyledDiv1,
-    StyledBorderDiv13,
-    StyledBackgroundDiv13,
-    StyledText1,
-    StyledExternalDiv1,
-    StyledButton2,
     StyledFixed2,
     StyledDiv5,
     StyledDiv6,
     StyledFlex13,
-    StyledFlex16,
+    StyledFlex16_1,
     StyledBorderDiv21,
     StyledBackgroundDiv21,
     StyledText4,
 } from '../../api/styled';
-import { StyledLeftOutLined1, StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
-import { StyledH3, StyledH4, StyledH6 } from '../../api/styledFont';
+import { StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
+import { StyledH4 } from '../../api/styledFont';
 import Comment from './comment';
 import { IComment } from '../../api/interface';
-import { getTime, goSpotItems } from '../../api/common';
+import { getTime } from '../../api/common';
 
 interface IComments {
     openComments: boolean;
@@ -176,7 +170,7 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                 <StyledFixed2 open={openComments}>
                     <StyledDiv5>
                         <StyledDiv6>
-                            <StyledFlex16>
+                            <StyledFlex16_1>
                                 <div style={{ width: '100%', marginRight: '10px' }}>
                                     <StyledBorderDiv21>
                                         <StyledBackgroundDiv21>
@@ -191,7 +185,7 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                                 <div onClick={onSaveComment}>
                                     <StyledPlusCircleFilled1 />
                                 </div>
-                            </StyledFlex16>
+                            </StyledFlex16_1>
                         </StyledDiv6>
                     </StyledDiv5>
                 </StyledFixed2>

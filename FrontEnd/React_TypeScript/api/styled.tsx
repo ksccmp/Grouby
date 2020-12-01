@@ -60,6 +60,17 @@ export const StyledText4 = styled.input.attrs(() => ({
     margin: 0 10px;
 `;
 
+export const StyledText5 = styled.input.attrs(() => ({
+    type: 'text',
+}))`
+    width: 100%;
+    height: ${height1}px;
+    border: none;
+    outline: none;
+    background-color: ${color1};
+    margin: 0 10px;
+`;
+
 export const StyledPassword1 = styled.input.attrs(() => ({
     type: 'password',
 }))`
@@ -68,6 +79,17 @@ export const StyledPassword1 = styled.input.attrs(() => ({
     border-width: 0;
     outline: none;
     margin: 0 15px;
+`;
+
+export const StyledPassword2 = styled.input.attrs(() => ({
+    type: 'password',
+}))`
+    width: 100%;
+    height: ${height2}px;
+    border: none;
+    outline: none;
+    background-color: ${color1};
+    margin: 0 10px;
 `;
 
 export const StyledCheckBox1 = styled.input.attrs(() => ({
@@ -140,23 +162,9 @@ export const StyledDiv8 = styled.div`
     overflow: hidden;
 `;
 
-const KeyFramesRipple2 = keyframes`
-    0% {
-        background: linear-gradient(0deg, #ffffff 0%, ${color1} 100%)
-    }
-
-    100% {
-        background: linear-gradient(300deg, #ffffff 0%, ${color1} 100%)
-    }
-`;
-
 export const StyledDiv9 = styled.div`
-    position: relative;
-    overflow: hidden;
-
     &:active {
-        display: block;
-        animation: ${KeyFramesRipple2} 0.5s;
+        background-color: ${color1};
     }
 `;
 
@@ -466,13 +474,17 @@ export const StyledBackgroundDiv12 = styled.div`
 `;
 
 export const StyledBackgroundDiv13 = styled.div`
-    height: ${height1}px;
     overflow: hidden;
-    background-color: #fafafa;
+    width: 100%;
+    height: ${height1}px;
+    background-color: ${color1};
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: ${external1}px;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 `;
 
 export const StyledBackgroundDiv14 = styled.div`
@@ -572,20 +584,15 @@ export const StyledBackgroundDiv21 = styled.div`
 
 export const StyledButton1 = styled.button`
     width: 100%;
-    min-width: 70px;
-    max-width: 200px;
     height: ${height2}px;
-    margin: 0 1rem;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
     outline: none;
-    border: 1px solid #e6951a;
-    background-color: #fafafa;
-    &:active {
-        background-color: #e6951a;
-    }
+    border: none;
+    background-color: ${color3};
+    color: ${color1};
 `;
 
 export const StyledButton2 = styled.button`
@@ -693,6 +700,7 @@ export const StyledFlex1 = styled.div`
     height: 100%;
     align-items: center;
     margin: 0 auto;
+    background-color: #ffffff;
 `;
 
 export const StyledFlex2 = styled.div`
@@ -808,6 +816,10 @@ export const StyledFlex14 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height7}px;
+
+    &:active {
+        background-color: ${color1};
+    }
 `;
 
 export const StyledFlex15 = styled.div`
@@ -824,6 +836,17 @@ export const StyledFlex15 = styled.div`
 `;
 
 export const StyledFlex16 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: ${height1}px;
+
+    &:active {
+        background-color: ${color1};
+    }
+`;
+
+export const StyledFlex16_1 = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -866,6 +889,19 @@ export const StyledFlex22 = styled.div`
     justify-content: space-between;
     align-items: center;
     height: ${height12}px;
+`;
+
+export const StyledFlex23 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: ${height7}px;
+`;
+
+export const StyledFlex24 = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    color: ${color5};
 `;
 
 export const StyledGrid1 = styled.div`
@@ -1106,6 +1142,10 @@ export const StyledTr1 = styled.tr`
 
 export const StyledTd1 = styled.td`
     border-right: 1px solid ${color1};
+
+    &:active {
+        background-color: ${color1};
+    }
 `;
 
 export const StyledTableCell1 = styled.div`

@@ -12,7 +12,7 @@ interface ISignLayout {
 const SignLayout: React.FC<ISignLayout> = ({ children, router }): JSX.Element => {
     return (
         <>
-            <div style={{ paddingBottom: '30px' }}>{children}</div>
+            <div style={{ paddingBottom: '40px' }}>{children}</div>
             {router.pathname.endsWith('mainHome') ||
             router.pathname.endsWith('mainFriends') ||
             router.pathname.endsWith('mainAdd') ? (
