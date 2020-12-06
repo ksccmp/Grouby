@@ -1,13 +1,8 @@
 import * as React from 'react';
 import {
     StyledButton1,
-    StyledPassword1,
-    StyledText1,
     StyledDiv1,
     StyledFlex1,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledNineDiv1,
     StyledDiv5,
     StyledDiv6,
     StyledFlex16_1,
@@ -17,10 +12,9 @@ import {
     StyledPassword2,
     StyledFlex24,
 } from '../../api/styled';
-import { StyledH6, StyledH7, StyledMainTitle1, StyledSubTitle1 } from '../../api/styledFont';
+import { StyledH6, StyledH7 } from '../../api/styledFont';
 import { goMainHome, goGroupHome, goSpotItems, goSignUp } from '../../api/common';
 import { IUser } from '../../api/interface';
-import Link from 'next/link';
 
 type ISignIn = IUser;
 
@@ -136,24 +130,6 @@ const SignIn = (): JSX.Element => {
                         </StyledDiv6>
                     </StyledDiv5>
                 </StyledDiv1>
-
-                {/* <StyledNineDiv1>
-                    <StyledDiv1>
-                        <div>
-                            <StyledFlex1>
-                                <StyledButton1 onClick={onSignIn}>
-                                    <StyledH6>SignIn</StyledH6>
-                                </StyledButton1>
-                                <StyledButton1 onClick={goSignUp}>
-                                    <StyledH6>SignUp</StyledH6>
-                                </StyledButton1>
-                                <StyledButton1>
-                                    <StyledH6>Search</StyledH6>
-                                </StyledButton1>
-                            </StyledFlex1>
-                        </div>
-                    </StyledDiv1>
-                </StyledNineDiv1> */}
             </StyledFlex1>
 
             <style global jsx>
