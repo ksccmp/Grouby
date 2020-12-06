@@ -15,10 +15,14 @@ import {
 import { StyledH6, StyledH7 } from '../../api/styledFont';
 import { goMainHome, goGroupHome, goSpotItems, goSignUp } from '../../api/common';
 import { IUser } from '../../api/interface';
+import { useDispatch } from 'react-redux';
+import { userSelectByUserIdAction } from '../../modules/actions';
 
 type ISignIn = IUser;
 
 const SignIn = (): JSX.Element => {
+    const dispatch = useDispatch();
+
     const signInInitState: ISignIn = {
         userId: '',
         userPassword: '',
@@ -75,14 +79,14 @@ const SignIn = (): JSX.Element => {
             userPassword: localReducer.userPassword,
         };
 
-        console.log(user);
+        dispatch(userSelectByUserIdAction(user));
     };
 
     return (
         <>
-            <button onClick={goMainHome}>mainHome</button>
+            {/* <button onClick={goMainHome}>mainHome</button>
             <button onClick={goGroupHome}>groupHome</button>
-            <button onClick={goSpotItems}>spotItems</button>
+            <button onClick={goSpotItems}>spotItems</button> */}
             <StyledFlex1>
                 <StyledDiv1>
                     <div style={{ textAlign: 'center' }}>

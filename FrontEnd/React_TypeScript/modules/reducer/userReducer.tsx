@@ -7,18 +7,34 @@ export interface IUserInitState {
 
 const userInitState: IUserInitState = {
     user: {
-        userId: 'userId',
-        userName: 'userName',
-        userPassword: 'userPassword',
-        userPhone: 'userPhone',
-        regDate: 'regDate',
-        modDate: 'modDate',
+        userId: '',
+        userName: '',
+        userPassword: '',
+        userPhone: '',
+        regDate: '',
+        modDate: '',
     },
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const UserReducer = (state = userInitState, action: actions.Iactions) => {
     switch (action.type) {
+        // not saga
+        case actions.userSetUser: {
+            return {
+                ...state,
+                user: (action as actions.IuserSetUserAction).payload,
+            };
+        }
+
+        // saga
+        case actions.userSelectByUserId: {
+            return {
+                ...state,
+                payload: (action as actions.IuserSelectByUserIdAction).payload,
+            };
+        }
+
         default: {
             return {
                 ...state,

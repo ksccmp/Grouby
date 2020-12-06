@@ -21,16 +21,15 @@ import {
 } from '../../api/styledAnt';
 import { IUser } from '../../api/interface';
 import { getTime, goSignIn, color3 } from '../../api/common';
+import axios from '../../api/axios';
 
 interface ISignUp extends IUser {
     userCheckPassword: string;
-    userCheckId: boolean;
 }
 
 const SignUp = (): JSX.Element => {
     const signUpInitState: ISignUp = {
         userId: '',
-        userCheckId: false,
         userName: '',
         userPassword: '',
         userCheckPassword: '',
@@ -39,14 +38,12 @@ const SignUp = (): JSX.Element => {
 
     type IAction =
         | { type: typeof setUserId; payload: string }
-        | { type: typeof setUserCheckId }
         | { type: typeof setUserName; payload: string }
         | { type: typeof setUserPassword; payload: string }
         | { type: typeof setUserCheckPassword; payload: string }
         | { type: typeof setUserPhone; payload: string };
 
     const setUserId = 'setUserId';
-    const setUserCheckId = 'setUserCheckId';
     const setUserName = 'setUserName';
     const setUserPassword = 'setUserPassword';
     const setUserCheckPassword = 'setUserCheckPassword';
@@ -56,12 +53,6 @@ const SignUp = (): JSX.Element => {
         signUpDispatch({
             type: setUserId,
             payload: e.target.value,
-        });
-    };
-
-    const setUserCheckIdAction = () => {
-        signUpDispatch({
-            type: setUserCheckId,
         });
     };
 
@@ -99,13 +90,6 @@ const SignUp = (): JSX.Element => {
                 return {
                     ...state,
                     userId: action.payload,
-                };
-            }
-
-            case setUserCheckId: {
-                return {
-                    ...state,
-                    userCheckId: true,
                 };
             }
 
@@ -147,7 +131,7 @@ const SignUp = (): JSX.Element => {
 
     const [localReducer, signUpDispatch] = React.useReducer(signUpReducer, signUpInitState);
 
-    const onRegUser = () => {
+    const onRegUser = async () => {
         const curTime: string = getTime();
         const user: IUser = {
             userId: localReducer.userId,
@@ -158,7 +142,23 @@ const SignUp = (): JSX.Element => {
             modDate: curTime,
         };
 
-        console.log(user);
+        if (
+            user.userId === '' ||
+            user.userName === '' ||
+            user.userPassword === '' ||
+            user.userPhone === '' ||
+            user.userPassword !== localReducer.userCheckPassword
+        ) {
+            alert('정보를 확인해주세요.');
+        } else {
+            const res = await axios.post('/user/insert', user);
+            if (res.data.data === 0 && res.data.success === false) {
+                alert('중복된 아이디가 존재합니다.');
+            } else {
+                alert('아이디가 생성되었습니다.');
+                goSignIn();
+            }
+        }
     };
 
     return (

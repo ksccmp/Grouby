@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.grouby.groupmapper">
+	<select id="selectByUserId" parameterType="string" resultType="group">
+		select *
+		from grouby_group
+		where group_id in (select group_id from grouby_groupmember where user_id = #{value})
+	</select>
+</mapper>

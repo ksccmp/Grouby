@@ -17,6 +17,7 @@ import { IUser, IGroup, IGroupMember } from '../../api/interface';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import { goMainRegGroup, getTime, color3 } from '../../api/common';
+import axios from '../../api/axios';
 
 interface IChangeGroup extends IGroup {
     groupMembers: IGroupMember[];
@@ -72,6 +73,20 @@ const MainHome = (): JSX.Element => {
     ]);
     const [searchGroup, setSearchGroup] = React.useState<string>('');
     const [openSearchGroup, setOpenSearchGroup] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+        selectGroups();
+    }, []);
+
+    const selectGroups = async () => {
+        const res = await axios.get('/group/selectGroups', {
+            params: {
+                userId: reduxUser.userId,
+            },
+        });
+
+        setGroups(res.data.data);
+    };
 
     const onSearchGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchGroup(e.target.value);
