@@ -1,11 +1,7 @@
 import * as React from 'react';
 import {
-    StyledNineDiv1,
     StyledDiv1,
     StyledFlex2,
-    StyledBorderDiv1,
-    StyledBackgroundDiv1,
-    StyledText1,
     StyledDiv5,
     StyledDiv6,
     StyledDiv8,
@@ -14,18 +10,21 @@ import {
     StyledBackgroundDiv18,
     StyledText3,
 } from '../../api/styled';
-import {
-    StyledLeftOutLined1,
-    StyledLeftOutlined2,
-    StyledCheckOutlined1,
-    StyledSearchOutlined1,
-} from '../../api/styledAnt';
-import { StyledH4, StyledH5, StyledH7 } from '../../api/styledFont';
+import { StyledLeftOutlined2, StyledCheckOutlined1, StyledSearchOutlined1 } from '../../api/styledAnt';
+import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Other from '../../component/main/other';
 import { IFriend } from '../../api/interface';
 import { getTime, goMainRegGroup, color3 } from '../../api/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 const MainModFriends = (): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const reduxCreateGroupFriends: IFriend[] = useSelector(
+        (state: IIndexReducer) => state.FriendReducer.createGroupFriends,
+    );
+
     const [friends, setFriends] = React.useState<IFriend[]>([
         {
             userId: 'ksccmp',

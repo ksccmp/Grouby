@@ -10,11 +10,14 @@ import {
     StyledText3,
     StyledFlex13,
 } from '../../api/styled';
-import { StyledSearchOutlined1, StyledLeftOutlined2 } from '../../api/styledAnt';
+import { StyledLeftOutlined2 } from '../../api/styledAnt';
 import { StyledH7 } from '../../api/styledFont';
-import { IFriend } from '../../api/interface';
-import { getTime, color3 } from '../../api/common';
-import Other from './other';
+import { IFriend, IUser } from '../../api/interface';
+import { color3 } from '../../api/common';
+import Friend from './friend';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import axios from '../../api/axios';
 
 interface IOther {
     openOthers: boolean;
@@ -22,42 +25,104 @@ interface IOther {
 }
 
 const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+
     const [searchOther, setSearchOther] = React.useState<string>('');
+    const [others, setOthers] = React.useState<IUser[]>([]);
 
-    const [others, setOthers] = React.useState<IFriend[]>([
-        {
-            userId: 'ksccmp',
-            friendId: 'intan',
-            friendName: '정수안',
-            friendPhone: '010-1234-5678',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'ABC',
-            friendName: '에이비씨',
-            friendPhone: '010-1111-2222',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-    ]);
+    React.useEffect(() => {
+        if (openOthers) {
+            // 친구추가 창을 열때마다 데이터 select
+            selectOthers();
+        }
+    }, [openOthers]);
 
+    // 다른 사용자 불러오기
+    const selectOthers = async () => {
+        const res = await axios.get('/user/selectOthersByUserId', {
+            params: {
+                userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        const tempFriends: IUser[] = res.data.data;
+        tempFriends.map((friend) => {
+            friend.add = false;
+        });
+
+        setOthers(tempFriends);
+    };
+
+    // 검색내용 저장
     const onSearchOther = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchOther(e.target.value);
     };
 
-    const onInsertFriend = () => {
-        console.log('onInsertFriend');
+    // 친구 추가
+    const onInsertFriend = async (otherId: string) => {
+        const friend: IFriend = {
+            userId: reduxUser.userId,
+            friendId: otherId,
+        };
+
+        const res = await axios.post('/friend/insert', friend, {
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            const newOthers: IUser[] = [];
+
+            others.map((other) => {
+                if (other.userId === otherId) {
+                    other.add = true;
+                }
+                newOthers.push(other);
+            });
+
+            setOthers(newOthers);
+        } else {
+            alert('요청 중 문제가 발생했습니다.');
+        }
     };
 
+    // 친구 삭제
+    const onDeleteFriend = async (otherId: string) => {
+        const res = await axios.delete('/friend/delete', {
+            data: {
+                userId: reduxUser.userId,
+                friendId: otherId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            const newOthers: IUser[] = [];
+
+            others.map((other) => {
+                if (other.userId === otherId) {
+                    other.add = false;
+                }
+                newOthers.push(other);
+            });
+
+            setOthers(newOthers);
+        } else {
+            alert('요청 중 문제가 발생했습니다.');
+        }
+    };
+
+    // 다른 사용자 검색어에 맞게 필터
     const getFilterOthers = () => {
-        return others.filter((other) => other.friendId.includes(searchOther) || other.friendName.includes(searchOther));
+        return others.filter(
+            (other) => other.userId.includes(searchOther) || (other.userName as string).includes(searchOther),
+        );
     };
 
     return (
@@ -91,7 +156,12 @@ const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => 
 
                             <div>
                                 {getFilterOthers().map((other, key) => (
-                                    <Other other={other} index={key} onInsertFriend={onInsertFriend} key={key} />
+                                    <Friend
+                                        friend={other}
+                                        onInsertFriend={onInsertFriend}
+                                        onDeleteFriend={onDeleteFriend}
+                                        key={key}
+                                    />
                                 ))}
                             </div>
                         </StyledDiv6>

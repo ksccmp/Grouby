@@ -151,7 +151,7 @@ const SignUp = (): JSX.Element => {
         ) {
             alert('정보를 확인해주세요.');
         } else {
-            const res = await axios.post('/user/insert', user);
+            const res = await axios.post('/user/notsign/insert', user);
             if (res.data.data === 0 && res.data.success === false) {
                 alert('중복된 아이디가 존재합니다.');
             } else {

@@ -16,41 +16,24 @@ import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
 import { IFriend } from '../../api/interface';
 import { goMainHome, goMainModFriends, getTime, color3 } from '../../api/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import { friendDelCreateGroupFriendsAction } from '../../modules/actions';
 
 const MainRegGroup = (): JSX.Element => {
-    const [friends, setFriends] = React.useState<IFriend[]>([
-        {
-            userId: 'ksccmp',
-            friendId: 'intan',
-            friendName: '정수안',
-            friendPhone: '010-1234-5678',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'ABC',
-            friendName: '에이비씨',
-            friendPhone: '010-1111-2222',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-    ]);
+    const dispatch = useDispatch();
+
+    const reduxCreateGroupFriends: IFriend[] = useSelector(
+        (state: IIndexReducer) => state.FriendReducer.createGroupFriends,
+    );
     const [searchGroupName, setSearchGroupName] = React.useState<string>('');
 
     const onSearchGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchGroupName(e.target.value);
     };
 
-    const onDeleteFriend = (index: number) => {
-        const newFriends = friends.slice();
-        newFriends.splice(index, 1);
-        setFriends(newFriends);
+    const onDeleteFriend = (friendId: string) => {
+        dispatch(friendDelCreateGroupFriendsAction(friendId));
     };
 
     return (
@@ -100,8 +83,8 @@ const MainRegGroup = (): JSX.Element => {
                             </div>
                         </StyledFlex21>
                         <div>
-                            {friends.map((friend, key) => (
-                                <Friend friend={friend} index={key} onDeleteFriend={onDeleteFriend} key={key} />
+                            {reduxCreateGroupFriends.map((friend, key) => (
+                                <Friend friend={friend} onDeleteFriend={onDeleteFriend} key={key} />
                             ))}
                         </div>
                     </StyledDiv6>

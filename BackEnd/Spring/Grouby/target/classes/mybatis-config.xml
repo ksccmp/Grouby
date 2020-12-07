@@ -11,10 +11,12 @@
 		<typeAlias type="com.project.grouby.dto.User" alias="user"/>
 		<typeAlias type="com.project.grouby.dto.Group" alias="group"/>
 		<typeAlias type="com.project.grouby.dto.GroupMember" alias="groupMember"/>
+		<typeAlias type="com.project.grouby.dto.Friend" alias="friend"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/usermapper.xml" />
 		<mapper resource="mapper/groupmapper.xml"/>
+		<mapper resource="mapper/friendmapper.xml"/>
 	</mappers>
 </configuration>

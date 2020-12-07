@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyledCardDiv1, StyledFlex3, StyledDiv2, StyledFlex4, StyledFlex14, StyledFlex15 } from '../../api/styled';
-import { StyledH5, StyledH6, StyledBorderH6 } from '../../api/styledFont';
+import { StyledFlex14, StyledFlex15 } from '../../api/styled';
+import { StyledH5, StyledH6 } from '../../api/styledFont';
 import { IGroup, IGroupMember } from '../../api/interface';
 import { color2 } from '../../api/common';
 

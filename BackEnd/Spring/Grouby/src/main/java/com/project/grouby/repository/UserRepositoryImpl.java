@@ -1,5 +1,7 @@
 package com.project.grouby.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,5 +24,15 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public User selectByUserId(String userId) {
 		return session.selectOne(ns + "selectByUserId", userId);
+	}
+	
+	@Override
+	public List<User> selectOthersByUserId(String userId) {
+		return session.selectList(ns + "selectOthersByUserId", userId);
+	}
+	
+	@Override
+	public List<User> selectFriendsByUserId(String userId) {
+		return session.selectList(ns + "selectFriendsByUserId", userId);
 	}
 }

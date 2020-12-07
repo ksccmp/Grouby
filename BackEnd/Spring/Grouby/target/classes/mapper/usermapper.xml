@@ -14,4 +14,16 @@
 		from grouby_user
 		where user_id = #{value}
 	</select>
+	
+	<select id="selectOthersByUserId" parameterType="string" resultType="user">
+		select user_id, user_name, user_phone, reg_date, mod_date
+		from grouby_user
+		where user_id not in (select friend_id from grouby_friend where user_id = #{value}) and user_id != #{value};
+	</select>
+	
+	<select id="selectFriendsByUserId" parameterType="string" resultType="user">
+		select user_id, user_name, user_phone, reg_date, mod_date
+		from grouby_user
+		where user_id in (select friend_id from grouby_friend where user_id = #{value}) and user_id != #{value};
+	</select>
 </mapper>

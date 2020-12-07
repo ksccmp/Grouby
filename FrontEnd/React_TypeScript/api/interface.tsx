@@ -1,10 +1,12 @@
 export interface IUser {
     userId: string;
     userName?: string;
-    userPassword: string;
+    userPassword?: string;
     userPhone?: string;
     regDate?: string;
     modDate?: string;
+
+    add?: boolean;
 }
 
 export interface IGroup {
@@ -24,9 +26,9 @@ export interface IGroupMember {
 export interface IFriend {
     userId: string;
     friendId: string;
-    friendName: string;
-    friendPhone: string;
-    regDate: string;
+    friendName?: string;
+    friendPhone?: string;
+    regDate?: string;
 }
 
 export interface ISpot {

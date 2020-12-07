@@ -14,16 +14,19 @@ import { StyledH4, StyledH7 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined4, StyledSearchOutlined1 } from '../../api/styledAnt';
 import GroupCard from '../../component/main/groupCard';
 import { IUser, IGroup, IGroupMember } from '../../api/interface';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import { goMainRegGroup, getTime, color3 } from '../../api/common';
 import axios from '../../api/axios';
+import { friendResetCreateGroupFriendsAction } from '../../modules/actions';
 
 interface IChangeGroup extends IGroup {
     groupMembers: IGroupMember[];
 }
 
 const MainHome = (): JSX.Element => {
+    const dispatch = useDispatch();
+
     const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
     const [groups, setGroups] = React.useState<IChangeGroup[]>([
@@ -78,24 +81,31 @@ const MainHome = (): JSX.Element => {
         selectGroups();
     }, []);
 
+    // 서버로부터 그룹 가져오기
     const selectGroups = async () => {
         const res = await axios.get('/group/selectGroups', {
             params: {
                 userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
             },
         });
 
         setGroups(res.data.data);
     };
 
+    // 검색내용 저장
     const onSearchGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchGroup(e.target.value);
     };
 
+    // 검색 창 오픈
     const onOpenSearchGroup = () => {
         setOpenSearchGroup(!openSearchGroup);
     };
 
+    // 필터 된 그룹
     const getFilterGroups = (): IChangeGroup[] => {
         return groups.filter((group) => {
             return group.groupName.includes(searchGroup) ||
@@ -105,6 +115,11 @@ const MainHome = (): JSX.Element => {
                 ? true
                 : false;
         });
+    };
+
+    const onPlusCircle = () => {
+        friendResetCreateGroupFriendsAction(); // redux 비우기
+        goMainRegGroup();
     };
 
     return (
@@ -126,7 +141,7 @@ const MainHome = (): JSX.Element => {
                             </StyledDiv8>
                             <StyledFlex13>
                                 <StyledSearchOutlined1 onClick={onOpenSearchGroup} />
-                                <StyledPlusCircleOutlined4 onClick={goMainRegGroup} />
+                                <StyledPlusCircleOutlined4 onClick={onPlusCircle} />
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>

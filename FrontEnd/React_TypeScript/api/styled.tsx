@@ -904,6 +904,11 @@ export const StyledFlex24 = styled.div`
     color: ${color5};
 `;
 
+export const StyledFlex25 = styled.div`
+    display: flex;
+    align-items: baseline;
+`;
+
 export const StyledGrid1 = styled.div`
     display: grid;
     grid-template-columns: 4fr 2fr 4fr;

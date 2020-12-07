@@ -13,138 +13,44 @@ import { StyledSearchOutlined1, StyledUsergroupAddOutlined1 } from '../../api/st
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
 import { IFriend, IUser } from '../../api/interface';
-import { getTime, color3 } from '../../api/common';
+import { color3 } from '../../api/common';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import { useSelector } from 'react-redux';
 import Others from '../../component/main/others';
+import axios from '../../api/axios';
 
 const MainFriends = (): JSX.Element => {
     const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
-    const [friends, setFriends] = React.useState<IFriend[]>([
-        {
-            userId: 'ksccmp',
-            friendId: 'intan',
-            friendName: '정수안',
-            friendPhone: '010-1234-5678',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'ABC',
-            friendName: '에이비씨',
-            friendPhone: '010-1111-2222',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-    ]);
+    const [friends, setFriends] = React.useState<IUser[]>([]);
     const [searchFriend, setSearchFriend] = React.useState<string>('');
     const [openSearchFriend, setOpenSearchFriend] = React.useState<boolean>(false);
     const [openOthers, setOpenOthers] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+        if (!openOthers) {
+            // 친구추가 창이 닫힐때 마다 불러오기
+            selectOthers();
+        }
+    }, [openOthers]);
+
+    const selectOthers = async () => {
+        const res = await axios.get('/user/selectFriendsByUserId', {
+            params: {
+                userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        const tempFriends: IUser[] = res.data.data;
+        tempFriends.map((friend) => {
+            friend.add = true;
+        });
+
+        setFriends(tempFriends);
+    };
 
     const onSearchFriend = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchFriend(e.target.value);
@@ -154,19 +60,70 @@ const MainFriends = (): JSX.Element => {
         setOpenSearchFriend(!openSearchFriend);
     };
 
-    const onDeleteFriend = (index: number) => {
-        const newFriends = friends.slice();
-        newFriends.splice(index, 1);
-        setFriends(newFriends);
+    // 친구 추가
+    const onInsertFriend = async (friendId: string) => {
+        const friend: IFriend = {
+            userId: reduxUser.userId,
+            friendId: friendId,
+        };
+
+        const res = await axios.post('/friend/insert', friend, {
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            const newFriends: IUser[] = [];
+
+            friends.map((friend) => {
+                if (friend.userId === friendId) {
+                    friend.add = true;
+                }
+                newFriends.push(friend);
+            });
+
+            setFriends(newFriends);
+        } else {
+            alert('요청 중 문제가 발생했습니다.');
+        }
+    };
+
+    // 친구 삭제
+    const onDeleteFriend = async (friendId: string) => {
+        const res = await axios.delete('/friend/delete', {
+            data: {
+                userId: reduxUser.userId,
+                friendId: friendId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            const newFriends: IUser[] = [];
+
+            friends.map((friend) => {
+                if (friend.userId === friendId) {
+                    friend.add = false;
+                }
+                newFriends.push(friend);
+            });
+
+            setFriends(newFriends);
+        } else {
+            alert('요청 중 문제가 발생했습니다.');
+        }
     };
 
     const onOpenOthers = () => {
         setOpenOthers(!openOthers);
     };
 
-    const getFilterFriends = (): IFriend[] => {
+    const getFilterFriends = (): IUser[] => {
         return friends.filter(
-            (friend) => friend.friendId.includes(searchFriend) || friend.friendName.includes(searchFriend),
+            (friend) => friend.userId.includes(searchFriend) || (friend.userName as string).includes(searchFriend),
         );
     };
 
@@ -205,7 +162,12 @@ const MainFriends = (): JSX.Element => {
 
                         <div>
                             {getFilterFriends().map((friend, key) => (
-                                <Friend friend={friend} index={key} onDeleteFriend={onDeleteFriend} key={key} />
+                                <Friend
+                                    friend={friend}
+                                    onInsertFriend={onInsertFriend}
+                                    onDeleteFriend={onDeleteFriend}
+                                    key={key}
+                                />
                             ))}
                         </div>
                     </StyledDiv6>

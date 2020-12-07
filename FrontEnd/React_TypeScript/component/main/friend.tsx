@@ -1,25 +1,29 @@
 import * as React from 'react';
-import { StyledFlex16, StyledFlex17 } from '../../api/styled';
-import { StyledH5, StyledH7 } from '../../api/styledFont';
-import { IFriend } from '../../api/interface';
-import { StyledMinusCircleFilled2 } from '../../api/styledAnt';
+import { StyledFlex16, StyledFlex25 } from '../../api/styled';
+import { StyledH5, StyledH6 } from '../../api/styledFont';
+import { IUser } from '../../api/interface';
+import { StyledMinusCircleFilled2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
 
 interface IChangeFriend {
-    friend: IFriend;
-    index: number;
-    onDeleteFriend: (index: number) => void;
+    friend: IUser;
+    onInsertFriend: (friendId: string) => void;
+    onDeleteFriend: (friendId: string) => void;
 }
 
-const Friend: React.FC<IChangeFriend> = ({ friend, index, onDeleteFriend }): JSX.Element => {
+const Friend: React.FC<IChangeFriend> = ({ friend, onInsertFriend, onDeleteFriend }): JSX.Element => {
     return (
         <>
             <StyledFlex16>
-                <StyledFlex17>
-                    <StyledH5>{friend.friendId}</StyledH5>
-                    <StyledH7>({friend.friendName})</StyledH7>
-                </StyledFlex17>
+                <StyledFlex25>
+                    <StyledH5 style={{ marginRight: '5px' }}>{friend.userName}</StyledH5>
+                    <StyledH6 style={{ opacity: '0.6' }}>({friend.userId})</StyledH6>
+                </StyledFlex25>
                 <div>
-                    <StyledMinusCircleFilled2 onClick={() => onDeleteFriend(index)} />
+                    {friend.add ? (
+                        <StyledMinusCircleFilled2 onClick={() => onDeleteFriend(friend.userId)} />
+                    ) : (
+                        <StyledPlusCircleFilled1 onClick={() => onInsertFriend(friend.userId)} />
+                    )}
                 </div>
             </StyledFlex16>
         </>

@@ -5,17 +5,16 @@ import { goMainHome } from '../../api/common';
 
 function* userSelectByUserIdSaga(action: actions.IuserSelectByUserIdAction) {
     try {
-        const res = yield call([axios, 'get'], '/user/selectByUserId', {
+        const res = yield call([axios, 'get'], '/user/notsign/selectByUserId', {
             params: {
                 userId: action.payload.userId,
                 userPassword: action.payload.userPassword,
             },
         });
 
-        console.log(res.data);
-
         if (res.data.success) {
             yield put(actions.userSetUserAction(res.data.data));
+            localStorage.userToken = res.headers['user-token'];
             goMainHome();
         } else {
             alert('정보를 확인해주세요.');
