@@ -14,26 +14,78 @@ import {
 import { StyledCheckOutlined1, StyledLeftOutlined2 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Friend from '../../component/main/friend';
-import { IFriend } from '../../api/interface';
+import { IGroup, IGroupMember, IUser } from '../../api/interface';
 import { goMainHome, goMainModFriends, getTime, color3 } from '../../api/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
-import { friendDelCreateGroupFriendsAction } from '../../modules/actions';
+import axios from '../../api/axios';
+import {
+    friendDelCreateGroupFriendsAction,
+    friendInsCreateGroupFriendsAction,
+    friendSetonCreateGroupNameAction,
+} from '../../modules/actions';
 
 const MainRegGroup = (): JSX.Element => {
     const dispatch = useDispatch();
 
-    const reduxCreateGroupFriends: IFriend[] = useSelector(
+    const reduxCreateGroupFriends: IUser[] = useSelector(
         (state: IIndexReducer) => state.FriendReducer.createGroupFriends,
     );
-    const [searchGroupName, setSearchGroupName] = React.useState<string>('');
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+    const reduxGroupName: string = useSelector((state: IIndexReducer) => state.FriendReducer.createGroupName);
 
-    const onSearchGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchGroupName(e.target.value);
+    const onInputGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(friendSetonCreateGroupNameAction(e.target.value));
     };
 
     const onDeleteFriend = (friendId: string) => {
         dispatch(friendDelCreateGroupFriendsAction(friendId));
+    };
+
+    const onInsertFriend = (friendId: string) => {
+        dispatch(friendInsCreateGroupFriendsAction(friendId));
+    };
+
+    const onCreateGroup = async () => {
+        const groupMembers: IGroupMember[] = [];
+        reduxCreateGroupFriends.map((reduxFriend) => {
+            const groupMember: IGroupMember = {
+                groupId: 0,
+                userId: reduxFriend.userId,
+                regDate: '',
+            };
+
+            groupMembers.push(groupMember);
+        });
+
+        const groupMember: IGroupMember = {
+            groupId: 0,
+            userId: reduxUser.userId,
+            regDate: '',
+        };
+        groupMembers.push(groupMember);
+
+        const group: IGroup = {
+            groupId: 0,
+            groupName: reduxGroupName,
+            regId: reduxUser.userId,
+            regDate: '',
+            modDate: '',
+            groupMembers: groupMembers,
+        };
+
+        const res = await axios.post('/group/createGroup', group, {
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            alert('그룹이 생성되었습니다.');
+            goMainHome();
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+        }
     };
 
     return (
@@ -49,7 +101,7 @@ const MainRegGroup = (): JSX.Element => {
                                 <StyledH4>아이템 생성</StyledH4>
                             </StyledDiv8>
                             <StyledFlex13>
-                                <StyledCheckOutlined1 />
+                                <StyledCheckOutlined1 onClick={onCreateGroup} />
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
@@ -64,7 +116,11 @@ const MainRegGroup = (): JSX.Element => {
                             <StyledFlex2>
                                 <StyledBorderDiv18>
                                     <StyledBackgroundDiv18>
-                                        <StyledText3 placeholder="그룹 명" onChange={onSearchGroupName} />
+                                        <StyledText3
+                                            placeholder="그룹 명"
+                                            onChange={onInputGroupName}
+                                            value={reduxGroupName}
+                                        />
                                     </StyledBackgroundDiv18>
                                 </StyledBorderDiv18>
                             </StyledFlex2>
@@ -83,9 +139,16 @@ const MainRegGroup = (): JSX.Element => {
                             </div>
                         </StyledFlex21>
                         <div>
-                            {reduxCreateGroupFriends.map((friend, key) => (
-                                <Friend friend={friend} onDeleteFriend={onDeleteFriend} key={key} />
-                            ))}
+                            {reduxCreateGroupFriends
+                                .filter((friend) => friend.add !== false)
+                                .map((friend, key) => (
+                                    <Friend
+                                        friend={friend}
+                                        onInsertFriend={onInsertFriend}
+                                        onDeleteFriend={onDeleteFriend}
+                                        key={key}
+                                    />
+                                ))}
                         </div>
                     </StyledDiv6>
                 </StyledDiv5>

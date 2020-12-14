@@ -9,10 +9,10 @@ import {
 } from '../../api/styled';
 import { StyledH6, StyledH4, StyledH7 } from '../../api/styledFont';
 import { color2, color3, color4, color5 } from '../../api/common';
-import { IChangeSpot } from '../../pages/group/groupHome';
+import { ISpot } from '../../api/interface';
 
 interface ISpotCard {
-    spot: IChangeSpot;
+    spot: ISpot;
 }
 
 const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {

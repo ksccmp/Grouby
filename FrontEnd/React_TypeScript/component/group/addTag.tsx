@@ -23,14 +23,11 @@ import { color3 } from '../../api/common';
 interface IAddTag {
     openAddTag: boolean;
     onOpenAddTag: () => void;
+    tags: ITag[];
+    setTags: React.Dispatch<React.SetStateAction<ITag[]>>;
 }
 
-const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag }): JSX.Element => {
-    const [tags, setTags] = React.useState<ITag[]>([
-        { groupId: 1, tagName: '광어회' },
-        { groupId: 1, tagName: '연어회' },
-        { groupId: 1, tagName: '고등어회' },
-    ]);
+const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag, tags, setTags }): JSX.Element => {
     const [searchTag, setSearchTag] = React.useState<string>('');
     const [addTag, setAddTag] = React.useState<string>('');
 
@@ -58,9 +55,8 @@ const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag }): JSX.Element =>
         setTags((prev) => [
             ...prev,
             {
-                groupId: 1,
+                groupId: 0,
                 tagName: addTag,
-                tagSelect: false,
             },
         ]);
         setAddTag('');

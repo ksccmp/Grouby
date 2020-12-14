@@ -20,60 +20,12 @@ import { goMainRegGroup, getTime, color3 } from '../../api/common';
 import axios from '../../api/axios';
 import { friendResetCreateGroupFriendsAction } from '../../modules/actions';
 
-interface IChangeGroup extends IGroup {
-    groupMembers: IGroupMember[];
-}
-
 const MainHome = (): JSX.Element => {
     const dispatch = useDispatch();
 
     const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
-    const [groups, setGroups] = React.useState<IChangeGroup[]>([
-        {
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            groupMembers: [
-                {
-                    groupId: 1,
-                    userId: 'intan',
-                    regDate: getTime(),
-                },
-                {
-                    groupId: 1,
-                    userId: 'ksccmp',
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            groupId: 2,
-            groupName: '친구들',
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            groupMembers: [
-                {
-                    groupId: 2,
-                    userId: 'ABC',
-                    regDate: getTime(),
-                },
-                {
-                    groupId: 2,
-                    userId: 'BCD',
-                    regDate: getTime(),
-                },
-                {
-                    groupId: 2,
-                    userId: 'CDE',
-                    regDate: getTime(),
-                },
-            ],
-        },
-    ]);
+    const [groups, setGroups] = React.useState<IGroup[]>([]);
     const [searchGroup, setSearchGroup] = React.useState<string>('');
     const [openSearchGroup, setOpenSearchGroup] = React.useState<boolean>(false);
 
@@ -106,10 +58,10 @@ const MainHome = (): JSX.Element => {
     };
 
     // 필터 된 그룹
-    const getFilterGroups = (): IChangeGroup[] => {
+    const getFilterGroups = (): IGroup[] => {
         return groups.filter((group) => {
             return group.groupName.includes(searchGroup) ||
-                group.groupMembers.filter((groupMembers) => {
+                (group.groupMembers as IGroupMember[]).filter((groupMembers) => {
                     return groupMembers.userId.includes(searchGroup);
                 }).length > 0
                 ? true
@@ -118,7 +70,7 @@ const MainHome = (): JSX.Element => {
     };
 
     const onPlusCircle = () => {
-        friendResetCreateGroupFriendsAction(); // redux 비우기
+        dispatch(friendResetCreateGroupFriendsAction()); // redux 비우기
         goMainRegGroup();
     };
 
@@ -157,7 +109,13 @@ const MainHome = (): JSX.Element => {
 
                         <div>
                             {getFilterGroups().map((group, key) => {
-                                return <GroupCard group={group} groupMembers={group.groupMembers} key={key} />;
+                                return (
+                                    <GroupCard
+                                        group={group}
+                                        groupMembers={group.groupMembers as IGroupMember[]}
+                                        key={key}
+                                    />
+                                );
                             })}
                         </div>
                     </StyledDiv6>

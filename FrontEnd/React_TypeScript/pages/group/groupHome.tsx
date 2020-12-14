@@ -17,421 +17,16 @@ import {
 import { StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
-import { ISpot, IRank, IRankComp } from '../../api/interface';
+import { ISpot, IRank, IRankComp, IGroup } from '../../api/interface';
 import { goGroupRegSpot, getTime, color3 } from '../../api/common';
 import FilterRankComp from '../../component/group/filterRankComp';
-
-export interface IChangeSpot extends ISpot {
-    ranks: IRank[];
-}
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import axios from '../../api/axios';
 
 const GroupHome = (): JSX.Element => {
-    const [spots, setSpots] = React.useState<IChangeSpot[]>([
-        {
-            spotId: 1,
-            spotName: '사당 요란한부엌',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 20,
-            todayRank: 2,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 4,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 3,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 2,
-            spotName: '평택 요계닭',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'intan',
-            totalRank: 32,
-            todayRank: 5,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 3,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-        {
-            spotId: 3,
-            spotName: '안양 다코야끼',
-            groupId: 1,
-            groupName: '수찬 커플',
-            regId: 'ksccmp',
-            totalRank: 14,
-            todayRank: 0,
-            regDate: getTime(),
-            modDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 2,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    rankCompId: 4,
-                    rankCompName: '가격',
-                    rank: 1,
-                    regDate: getTime(),
-                },
-            ],
-        },
-    ]);
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
+    const [spots, setSpots] = React.useState<ISpot[]>([]);
     const [rankComps, setRankComps] = React.useState<IRankComp[]>([
         // rankCompOrder => 0: 소트 x / 1: 오름차순 / 2: 내림차순
         {
@@ -449,6 +44,27 @@ const GroupHome = (): JSX.Element => {
     const [openFilterRankComp, setOpenFilterRankComp] = React.useState<boolean>(false);
     const [openSearchSpot, setOpenSearchSpot] = React.useState<boolean>(false);
 
+    React.useEffect(() => {
+        getSpots();
+    }, []);
+
+    const getSpots = async () => {
+        const res = await axios.get('/spot/selectByGroupId', {
+            params: {
+                groupId: reduxGroup.groupId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            setSpots(res.data.data);
+        } else {
+            alert('처리 중 에러가 발생했습니다.');
+        }
+    };
+
     // 필터창 열기/닫기
     const onOpenFilterRankComp = () => {
         setOpenFilterRankComp(!openFilterRankComp);
@@ -460,7 +76,7 @@ const GroupHome = (): JSX.Element => {
     };
 
     // Sort함수에 들어갈 Rank별 상수값 구하기
-    const getSort = (a: IChangeSpot, b: IChangeSpot, rankCompId: number, rankCompOrder: number): number => {
+    const getSort = (a: ISpot, b: ISpot, rankCompId: number, rankCompOrder: number): number => {
         switch (rankCompOrder) {
             // 오름차순
             case 1:
@@ -490,7 +106,7 @@ const GroupHome = (): JSX.Element => {
     };
 
     // 필터 된 spot 값 리턴
-    const getFilterSpots = (): IChangeSpot[] => {
+    const getFilterSpots = (): ISpot[] => {
         return (
             spots
                 // 랭크 별 Sort
@@ -529,7 +145,7 @@ const GroupHome = (): JSX.Element => {
                                         </StyledBackgroundDiv18>
                                     </StyledBorderDiv18>
                                 ) : (
-                                    <StyledH4>수찬 커플</StyledH4>
+                                    <StyledH4>{reduxGroup.groupName}</StyledH4>
                                 )}
                             </StyledDiv8>
                             <StyledFlex13>

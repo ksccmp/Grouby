@@ -9,11 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.grouby.dto.Group;
+import com.project.grouby.dto.GroupMember;
 import com.project.grouby.service.GroupMemberService;
 import com.project.grouby.service.GroupService;
 
@@ -27,6 +30,33 @@ public class GroupController {
 	
 	@Autowired
 	GroupMemberService groupMemberServ;
+	
+	@PostMapping("/createGroup")
+	public ResponseEntity<Map<String, Object>> createGroup(@RequestBody Group group) {
+		List<GroupMember> groupMembers = group.getGroupMembers();
+		
+		try {
+			int groupId = groupServ.insert(group);
+			if(groupId > 0) {
+				int count = 0;
+
+				for(int i=0; i<groupMembers.size(); i++) {
+					GroupMember groupMember = groupMembers.get(i);
+					groupMember.setGroupId(groupId);
+					
+					count = count + groupMemberServ.insert(groupMember);
+				}
+				
+				if(count > 0) {
+					return response(groupId, true, HttpStatus.OK);
+				}
+			}
+			
+			return response(groupId, false, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
 	
 	@GetMapping("/selectGroups")
 	public ResponseEntity<Map<String, Object>> selectGroups(@RequestParam String userId) {

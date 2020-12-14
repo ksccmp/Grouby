@@ -20,20 +20,16 @@ import { color3 } from '../../api/common';
 interface IAddRankComp {
     openAddRankComp: boolean;
     onOpenAddRankComp: () => void;
+    rankComps: IRankComp[];
+    setRankComps: React.Dispatch<React.SetStateAction<IRankComp[]>>;
 }
 
-const AddRankComp: React.FC<IAddRankComp> = ({ openAddRankComp, onOpenAddRankComp }): JSX.Element => {
-    const [rankComps, setRankComps] = React.useState<IRankComp[]>([
-        { rankCompId: 1, rankCompName: '음식', rankCompSelect: false },
-        { rankCompId: 2, rankCompName: '가격', rankCompSelect: false },
-        { rankCompId: 3, rankCompName: '친절', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-        { rankCompId: 4, rankCompName: '화장실', rankCompSelect: false },
-    ]);
+const AddRankComp: React.FC<IAddRankComp> = ({
+    openAddRankComp,
+    onOpenAddRankComp,
+    rankComps,
+    setRankComps,
+}): JSX.Element => {
     const [searchRankComp, setSearchRankComp] = React.useState<string>('');
 
     const onSearchRankComp = (e: React.ChangeEvent<HTMLInputElement>) => {

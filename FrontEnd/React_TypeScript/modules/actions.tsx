@@ -1,11 +1,14 @@
-import { IFriend, IRank, IUser } from '../api/interface';
+import { IFriend, IGroup, IRank, IUser } from '../api/interface';
 
 // not saga
 export const rankSetRank = 'rankSetRank';
 export const userSetUser = 'userSetUser';
-export const friendSetCreateGroupFriends = 'friendSetCreateGroupFriends';
+export const friendInsCreateGroupFriends = 'friendInsCreateGroupFriends';
 export const friendDelCreateGroupFriends = 'friendDelCreateGroupFriends';
 export const friendResetCreateGroupFriends = 'friendResetCreateGroupFriends';
+export const friendSetCreateGroupFriends = 'friendSetCreateGroupFriends';
+export const friendSetonCreateGroupName = 'friendSetonCreateGroupName';
+export const groupSetGroup = 'groupSetGroup';
 
 // saga
 export const userSelectByUserId = 'userSelectByUserId';
@@ -21,9 +24,9 @@ export interface IuserSetUserAction {
     payload: IUser;
 }
 
-export interface IfriendSetCreateGroupFriendsAction {
-    type: typeof friendSetCreateGroupFriends;
-    payload: IFriend;
+export interface IfriendInsCreateGroupFriendsAction {
+    type: typeof friendInsCreateGroupFriends;
+    payload: string;
 }
 
 export interface IfriendDelCreateGroupFriendsAction {
@@ -33,6 +36,21 @@ export interface IfriendDelCreateGroupFriendsAction {
 
 export interface IfriendResetCreateGroupFriendsAction {
     type: typeof friendResetCreateGroupFriends;
+}
+
+export interface IfriendSetCreateGroupFriendsAction {
+    type: typeof friendSetCreateGroupFriends;
+    payload: IUser[];
+}
+
+export interface IfriendSetonCreateGroupNameAction {
+    type: typeof friendSetonCreateGroupName;
+    payload: string;
+}
+
+export interface IgroupSetGroupAction {
+    type: typeof groupSetGroup;
+    payload: IGroup;
 }
 
 // saga
@@ -56,9 +74,9 @@ export const userSetUserAction = (res: IUser): IuserSetUserAction => {
     };
 };
 
-export const friendSetCreateGroupFriendsAction = (res: IFriend): IfriendSetCreateGroupFriendsAction => {
+export const friendInsCreateGroupFriendsAction = (res: string): IfriendInsCreateGroupFriendsAction => {
     return {
-        type: friendSetCreateGroupFriends,
+        type: friendInsCreateGroupFriends,
         payload: res,
     };
 };
@@ -76,6 +94,27 @@ export const friendResetCreateGroupFriendsAction = (): IfriendResetCreateGroupFr
     };
 };
 
+export const friendSetCreateGroupFriendsAction = (res: IUser[]): IfriendSetCreateGroupFriendsAction => {
+    return {
+        type: friendSetCreateGroupFriends,
+        payload: res,
+    };
+};
+
+export const friendSetonCreateGroupNameAction = (res: string): IfriendSetonCreateGroupNameAction => {
+    return {
+        type: friendSetonCreateGroupName,
+        payload: res,
+    };
+};
+
+export const groupSetGroupAction = (res: IGroup): IgroupSetGroupAction => {
+    return {
+        type: groupSetGroup,
+        payload: res,
+    };
+};
+
 // saga
 export const userSelectByUserIdAction = (res: IUser): IuserSelectByUserIdAction => {
     return {
@@ -88,8 +127,11 @@ export type Iactions =
     // not saga
     | IRankSetRankAction
     | IuserSetUserAction
-    | IfriendSetCreateGroupFriendsAction
+    | IfriendInsCreateGroupFriendsAction
     | IfriendDelCreateGroupFriendsAction
     | IfriendResetCreateGroupFriendsAction
+    | IfriendSetCreateGroupFriendsAction
+    | IfriendSetonCreateGroupNameAction
+    | IgroupSetGroupAction
     // saga
     | IuserSelectByUserIdAction;

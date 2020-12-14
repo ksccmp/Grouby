@@ -12,11 +12,20 @@
 		<typeAlias type="com.project.grouby.dto.Group" alias="group"/>
 		<typeAlias type="com.project.grouby.dto.GroupMember" alias="groupMember"/>
 		<typeAlias type="com.project.grouby.dto.Friend" alias="friend"/>
+		<typeAlias type="com.project.grouby.dto.Spot" alias="spot"/>
+		<typeAlias type="com.project.grouby.dto.Rank" alias="rank"/>
+		<typeAlias type="com.project.grouby.dto.RankComp" alias="rankComp"/>
+		<typeAlias type="com.project.grouby.dto.Tag" alias="tag"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/usermapper.xml" />
 		<mapper resource="mapper/groupmapper.xml"/>
+		<mapper resource="mapper/groupmembermapper.xml"/>
 		<mapper resource="mapper/friendmapper.xml"/>
+		<mapper resource="mapper/spotmapper.xml"/>
+		<mapper resource="mapper/rankmapper.xml"/>
+		<mapper resource="mapper/rankcompmapper.xml"/>
+		<mapper resource="mapper/tagmapper.xml"/>
 	</mappers>
 </configuration>

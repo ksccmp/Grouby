@@ -15,6 +15,8 @@ export interface IGroup {
     regId: string;
     regDate: string;
     modDate: string;
+
+    groupMembers?: IGroupMember[];
 }
 
 export interface IGroupMember {
@@ -35,12 +37,14 @@ export interface ISpot {
     spotId: number;
     spotName: string;
     groupId: number;
-    groupName: string;
     regId: string;
-    totalRank: number;
-    todayRank: number;
     regDate: string;
     modDate: string;
+
+    groupName?: string;
+    ranks?: IRank[];
+    rankComps?: IRankComp[];
+    tags?: ITag[];
 }
 
 export interface IRank {
@@ -48,19 +52,23 @@ export interface IRank {
     regId?: string;
     rankCompId: number;
     rankCompName: string;
-    rank: number;
+    rankScore: number;
     regDate: string;
+    modDate: string;
 }
 
 export interface IRankComp {
     rankCompId: number;
     rankCompName: string;
+    regDate: string;
+    modDate: string;
+
     rankCompOrder?: number;
     rankCompSelect?: boolean;
 }
 
 export interface ITag {
-    groupId: number;
+    spotId?: number;
     tagName: string;
 }
 

@@ -17,6 +17,11 @@ public class GroupMemberRepositoryImpl implements GroupMemberRepository {
 	SqlSession session;
 	
 	@Override
+	public int insert(GroupMember groupMember) {
+		return session.insert(ns + "insert", groupMember);
+	}
+	
+	@Override
 	public List<GroupMember> selectByGroupId(int groupId) {
 		return session.selectList(ns + "selectByGroupId", groupId);
 	}

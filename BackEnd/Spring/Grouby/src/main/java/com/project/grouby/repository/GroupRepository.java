@@ -6,5 +6,7 @@ import com.project.grouby.dto.Group;
 
 public interface GroupRepository {
 	
+	public int insert(Group group);
+	
 	public List<Group> selectByUserId(String userId);
 }

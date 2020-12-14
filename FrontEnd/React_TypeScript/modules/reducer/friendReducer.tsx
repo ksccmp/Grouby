@@ -1,21 +1,29 @@
-import { IFriend } from '../../api/interface';
+import { IUser } from '../../api/interface';
 import * as actions from '../actions';
 
 export interface IFriendInitState {
-    createGroupFriends: IFriend[];
+    createGroupFriends: IUser[];
+    createGroupName: string;
 }
 
 const friendInitState: IFriendInitState = {
     createGroupFriends: [],
+    createGroupName: '',
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const FriendReducer = (state = friendInitState, action: actions.Iactions) => {
     switch (action.type) {
         // not saga
-        case actions.friendSetCreateGroupFriends: {
-            const newCreateGroupFriends: IFriend[] = state.createGroupFriends.slice();
-            newCreateGroupFriends.push((action as actions.IfriendSetCreateGroupFriendsAction).payload);
+        case actions.friendInsCreateGroupFriends: {
+            const userId: string = (action as actions.IfriendInsCreateGroupFriendsAction).payload;
+            const newCreateGroupFriends: IUser[] = state.createGroupFriends.slice();
+
+            newCreateGroupFriends.map((friend) => {
+                if (friend.userId === userId) {
+                    friend.add = true;
+                }
+            });
 
             return {
                 ...state,
@@ -24,9 +32,14 @@ const FriendReducer = (state = friendInitState, action: actions.Iactions) => {
         }
 
         case actions.friendDelCreateGroupFriends: {
-            const newCreateGroupFriends: IFriend[] = state.createGroupFriends.filter(
-                (friend) => friend.friendId !== (action as actions.IfriendDelCreateGroupFriendsAction).payload,
-            );
+            const userId: string = (action as actions.IfriendDelCreateGroupFriendsAction).payload;
+            const newCreateGroupFriends: IUser[] = state.createGroupFriends.slice();
+
+            newCreateGroupFriends.map((friend) => {
+                if (friend.userId === userId) {
+                    friend.add = false;
+                }
+            });
 
             return {
                 ...state,
@@ -38,6 +51,20 @@ const FriendReducer = (state = friendInitState, action: actions.Iactions) => {
             return {
                 ...state,
                 createGroupFriends: friendInitState.createGroupFriends,
+            };
+        }
+
+        case actions.friendSetCreateGroupFriends: {
+            return {
+                ...state,
+                createGroupFriends: (action as actions.IfriendSetCreateGroupFriendsAction).payload,
+            };
+        }
+
+        case actions.friendSetonCreateGroupName: {
+            return {
+                ...state,
+                createGroupName: (action as actions.IfriendSetonCreateGroupNameAction).payload,
             };
         }
 

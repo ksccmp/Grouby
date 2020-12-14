@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.grouby.rankmapper">
+	<insert id="insert" parameterType="rank">
+		insert
+		into grouby_rank
+		values (#{spotId}, #{regId}, #{rankCompId}, #{rankScore}, current_timestamp(), current_timestamp())
+	</insert>
+
+	<select id="selectBySpotId" parameterType="int" resultType="rank">
+		select grank.spot_id spot_id,
+			   grank.reg_id reg_id,
+			   grank.rank_comp_id rank_comp_id,
+			   grank.rank_score rank_score,
+			   grank.reg_date reg_date,
+			   grank.mod_date mod_date,
+			   rankcomp.rank_comp_name
+		from grouby_rank grank, grouby_rank_comp rankcomp
+		where grank.spot_id = #{value}
+		  and grank.rank_comp_id = rankcomp.rank_comp_id 
+	</select>
+</mapper>

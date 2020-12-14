@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.grouby.spotmapper">
+	<insert id="insert" parameterType="spot" useGeneratedKeys="true" keyProperty="spotId">
+		insert
+		into grouby_spot(group_id, spot_name, reg_id, reg_date, mod_date)
+		values (#{groupId}, #{spotName}, #{regId}, current_timestamp(), current_timestamp())
+	</insert>
+
+	<select id="selectByGroupId" parameterType="int" resultType="spot">
+		select spot.spot_id,
+			   spot.group_id,
+			   spot.spot_name,
+			   spot.reg_id,
+			   spot.reg_date,
+			   spot.mod_date,
+			   ggroup.group_name
+		from grouby_spot spot, grouby_group ggroup
+		where spot.group_id = #{value}
+		  and spot.group_id = ggroup.group_id
+	</select>
+</mapper>

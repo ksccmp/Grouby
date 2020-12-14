@@ -13,43 +13,60 @@ import {
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledSearchOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import Other from '../../component/main/other';
-import { IFriend } from '../../api/interface';
+import { IFriend, IUser } from '../../api/interface';
 import { getTime, goMainRegGroup, color3 } from '../../api/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import Friend from '../../component/main/friend';
+import {
+    friendDelCreateGroupFriendsAction,
+    friendInsCreateGroupFriendsAction,
+    friendSetCreateGroupFriendsAction,
+} from '../../modules/actions';
+import axios from '../../api/axios';
 
 const MainModFriends = (): JSX.Element => {
     const dispatch = useDispatch();
 
-    const reduxCreateGroupFriends: IFriend[] = useSelector(
+    const reduxCreateGroupFriends: IUser[] = useSelector(
         (state: IIndexReducer) => state.FriendReducer.createGroupFriends,
     );
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
-    const [friends, setFriends] = React.useState<IFriend[]>([
-        {
-            userId: 'ksccmp',
-            friendId: 'intan',
-            friendName: '정수안',
-            friendPhone: '010-1234-5678',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'ABC',
-            friendName: '에이비씨',
-            friendPhone: '010-1111-2222',
-            regDate: getTime(),
-        },
-        {
-            userId: 'ksccmp',
-            friendId: 'CDE',
-            friendName: '씨디이',
-            friendPhone: '010-3333-4444',
-            regDate: getTime(),
-        },
-    ]);
     const [searchMember, setSearchMember] = React.useState<string>('');
     const [openSearchMember, setOpenSearchMember] = React.useState<boolean>(false);
+    const [friends, setFriends] = React.useState<IUser[]>([]);
+
+    React.useEffect(() => {
+        getMembers();
+    }, []);
+
+    const getMembers = async () => {
+        if (reduxCreateGroupFriends.length === 0) {
+            const res = await axios.get('/user/selectFriendsByUserId', {
+                params: {
+                    userId: reduxUser.userId,
+                },
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            const tempFriends: IUser[] = res.data.data;
+            tempFriends.map((friend) => {
+                friend.add = false;
+            });
+
+            setFriends(tempFriends);
+            dispatch(friendSetCreateGroupFriendsAction(tempFriends));
+        } else {
+            reduxCreateGroupFriends.map((reduxFriend) => {
+                if (reduxFriend.add === false) {
+                    setFriends((prev) => [...prev, reduxFriend]);
+                }
+            });
+        }
+    };
 
     const onSearchMember = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchMember(e.target.value);
@@ -59,14 +76,38 @@ const MainModFriends = (): JSX.Element => {
         setOpenSearchMember(!openSearchMember);
     };
 
-    const onInsertFriend = () => {
-        console.log('onInsertFriend');
+    const onDeleteFriend = (friendId: string) => {
+        const newFriends: IUser[] = friends.slice();
+        newFriends.map((newFriend) => {
+            if (newFriend.userId === friendId) {
+                newFriend.add === false;
+            }
+        });
+
+        setFriends(newFriends);
+        dispatch(friendDelCreateGroupFriendsAction(friendId));
+    };
+
+    const onInsertFriend = (friendId: string) => {
+        const newFriends: IUser[] = friends.slice();
+        newFriends.map((newFriend) => {
+            if (newFriend.userId === friendId) {
+                newFriend.add === true;
+            }
+        });
+
+        setFriends(newFriends);
+        dispatch(friendInsCreateGroupFriendsAction(friendId));
     };
 
     const getFilterFriends = () => {
         return friends.filter(
-            (friend) => friend.friendId.includes(searchMember) || friend.friendName.includes(searchMember),
+            (friend) => friend.userId.includes(searchMember) || (friend.userName as string).includes(searchMember),
         );
+    };
+
+    const changeGoMainRegGroup = () => {
+        goMainRegGroup();
     };
 
     return (
@@ -76,7 +117,7 @@ const MainModFriends = (): JSX.Element => {
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledFlex13>
-                                <StyledLeftOutlined2 onClick={goMainRegGroup} />
+                                <StyledLeftOutlined2 onClick={changeGoMainRegGroup} />
                             </StyledFlex13>
                             <StyledDiv8>
                                 {openSearchMember ? (
@@ -91,7 +132,6 @@ const MainModFriends = (): JSX.Element => {
                             </StyledDiv8>
                             <StyledFlex13>
                                 <StyledSearchOutlined1 onClick={onOpenSearchMember} />
-                                <StyledCheckOutlined1 />
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
@@ -106,7 +146,12 @@ const MainModFriends = (): JSX.Element => {
                         </div>
                         <div>
                             {getFilterFriends().map((friend, key) => (
-                                <Other other={friend} index={key} onInsertFriend={onInsertFriend} key={key} />
+                                <Friend
+                                    friend={friend}
+                                    onInsertFriend={onInsertFriend}
+                                    onDeleteFriend={onDeleteFriend}
+                                    key={key}
+                                />
                             ))}
                         </div>
                     </StyledDiv6>
