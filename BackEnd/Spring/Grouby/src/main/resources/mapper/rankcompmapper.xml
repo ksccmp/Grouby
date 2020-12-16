@@ -3,12 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.grouby.rankcompmapper">
-	<select id="selectAll" resultType="rankcomp">
+	<select id="selectAll" resultType="rankComp">
 		select rank_comp_id,
 			   rank_comp_name,
 			   reg_date,
 			   mod_date,
 			   'false' rank_comp_select
 		from grouby_rank_comp
+	</select>
+	
+	<select id="selectAllByGroupId" parameterType="int" resultType="rankComp">
+		select rankComp.rank_comp_id,
+			   rankComp.rank_comp_name,
+			   rankComp.reg_date,
+			   rankComp.mod_date,
+			   0 rankCompOrder
+		from grouby_rank_comp rankComp
+		where rankComp.rank_comp_id in (
+			select distinct grank.rank_comp_id
+			from grouby_spot_rank grank
+			where grank.spot_id in (
+				select spot.spot_id 
+				from grouby_spot spot 
+				where spot.group_id = #{value}
+			)
+		)
 	</select>
 </mapper>

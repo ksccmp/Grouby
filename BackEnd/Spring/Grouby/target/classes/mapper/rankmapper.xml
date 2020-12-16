@@ -21,4 +21,24 @@
 		where grank.spot_id = #{value}
 		  and grank.rank_comp_id = rankcomp.rank_comp_id 
 	</select>
+	
+	<select id="selectTotalBySpotId" parameterType="int" resultType="rank">
+		select grank.spot_id, 
+			   grank.rank_comp_id, 
+			   truncate(sum(grank.rank_score) / count(*), 1) rank_score,
+			   (select rankComp.rank_comp_name from grouby_rank_comp rankComp where rankComp.rank_comp_id = grank.rank_comp_id) rankCompName
+		from grouby_rank grank
+		where grank.rank_comp_id in (select spotRank.rank_comp_id from grouby_spot_rank spotRank where spotRank.spot_id = #{value})
+			  and grank.spot_id = #{value}
+		group by grank.rank_comp_id
+	</select>
+	
+	<select id="selectIfTotalNoneBySpotId" parameterType="int" resultType="rank">
+		select #{value} spot_id,
+			   rankComp.rank_comp_id,
+			   0 rank_score,
+			   rankComp.rank_comp_name
+		from grouby_rank_comp rankComp
+		where rankComp.rank_comp_id in (select spotRank.rank_comp_id from grouby_spot_rank spotRank where spotRank.spot_id = #{value})
+	</select>
 </mapper>

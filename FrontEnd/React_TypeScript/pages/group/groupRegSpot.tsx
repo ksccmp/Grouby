@@ -14,16 +14,21 @@ import {
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined5 } from '../../api/styledAnt';
 import { StyledH4, StyledH7, StyledH6 } from '../../api/styledFont';
-import { IRankComp, ITag } from '../../api/interface';
+import { IRankComp, ITag, ISpotRank, IUser, ISpot, IGroup } from '../../api/interface';
 import { goGroupHome, color3 } from '../../api/common';
 import AddRankComp from '../../component/group/addRankComp';
 import AddTag from '../../component/group/addTag';
 import axios from '../../api/axios';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 const GroupRegSpot = (): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
+
     const [rankComps, setRankComps] = React.useState<IRankComp[]>([]);
     const [tags, setTags] = React.useState<ITag[]>([]);
-    const [searchSpotName, setSearchSpotName] = React.useState<string>('');
+    const [inputSpotName, setInputSpotName] = React.useState<string>('');
     const [openAddRankComp, setOpenAddRankComp] = React.useState<boolean>(false);
     const [openAddTag, setOpenAddTag] = React.useState<boolean>(false);
 
@@ -46,8 +51,8 @@ const GroupRegSpot = (): JSX.Element => {
     };
 
     // 스팟 명 입력 내용 저장
-    const onSearchSpotName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchSpotName(e.target.value);
+    const onInputSpotName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputSpotName(e.target.value);
     };
 
     const onOpenAddRankComp = () => {
@@ -62,7 +67,43 @@ const GroupRegSpot = (): JSX.Element => {
         return rankComps.filter((rankComp) => rankComp.rankCompSelect !== false);
     };
 
-    const onCreateSpot = () => {};
+    const onCreateSpot = async () => {
+        const spotRanks: ISpotRank[] = [];
+
+        getFilterRankComps().map((rankComp) => {
+            const newSpotRank: ISpotRank = {
+                rankCompId: rankComp.rankCompId,
+                regId: reduxUser.userId,
+            };
+
+            spotRanks.push(newSpotRank);
+        });
+
+        if (spotRanks.length === 0) {
+            alert('평가항목은 적어도 하나 선택해야 됩니다.');
+        } else {
+            const newSpot: ISpot = {
+                spotName: inputSpotName,
+                groupId: reduxGroup.groupId,
+                regId: reduxUser.userId,
+                spotRanks: spotRanks,
+                tags: tags,
+            };
+
+            const res = await axios.post('/spot/createSpot', newSpot, {
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (res.data.success) {
+                alert('스팟 생성이 완료되었습니다.');
+                goGroupHome();
+            } else {
+                alert('처리 중 오류가 발생했습니다.');
+            }
+        }
+    };
 
     return (
         <>
@@ -77,7 +118,7 @@ const GroupRegSpot = (): JSX.Element => {
                                 <StyledH4>스팟 생성</StyledH4>
                             </StyledDiv8>
                             <StyledFlex13>
-                                <StyledCheckOutlined1 />
+                                <StyledCheckOutlined1 onClick={onCreateSpot} />
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
@@ -92,7 +133,7 @@ const GroupRegSpot = (): JSX.Element => {
                             <StyledFlex2>
                                 <StyledBorderDiv18>
                                     <StyledBackgroundDiv18>
-                                        <StyledText3 placeholder="스팟 명" onChange={onSearchSpotName} />
+                                        <StyledText3 placeholder="스팟 명" onChange={onInputSpotName} />
                                     </StyledBackgroundDiv18>
                                 </StyledBorderDiv18>
                             </StyledFlex2>

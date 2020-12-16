@@ -24,4 +24,14 @@ public class RankRepositoryImpl implements RankRepository {
 	public List<Rank> selectBySpotId(int spotId) {
 		return session.selectList(ns + "selectBySpotId", spotId);
 	}
+	
+	@Override
+	public List<Rank> selectTotalBySpotId(int spotId) {
+		return session.selectList(ns + "selectTotalBySpotId", spotId);
+	}
+	
+	@Override
+	public List<Rank> selectIfTotalNoneBySpotId(int spotId) {
+		return session.selectList(ns + "selectIfTotalNoneBySpotId", spotId);
+	}
 }

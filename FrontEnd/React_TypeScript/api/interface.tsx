@@ -34,17 +34,17 @@ export interface IFriend {
 }
 
 export interface ISpot {
-    spotId: number;
+    spotId?: number;
     spotName: string;
     groupId: number;
     regId: string;
-    regDate: string;
-    modDate: string;
+    regDate?: string;
+    modDate?: string;
 
     groupName?: string;
-    ranks?: IRank[];
-    rankComps?: IRankComp[];
+    spotRanks?: ISpotRank[];
     tags?: ITag[];
+    ranks?: IRank[];
 }
 
 export interface IRank {
@@ -53,8 +53,8 @@ export interface IRank {
     rankCompId: number;
     rankCompName: string;
     rankScore: number;
-    regDate: string;
-    modDate: string;
+    regDate?: string;
+    modDate?: string;
 }
 
 export interface IRankComp {
@@ -70,6 +70,14 @@ export interface IRankComp {
 export interface ITag {
     spotId?: number;
     tagName: string;
+}
+
+export interface ISpotRank {
+    spotId?: number;
+    rankCompId: number;
+    regId: string;
+    regDate?: string;
+    modDate?: string;
 }
 
 export interface IItem {

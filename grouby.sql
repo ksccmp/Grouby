@@ -12,6 +12,7 @@ alter table grouby_spot convert to character set utf8;
 alter table grouby_rank convert to character set utf8;
 alter table grouby_rank_comp convert to character set utf8;
 alter table grouby_tag convert to character set utf8;
+alter table grouby_spot_rank convert to character set utf8;
 
 create table grouby_user (
 	user_id varchar(50),
@@ -62,9 +63,18 @@ create table grouby_rank (
     rank_comp_id int,
     rank_score int,
     reg_date datetime,
-    mod_date datetime,
-    primary key(spot_id, reg_id, rank_comp_id)
+    mod_date datetime
 );
+
+insert into grouby_rank values (1, 'qqq', 1, 5, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'qqq', 2, 3, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'qqq', 3, 5, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'www', 1, 5, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'www', 2, 5, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'www', 3, 1, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'aaa', 1, 1, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'aaa', 2, 4, current_timestamp(), current_timestamp());
+insert into grouby_rank values (1, 'aaa', 3, 2, current_timestamp(), current_timestamp());
 
 create table grouby_rank_comp (
 	rank_comp_id int,
@@ -80,6 +90,19 @@ create table grouby_tag (
     primary key(spot_id, tag_name)
 );
 
+create table grouby_spot_rank (
+	spot_id int,
+    rank_comp_id int,
+    reg_id varchar(50),
+    reg_date datetime,
+    mod_date datetime,
+    primary key(spot_id, rank_comp_id)
+);
+
+insert into grouby_spot_rank values (1, 1, 'qqq', current_timestamp(), current_timestamp());
+insert into grouby_spot_rank values (1, 2, 'qqq', current_timestamp(), current_timestamp());
+insert into grouby_spot_rank values (1, 3, 'qqq', current_timestamp(), current_timestamp());
+
 select * from grouby_user;
 select * from grouby_friend;
 select * from grouby_group;
@@ -88,6 +111,7 @@ select * from grouby_spot;
 select * from grouby_rank;
 select * from grouby_rank_comp;
 select * from grouby_tag;
+select * from grouby_spot_rank;
 
 insert into grouby_rank_comp values (1, '음식', current_timestamp(), current_timestamp());
 insert into grouby_rank_comp values (2, '가격', current_timestamp(), current_timestamp());

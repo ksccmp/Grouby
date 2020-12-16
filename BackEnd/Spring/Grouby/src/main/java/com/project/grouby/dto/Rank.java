@@ -13,7 +13,7 @@ public class Rank {
 	private int spotId;
 	private String regId;
 	private int rankCompId;
-	private int rankScore;
+	private double rankScore;
 	private String regDate;
 	private String modDate;
 	

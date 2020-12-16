@@ -16,6 +16,7 @@
 		<typeAlias type="com.project.grouby.dto.Rank" alias="rank"/>
 		<typeAlias type="com.project.grouby.dto.RankComp" alias="rankComp"/>
 		<typeAlias type="com.project.grouby.dto.Tag" alias="tag"/>
+		<typeAlias type="com.project.grouby.dto.SpotRank" alias="spotRank"/>
 	</typeAliases>
 	
 	<mappers>
@@ -27,5 +28,6 @@
 		<mapper resource="mapper/rankmapper.xml"/>
 		<mapper resource="mapper/rankcompmapper.xml"/>
 		<mapper resource="mapper/tagmapper.xml"/>
+		<mapper resource="mapper/spotrankmapper.xml"/>
 	</mappers>
 </configuration>

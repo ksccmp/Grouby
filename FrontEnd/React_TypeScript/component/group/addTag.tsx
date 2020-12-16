@@ -55,7 +55,6 @@ const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag, tags, setTags }):
         setTags((prev) => [
             ...prev,
             {
-                groupId: 0,
                 tagName: addTag,
             },
         ]);

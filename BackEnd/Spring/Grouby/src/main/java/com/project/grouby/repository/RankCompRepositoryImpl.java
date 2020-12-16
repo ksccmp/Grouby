@@ -19,4 +19,9 @@ public class RankCompRepositoryImpl implements RankCompRepository {
 	public List<RankComp> selectAll() {
 		return session.selectList(ns + "selectAll");
 	}
+	
+	@Override
+	public List<RankComp> selectAllByGroupId(int groupId) {
+		return session.selectList(ns + "selectAllByGroupId", groupId);
+	}
 }

@@ -8,4 +8,10 @@
 		into grouby_tag
 		values (#{spotId}, #{tagName})
 	</insert>
+	
+	<select id="selectBySpotId" parameterType="int" resultType="tag">
+		select *
+		from grouby_tag
+		where spot_id = #{value}
+	</select>
 </mapper>

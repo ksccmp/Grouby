@@ -17,7 +17,7 @@ import {
 import { StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
-import { ISpot, IRank, IRankComp, IGroup } from '../../api/interface';
+import { ISpot, IRank, IRankComp, IGroup, ITag } from '../../api/interface';
 import { goGroupRegSpot, getTime, color3 } from '../../api/common';
 import FilterRankComp from '../../component/group/filterRankComp';
 import { useSelector } from 'react-redux';
@@ -27,29 +27,18 @@ import axios from '../../api/axios';
 const GroupHome = (): JSX.Element => {
     const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
     const [spots, setSpots] = React.useState<ISpot[]>([]);
-    const [rankComps, setRankComps] = React.useState<IRankComp[]>([
-        // rankCompOrder => 0: 소트 x / 1: 오름차순 / 2: 내림차순
-        {
-            rankCompId: 1,
-            rankCompName: '음식',
-            rankCompOrder: 0,
-        },
-        {
-            rankCompId: 3,
-            rankCompName: '화장실',
-            rankCompOrder: 0,
-        },
-    ]);
+    const [rankComps, setRankComps] = React.useState<IRankComp[]>([]); // rankCompOrder => 0: 소트 x / 1: 오름차순 / 2: 내림차순
     const [searchSpot, setSearchSpot] = React.useState<string>('');
     const [openFilterRankComp, setOpenFilterRankComp] = React.useState<boolean>(false);
     const [openSearchSpot, setOpenSearchSpot] = React.useState<boolean>(false);
 
     React.useEffect(() => {
         getSpots();
+        getRankComps();
     }, []);
 
     const getSpots = async () => {
-        const res = await axios.get('/spot/selectByGroupId', {
+        const res = await axios.get('/spot/selectSpotByGroupId', {
             params: {
                 groupId: reduxGroup.groupId,
             },
@@ -60,6 +49,24 @@ const GroupHome = (): JSX.Element => {
 
         if (res.data.success) {
             setSpots(res.data.data);
+            console.log(res.data.data);
+        } else {
+            alert('처리 중 에러가 발생했습니다.');
+        }
+    };
+
+    const getRankComps = async () => {
+        const res = await axios.get('/spot/selectAllRankCompByGroupId', {
+            params: {
+                groupId: reduxGroup.groupId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            setRankComps(res.data.data);
         } else {
             alert('처리 중 에러가 발생했습니다.');
         }
@@ -81,19 +88,35 @@ const GroupHome = (): JSX.Element => {
             // 오름차순
             case 1:
                 // 비교할 두 스팟이 Sort할 Rank를 모두 소유하고 있을 시 차이값 구하기
-                return a.ranks.find((rank) => rank.rankCompId === rankCompId) &&
-                    b.ranks.find((rank) => rank.rankCompId === rankCompId)
-                    ? (a.ranks.find((rank) => rank.rankCompId === rankCompId) as IRank).rank -
-                          (b.ranks.find((rank) => rank.rankCompId === rankCompId) as IRank).rank
-                    : 0;
+                // return (a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) &&
+                //     (b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                //     ? ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore -
+                //           ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                //     : 0;
+                return (
+                    ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                        ? ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                        : 6) -
+                    ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                        ? ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                        : 6)
+                );
             // 내림차순
             case 2:
                 // 비교할 두 스팟이 Sort할 Rank를 모두 소유하고 있을 시 차이값 구하기
-                return a.ranks.find((rank) => rank.rankCompId === rankCompId) &&
-                    b.ranks.find((rank) => rank.rankCompId === rankCompId)
-                    ? (b.ranks.find((rank) => rank.rankCompId === rankCompId) as IRank).rank -
-                          (a.ranks.find((rank) => rank.rankCompId === rankCompId) as IRank).rank
-                    : 0;
+                // return (a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) &&
+                //     (b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                //     ? ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore -
+                //           ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                //     : 0;
+                return (
+                    ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                        ? ((b.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                        : 0) -
+                    ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId)
+                        ? ((a.ranks as IRank[]).find((rank) => rank.rankCompId === rankCompId) as IRank).rankScore
+                        : 0)
+                );
             // Sort X
             default:
                 return 0;
@@ -114,13 +137,22 @@ const GroupHome = (): JSX.Element => {
                     rankComps.reduce(
                         (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
                         0,
-                    ),
+                    ) !== 0
+                        ? rankComps.reduce(
+                              (prev, cur) => prev || getSort(a, b, cur.rankCompId, cur.rankCompOrder as number),
+                              0,
+                          )
+                        : (a.regDate as string) > (b.regDate as string)
+                        ? 1
+                        : -1,
                 )
                 // 검색어가 포함된 것만 Filter
                 .filter(
                     (spot) =>
                         spot.spotName.includes(searchSpot) ||
-                        spot.ranks.filter((rank) => rank.rankCompName.includes(searchSpot)).length > 0,
+                        (spot.ranks as IRank[]).filter((rank) => rank.rankCompName.includes(searchSpot)).length > 0 ||
+                        ((spot.tags as ITag[]).length > 0 &&
+                            (spot.tags as ITag[]).filter((tag) => tag.tagName.includes(searchSpot)).length > 0),
                 )
         );
     };

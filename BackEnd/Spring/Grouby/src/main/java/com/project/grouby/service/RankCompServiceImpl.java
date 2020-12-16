@@ -18,4 +18,9 @@ public class RankCompServiceImpl implements RankCompService {
 	public List<RankComp> selectAll() {
 		return rankCompRepo.selectAll();
 	}
+	
+	@Override
+	public List<RankComp> selectAllByGroupId(int groupId) {
+		return rankCompRepo.selectAllByGroupId(groupId);
+	}
 }
