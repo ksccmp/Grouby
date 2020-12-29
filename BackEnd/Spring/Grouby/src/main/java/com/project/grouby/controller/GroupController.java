@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +70,33 @@ public class GroupController {
 			}
 			
 			return response(groupList, true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/selectMemberCount")
+	public ResponseEntity<Map<String, Object>> selectMemberCount(@RequestParam int groupId) {
+		try {
+			return response(groupMemberServ.selectMemberCount(groupId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@PutMapping("/updateGroupName")
+	public ResponseEntity<Map<String, Object>> updateGroupName(@RequestBody Group group) {
+		try {
+			return response(groupServ.updateGroupName(group), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@DeleteMapping("/deleteMember")
+	public ResponseEntity<Map<String, Object>> deleteMember(@RequestParam String userId) {
+		try {
+			return response(groupMemberServ.deleteMember(userId), true, HttpStatus.OK);
 		} catch(RuntimeException e) {
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);
 		}

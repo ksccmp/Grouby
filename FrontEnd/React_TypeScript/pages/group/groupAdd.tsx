@@ -16,18 +16,92 @@ import {
 } from '../../api/styled';
 import { StyledH4_1, StyledH5, StyledH6 } from '../../api/styledFont';
 import { StyledEditOutlined1, StyledRightOutlined1, StyledCheckOutlined1 } from '../../api/styledAnt';
-import { color2 } from '../../api/common';
+import { color2, goMainHome } from '../../api/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import { IGroup, IUser } from '../../api/interface';
+import { groupSetGroupAction } from '../../modules/actions';
+import axios from '../../api/axios';
 
 const GroupAdd = (): JSX.Element => {
-    const [title, setTitle] = React.useState<string>('수찬 커플');
-    const [modGroupName, setModGroupName] = React.useState<boolean>(false);
+    const dispatch = useDispatch();
 
-    const onTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+    const [groupName, setGroupName] = React.useState<string>('');
+    const [modGroupName, setModGroupName] = React.useState<boolean>(false);
+    const [memberCount, setMemberCount] = React.useState<number>(0);
+
+    React.useEffect(() => {
+        setGroupName(reduxGroup.groupName);
+        getMemberCount();
+    }, []);
+
+    const getMemberCount = async () => {
+        const res = await axios.get('/group/selectMemberCount', {
+            params: {
+                groupId: reduxGroup.groupId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            setMemberCount(res.data.data);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+        }
     };
 
-    const onModGroupName = () => {
+    const onGroupName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGroupName(e.target.value);
+    };
+
+    const onModGroupName = async () => {
         setModGroupName(!modGroupName);
+
+        if (modGroupName) {
+            const newReduxGroup: IGroup = {
+                groupId: reduxGroup.groupId,
+                groupName: groupName,
+                regId: reduxGroup.regId,
+                regDate: reduxGroup.regDate,
+                modDate: reduxGroup.modDate,
+            };
+
+            dispatch(groupSetGroupAction(newReduxGroup));
+
+            const res = await axios.put('/group/updateGroupName', newReduxGroup, {
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (!res.data.success) {
+                alert('처리 중 에러가 발생했습니다.');
+            }
+        }
+    };
+
+    const onDeleteMember = async () => {
+        const res = confirm(`${reduxGroup.groupName} 그룹을 탈퇴하시겠습니까?`);
+        if (res) {
+            const res = await axios.delete('/group/deleteMember', {
+                params: {
+                    userId: reduxUser.userId,
+                },
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (res.data.success) {
+                goMainHome();
+            } else {
+                alert('처리 중 오류가 발생했습니다.');
+            }
+        }
     };
 
     return (
@@ -38,9 +112,9 @@ const GroupAdd = (): JSX.Element => {
                         <StyledFlex2>
                             <StyledDiv8>
                                 {modGroupName ? (
-                                    <StyledText2 value={title} onChange={onTitle} />
+                                    <StyledText2 value={groupName} onChange={onGroupName} />
                                 ) : (
-                                    <StyledH4_1>{title}</StyledH4_1>
+                                    <StyledH4_1>{groupName}</StyledH4_1>
                                 )}
                             </StyledDiv8>
                             <StyledFlex13>
@@ -85,13 +159,13 @@ const GroupAdd = (): JSX.Element => {
                         <StyledFlex16>
                             <StyledFlex17>
                                 <StyledH5 style={{ marginRight: '5px' }}>멤버</StyledH5>
-                                <StyledH6 style={{ color: color2 }}>3</StyledH6>
+                                <StyledH6 style={{ color: color2 }}>{memberCount}</StyledH6>
                             </StyledFlex17>
                             <div>
                                 <StyledRightOutlined1 />
                             </div>
                         </StyledFlex16>
-                        <StyledFlex16>
+                        <StyledFlex16 onClick={onDeleteMember}>
                             <div>
                                 <StyledH5>그룹탈퇴</StyledH5>
                             </div>

@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { StyledDiv1, StyledFlex2, StyledDiv5, StyledDiv6, StyledFlex13, StyledDiv8 } from '../../api/styled';
 import { StyledPlusCircleOutlined4 } from '../../api/styledAnt';
-import { StyledH4 } from '../../api/styledFont';
+import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { goSpotRegItem, getTime } from '../../api/common';
-import { IItem } from '../../api/interface';
+import { IGroup, IItem, ISpot } from '../../api/interface';
 import Item from '../../component/spot/item';
 import Comments from '../../component/spot/comments';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 const SpotItems = (): JSX.Element => {
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
+    const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
+
     const [items, setItems] = React.useState<IItem[]>([
         {
             index: 0,
@@ -76,7 +81,10 @@ const SpotItems = (): JSX.Element => {
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
-                                <StyledH4>수찬커플/사당 요라한식당</StyledH4>
+                                <StyledH5 style={{ opacity: '0.6', marginRight: '5px' }}>
+                                    {reduxGroup.groupName}
+                                </StyledH5>
+                                <StyledH4>{reduxSpot.spotName}</StyledH4>
                             </StyledDiv8>
                             <StyledFlex13>
                                 <StyledPlusCircleOutlined4 onClick={goSpotRegItem} />

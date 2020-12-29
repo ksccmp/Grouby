@@ -25,4 +25,15 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 	public List<GroupMember> selectByGroupId(int groupId) {
 		return groupMemberRepo.selectByGroupId(groupId);
 	}
+	
+	@Override
+	public int selectMemberCount(int groupId) {
+		return groupMemberRepo.selectMemberCount(groupId);
+	}
+	
+	@Override
+	@Transactional
+	public int deleteMember(String userId) {
+		return groupMemberRepo.deleteMember(userId);
+	}
 }

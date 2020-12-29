@@ -9,4 +9,6 @@ public interface GroupService {
 	public int insert(Group group);
 	
 	public List<Group> selectByUserId(String userId);
+	
+	public int updateGroupName(Group group);
 }

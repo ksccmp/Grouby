@@ -8,17 +8,26 @@ import {
     StyledDiv9,
 } from '../../api/styled';
 import { StyledH6, StyledH4, StyledH7 } from '../../api/styledFont';
-import { color2, color3, color4, color5 } from '../../api/common';
+import { color2, color3, color4, color5, goSpotItems } from '../../api/common';
 import { IRank, ISpot, ITag } from '../../api/interface';
+import { spotSetSpotAction } from '../../modules/actions';
+import { useDispatch } from 'react-redux';
 
 interface ISpotCard {
     spot: ISpot;
 }
 
 const SpotCard: React.FC<ISpotCard> = ({ spot }): JSX.Element => {
+    const dispatch = useDispatch();
+
+    const onClickSpotCard = () => {
+        dispatch(spotSetSpotAction(spot));
+        goSpotItems();
+    };
+
     return (
         <>
-            <StyledDiv9>
+            <StyledDiv9 onClick={onClickSpotCard}>
                 <StyledFlex9 style={{ margin: '0.5rem 0' }}>
                     <StyledFlex20>
                         {(spot.tags as ITag[]).length > 0

@@ -1,4 +1,4 @@
-import { IFriend, IGroup, IRank, IUser } from '../api/interface';
+import { IFriend, IGroup, IRank, ISpot, IUser } from '../api/interface';
 
 // not saga
 export const rankSetRank = 'rankSetRank';
@@ -9,6 +9,7 @@ export const friendResetCreateGroupFriends = 'friendResetCreateGroupFriends';
 export const friendSetCreateGroupFriends = 'friendSetCreateGroupFriends';
 export const friendSetonCreateGroupName = 'friendSetonCreateGroupName';
 export const groupSetGroup = 'groupSetGroup';
+export const spotSetSpot = 'spotSetSpot';
 
 // saga
 export const userSelectByUserId = 'userSelectByUserId';
@@ -51,6 +52,11 @@ export interface IfriendSetonCreateGroupNameAction {
 export interface IgroupSetGroupAction {
     type: typeof groupSetGroup;
     payload: IGroup;
+}
+
+export interface IspotSetSpotAction {
+    type: typeof spotSetSpot;
+    payload: ISpot;
 }
 
 // saga
@@ -115,6 +121,13 @@ export const groupSetGroupAction = (res: IGroup): IgroupSetGroupAction => {
     };
 };
 
+export const spotSetSpotAction = (res: ISpot): IspotSetSpotAction => {
+    return {
+        type: spotSetSpot,
+        payload: res,
+    };
+};
+
 // saga
 export const userSelectByUserIdAction = (res: IUser): IuserSelectByUserIdAction => {
     return {
@@ -133,5 +146,6 @@ export type Iactions =
     | IfriendSetCreateGroupFriendsAction
     | IfriendSetonCreateGroupNameAction
     | IgroupSetGroupAction
+    | IspotSetSpotAction
     // saga
     | IuserSelectByUserIdAction;

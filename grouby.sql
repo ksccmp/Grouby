@@ -13,6 +13,9 @@ alter table grouby_rank convert to character set utf8;
 alter table grouby_rank_comp convert to character set utf8;
 alter table grouby_tag convert to character set utf8;
 alter table grouby_spot_rank convert to character set utf8;
+alter table grouby_item convert to character set utf8;
+alter table grouby_like convert to character set utf8;
+alter table grouby_photo convert to character set utf8;
 
 create table grouby_user (
 	user_id varchar(50),
@@ -66,16 +69,6 @@ create table grouby_rank (
     mod_date datetime
 );
 
-insert into grouby_rank values (1, 'qqq', 1, 5, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'qqq', 2, 3, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'qqq', 3, 5, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'www', 1, 5, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'www', 2, 5, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'www', 3, 1, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'aaa', 1, 1, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'aaa', 2, 4, current_timestamp(), current_timestamp());
-insert into grouby_rank values (1, 'aaa', 3, 2, current_timestamp(), current_timestamp());
-
 create table grouby_rank_comp (
 	rank_comp_id int,
     rank_comp_name varchar(50),
@@ -97,6 +90,29 @@ create table grouby_spot_rank (
     reg_date datetime,
     mod_date datetime,
     primary key(spot_id, rank_comp_id)
+);
+
+create table grouby_item (
+	item_id int auto_increment,
+    group_id int,
+    spot_id int,
+    reg_id varchar(50),
+    contents varchar(500),
+    reg_date datetime,
+    mod_date datetime,
+    primary key(item_id)
+);
+
+create table grouby_like (
+	item_id int,
+    reg_id varchar(50),
+    primary key(item_id, reg_id)
+);
+
+create table grouby_photo (
+	item_id int,
+    path varchar(300),
+    primary key(item_id, path)
 );
 
 insert into grouby_spot_rank values (1, 1, 'qqq', current_timestamp(), current_timestamp());

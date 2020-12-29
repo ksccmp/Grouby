@@ -14,4 +14,16 @@
 		from grouby_groupmember
 		where group_id = #{value}
 	</select>
+	
+	<select id="selectMemberCount" parameterType="int" resultType="int">
+		select count(*)
+		from grouby_groupmember
+		where group_id = #{value}
+	</select>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete
+		from grouby_groupmember
+		where user_id = #{value}
+	</delete>
 </mapper>

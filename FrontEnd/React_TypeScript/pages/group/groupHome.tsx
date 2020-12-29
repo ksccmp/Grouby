@@ -49,7 +49,6 @@ const GroupHome = (): JSX.Element => {
 
         if (res.data.success) {
             setSpots(res.data.data);
-            console.log(res.data.data);
         } else {
             alert('처리 중 에러가 발생했습니다.');
         }

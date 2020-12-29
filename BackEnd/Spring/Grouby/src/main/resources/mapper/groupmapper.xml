@@ -14,4 +14,10 @@
 		from grouby_group
 		where group_id in (select group_id from grouby_groupmember where user_id = #{value})
 	</select>
+	
+	<update id="updateGroupName" parameterType="group">
+		update grouby_group
+		set group_name = #{groupName}
+		where group_id = #{groupId}
+	</update>
 </mapper>

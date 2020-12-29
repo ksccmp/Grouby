@@ -18,9 +18,11 @@ import {
     StyledDiv8,
     StyledFlex13,
     StyledFlex22,
+    StyledFlex9,
+    StyledSlideImg1,
 } from '../../api/styled';
-import { StyledLeftOutlined2, StyledCheckOutlined1 } from '../../api/styledAnt';
-import { StyledH4, StyledH7 } from '../../api/styledFont';
+import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined2 } from '../../api/styledAnt';
+import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { goSpotItems, getTime, color3 } from '../../api/common';
 import { IItem } from '../../api/interface';
 
@@ -28,6 +30,9 @@ const SpotRegItem = (): JSX.Element => {
     const [contents, setContents] = React.useState<string>('');
     const [slideIndex, setSlideIndex] = React.useState<number>(0);
     const [touchGab, setTouchGab] = React.useState<number>(0);
+    const [slideCount, setSlideCount] = React.useState<number>(0);
+    const [photo, setPhoto] = React.useState<HTMLInputElement | undefined>(undefined);
+    const [photos, setPhotos] = React.useState<string[]>([]);
 
     // 내용 저장
     const onContents = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,7 +65,7 @@ const SpotRegItem = (): JSX.Element => {
             setSlideIndex(slideIndex - 1 < 0 ? 0 : slideIndex - 1);
         } else if (val - touchGab < 0) {
             // 직후의 x축이 더 작을때 -> 왼쪽 넘김
-            setSlideIndex(slideIndex + 1 > 3 ? slideIndex : slideIndex + 1);
+            setSlideIndex(slideIndex + 1 > photos.length ? slideIndex : slideIndex + 1);
         }
         setTouchGab(0);
     };
@@ -72,6 +77,33 @@ const SpotRegItem = (): JSX.Element => {
 
     const onClickCircle = (index: number) => {
         setSlideIndex(index);
+    };
+
+    const onAddPhoto = () => {
+        (photo as HTMLInputElement).click();
+    };
+
+    const onSavePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.files);
+        const fileList: FileList | null = e.target.files;
+        const fileArray = Array.prototype.slice.call(fileList);
+        const newPhotos: string[] = photos.slice();
+
+        fileArray.forEach((file, index) => {
+            console.log(file);
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                // 파일을 읽은 result값(image url)을 photos에 저장
+                newPhotos.push(reader.result as string);
+
+                if (index === fileArray.length - 1) {
+                    setPhotos(newPhotos);
+                }
+            };
+
+            reader.readAsDataURL(file); // image url에 해당하는 파일 데이터 set
+        });
     };
 
     return (
@@ -95,38 +127,42 @@ const SpotRegItem = (): JSX.Element => {
 
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
-                        <StyledH7 style={{ color: color3 }}>사진/동영상</StyledH7>
+                        <StyledH7 style={{ color: color3 }}>사진</StyledH7>
                     </StyledDiv6>
                     <StyledBorderDiv10>
                         <StyledBackgroundDiv10>
                             <StyledSlideDiv1>
                                 <StyledSlideUl1
-                                    count={4}
+                                    count={photos.length + 1}
                                     index={slideIndex}
                                     onTouchStart={onBeforeTouch}
                                     onTouchEnd={onAfterTouch}
                                 >
-                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'red' }} />
-                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'blue' }} />
-                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'green' }} />
-                                    <StyledSlideLi1 count={4} style={{ backgroundColor: 'yellow' }} />
+                                    {photos.map((photo, index) => (
+                                        <StyledSlideImg1 count={photos.length + 1} src={photo} />
+                                    ))}
+                                    <StyledSlideLi1
+                                        count={photos.length + 1}
+                                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                    >
+                                        <StyledFlex9 onClick={onAddPhoto}>
+                                            <StyledPlusCircleOutlined2 />
+                                            <StyledH6 style={{ fontWeight: 'initial' }}>사진을 추가해보세요.</StyledH6>
+                                        </StyledFlex9>
+                                    </StyledSlideLi1>
                                 </StyledSlideUl1>
                             </StyledSlideDiv1>
 
                             <StyledSlideDiv2>
                                 <StyledSlideDiv3>
-                                    <StyledCircle1 target={slideIndex === 0} onClick={() => onClickCircle(0)}>
-                                        ●
-                                    </StyledCircle1>
-                                    <StyledCircle1 target={slideIndex === 1} onClick={() => onClickCircle(1)}>
-                                        ●
-                                    </StyledCircle1>
-                                    <StyledCircle1 target={slideIndex === 2} onClick={() => onClickCircle(2)}>
-                                        ●
-                                    </StyledCircle1>
-                                    <StyledCircle1 target={slideIndex === 3} onClick={() => onClickCircle(3)}>
-                                        ●
-                                    </StyledCircle1>
+                                    {[...Array(photos.length + 1)].map((count, index) => (
+                                        <StyledCircle1
+                                            target={slideIndex === count}
+                                            onClick={() => onClickCircle(count)}
+                                        >
+                                            ●
+                                        </StyledCircle1>
+                                    ))}
                                 </StyledSlideDiv3>
                             </StyledSlideDiv2>
                         </StyledBackgroundDiv10>
@@ -151,74 +187,7 @@ const SpotRegItem = (): JSX.Element => {
                 </StyledDiv5>
             </StyledDiv1>
 
-            {/* <StyledNineDiv1>
-                <StyledDiv1>
-                    <div style={{ margin: '0.5rem 0' }}>
-                        <StyledFlex2>
-                            <div>
-                                <StyledLeftOutLined1 onClick={goSpotItems} />
-                                <StyledH4>수찬 커플/요란한식당</StyledH4>
-                            </div>
-                            <div>
-                                <StyledH4>게시</StyledH4>
-                            </div>
-                        </StyledFlex2>
-                    </div>
-
-                    <div style={{ marginBottom: '1rem' }}>
-                        <StyledH5>사진/동영상</StyledH5>
-                        <StyledBorderDiv10>
-                            <StyledBackgroundDiv10>
-                                <StyledSlideDiv1>
-                                    <StyledSlideUl1
-                                        count={4}
-                                        index={slideIndex}
-                                        onTouchStart={onBeforeTouch}
-                                        onTouchEnd={onAfterTouch}
-                                    >
-                                        <StyledSlideLi1 count={4} style={{ backgroundColor: 'red' }}></StyledSlideLi1>
-                                        <StyledSlideLi1 count={4} style={{ backgroundColor: 'blue' }}></StyledSlideLi1>
-                                        <StyledSlideLi1 count={4} style={{ backgroundColor: 'green' }}></StyledSlideLi1>
-                                        <StyledSlideLi1
-                                            count={4}
-                                            style={{ backgroundColor: 'yellow' }}
-                                        ></StyledSlideLi1>
-                                    </StyledSlideUl1>
-                                </StyledSlideDiv1>
-
-                                <StyledSlideDiv2>
-                                    <StyledSlideDiv3>
-                                        <StyledCircle1 target={slideIndex === 0} onClick={() => onClickCircle(0)}>
-                                            ●
-                                        </StyledCircle1>
-                                        <StyledCircle1 target={slideIndex === 1} onClick={() => onClickCircle(1)}>
-                                            ●
-                                        </StyledCircle1>
-                                        <StyledCircle1 target={slideIndex === 2} onClick={() => onClickCircle(2)}>
-                                            ●
-                                        </StyledCircle1>
-                                        <StyledCircle1 target={slideIndex === 3} onClick={() => onClickCircle(3)}>
-                                            ●
-                                        </StyledCircle1>
-                                    </StyledSlideDiv3>
-                                </StyledSlideDiv2>
-                            </StyledBackgroundDiv10>
-                            <StyledExternalDiv2>
-                                <StyledPlusCircleOutlined1 />
-                            </StyledExternalDiv2>
-                        </StyledBorderDiv10>
-                    </div>
-
-                    <div>
-                        <StyledH5>리뷰</StyledH5>
-                        <StyledBorderDiv11>
-                            <StyledBackgroundDiv11>
-                                <StyledTextArea1 placeholder="리뷰를 작성해보세요." onChange={onContents} />
-                            </StyledBackgroundDiv11>
-                        </StyledBorderDiv11>
-                    </div>
-                </StyledDiv1>
-            </StyledNineDiv1> */}
+            <input type="file" multiple ref={(node: HTMLInputElement) => setPhoto(node)} onChange={onSavePhoto} />
         </>
     );
 };

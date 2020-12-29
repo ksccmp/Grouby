@@ -25,4 +25,10 @@ public class GroupServiceImpl implements GroupService {
 	public List<Group> selectByUserId(String userId) {
 		return groupRepo.selectByUserId(userId);
 	}
+	
+	@Override
+	@Transactional
+	public int updateGroupName(Group group) {
+		return groupRepo.updateGroupName(group);
+	}
 }

@@ -25,4 +25,14 @@ public class GroupMemberRepositoryImpl implements GroupMemberRepository {
 	public List<GroupMember> selectByGroupId(int groupId) {
 		return session.selectList(ns + "selectByGroupId", groupId);
 	}
+	
+	@Override
+	public int selectMemberCount(int groupId) {
+		return session.selectOne(ns + "selectMemberCount", groupId);
+	}
+	
+	@Override
+	public int deleteMember(String userId) {
+		return session.delete(ns + "deleteMember", userId);
+	}
 }

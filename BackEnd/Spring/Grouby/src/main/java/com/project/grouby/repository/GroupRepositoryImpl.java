@@ -30,4 +30,9 @@ public class GroupRepositoryImpl implements GroupRepository {
 	public List<Group> selectByUserId(String userId) {
 		return session.selectList(ns + "selectByUserId", userId);
 	}
+	
+	@Override
+	public int updateGroupName(Group group) {
+		return session.update(ns + "updateGroupName", group);
+	}
 }

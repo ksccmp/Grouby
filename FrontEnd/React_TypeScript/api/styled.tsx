@@ -1237,7 +1237,12 @@ export const StyledSlideUl1 = styled.ul`
 
 export const StyledSlideLi1 = styled.li`
     width: calc(100% / ${(props: IStyledSlideUl1) => props.count});
-    height: 300px;
+    height: ${height9}px;
+`;
+
+export const StyledSlideImg1 = styled.img`
+    width: calc(100% / ${(props: IStyledSlideUl1) => props.count});
+    height: ${height9}px;
 `;
 
 interface IStyledCircle1 {
