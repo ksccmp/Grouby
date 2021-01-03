@@ -1,8 +1,11 @@
 package com.project.grouby.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -23,6 +26,15 @@ public class ServletContext implements WebMvcConfigurer {
 	    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
+	@Bean
+	public MultipartResolver multipartResolver() throws Exception {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(2000000000);
+		multipartResolver.setDefaultEncoding("UTF-8");
+		
+		return multipartResolver;
+	}
+	
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
 	
@@ -41,6 +53,7 @@ public class ServletContext implements WebMvcConfigurer {
 				.addPathPatterns("/**")
 				.excludePathPatterns(new String[] {
 						"/user/notsign/**",
+						"/common/getImageFile/**",
 						"/v2/api-docs",
 						"/swagger-resources/**",
 						"/swagger-ui.html/**",

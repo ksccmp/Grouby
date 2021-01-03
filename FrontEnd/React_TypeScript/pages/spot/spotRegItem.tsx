@@ -25,14 +25,15 @@ import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined2 } 
 import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { goSpotItems, getTime, color3 } from '../../api/common';
 import { IItem } from '../../api/interface';
+import axios from '../../api/axios';
 
 const SpotRegItem = (): JSX.Element => {
     const [contents, setContents] = React.useState<string>('');
     const [slideIndex, setSlideIndex] = React.useState<number>(0);
     const [touchGab, setTouchGab] = React.useState<number>(0);
-    const [slideCount, setSlideCount] = React.useState<number>(0);
     const [photo, setPhoto] = React.useState<HTMLInputElement | undefined>(undefined);
     const [photos, setPhotos] = React.useState<string[]>([]);
+    const [fileLists, setFileLists] = React.useState<File[]>([]);
 
     // 내용 저장
     const onContents = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,21 +41,27 @@ const SpotRegItem = (): JSX.Element => {
     };
 
     // 아이템 등록
-    const onRegItem = () => {
-        const item: IItem = {
-            itemId: 1,
-            groupId: 1,
-            groupName: '수찬 커플',
-            spotId: 1,
-            spotName: '사당 요란한부엌',
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            like: 0,
-            contents: contents,
-        };
+    const onRegItem = async () => {
+        const formData = new FormData();
 
-        console.log(item);
+        fileLists.forEach((file) => {
+            formData.append('uploadFiles', file);
+        });
+
+        console.log(formData);
+
+        const res = await axios.post('/common/uploadFiles', formData, {
+            headers: {
+                // 'content-type': 'multipart/form-data',
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            console.log('업로드 완료');
+        } else {
+            console.log('업로드 실패');
+        }
     };
 
     // 사진/동영상 터치 직후
@@ -85,6 +92,7 @@ const SpotRegItem = (): JSX.Element => {
 
     const onSavePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files);
+
         const fileList: FileList | null = e.target.files;
         const fileArray = Array.prototype.slice.call(fileList);
         const newPhotos: string[] = photos.slice();
@@ -102,6 +110,7 @@ const SpotRegItem = (): JSX.Element => {
                 }
             };
 
+            fileLists.push(file);
             reader.readAsDataURL(file); // image url에 해당하는 파일 데이터 set
         });
     };
@@ -119,7 +128,7 @@ const SpotRegItem = (): JSX.Element => {
                                 <StyledH4>아이템 생성</StyledH4>
                             </StyledDiv8>
                             <StyledFlex13>
-                                <StyledCheckOutlined1 />
+                                <StyledCheckOutlined1 onClick={onRegItem} />
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
@@ -157,8 +166,8 @@ const SpotRegItem = (): JSX.Element => {
                                 <StyledSlideDiv3>
                                     {[...Array(photos.length + 1)].map((count, index) => (
                                         <StyledCircle1
-                                            target={slideIndex === count}
-                                            onClick={() => onClickCircle(count)}
+                                            target={slideIndex === index}
+                                            onClick={() => onClickCircle(index)}
                                         >
                                             ●
                                         </StyledCircle1>
@@ -188,6 +197,8 @@ const SpotRegItem = (): JSX.Element => {
             </StyledDiv1>
 
             <input type="file" multiple ref={(node: HTMLInputElement) => setPhoto(node)} onChange={onSavePhoto} />
+
+            <img src="http://localhost:8080/grouby/common/getImageFile/test" width="300px" height="300px"></img>
         </>
     );
 };
