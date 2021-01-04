@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,26 +23,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.grouby.dto.UploadFile;
+import com.project.grouby.service.UploadFileService;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/common")
 public class CommonController {
 	
-	private final String UPLOAD_PATH = "F:\\uploadTest";
+	private final String UPLOAD_PATH = "F:\\groubyUpload";
 	
-	@GetMapping("/getImageFile/{fileName}")
-	public ResponseEntity<byte[]> getImageFile(@PathVariable String fileName) {
+	@Autowired
+	UploadFileService uploadFileServ;
+	
+	@GetMapping("/getImageFile/{fileId}/{fileType}")
+	public ResponseEntity<byte[]> getImageFile(@PathVariable String fileId, @PathVariable String fileType) {
 		
 		try {
-			System.out.println("fileName=" + fileName);
-			
-			InputStream fileStream = new FileInputStream(UPLOAD_PATH + "\\" + fileName + ".jpg");
-			System.out.println("fileStream=" + fileStream);
+			InputStream fileStream = new FileInputStream(UPLOAD_PATH + "\\" + fileId + "." + fileType);
 			
 			byte[] fileByteArray = IOUtils.toByteArray(fileStream);
 			fileStream.close();
 			
-			System.out.println("fileByteArray=" + fileByteArray);
 			
 			return new ResponseEntity<byte[]>(fileByteArray, HttpStatus.OK);
 			
@@ -48,22 +54,26 @@ public class CommonController {
 	}
 	
 	@PostMapping("/uploadFiles")
-	public ResponseEntity<Map<String, Object>> uploadFiles(MultipartFile[] uploadFiles) {
+	public ResponseEntity<Map<String, Object>> uploadFiles(MultipartFile[] multipartFiles, String stringItemId) {
 		try {
-			System.out.println(uploadFiles);
+			int itemId = Integer.valueOf(stringItemId);
+			List<UploadFile> uploadFiles = new ArrayList<UploadFile>();
 			
-			for(int i=0; i<uploadFiles.length; i++) {
-				MultipartFile file = uploadFiles[i];
+			for(int i=0; i<multipartFiles.length; i++) {
+				MultipartFile file = multipartFiles[i];
+				String fileId = (new Date().getTime()) + "" + (new Random().ints(1000, 9999).findAny().getAsInt());
+				String originName = file.getOriginalFilename(); // 사진파일.jpg
+				String fileType = originName.substring(originName.lastIndexOf(".") + 1); // jpg
+				originName = originName.substring(0, originName.lastIndexOf(".")); // 사진파일
 				
-				System.out.println(file.getOriginalFilename());
-				System.out.println(file.getSize());
-				System.out.println(new Date().getTime());
-				
-				File fileSave = new File(UPLOAD_PATH, file.getOriginalFilename());
+				File fileSave = new File(UPLOAD_PATH, fileId + "." + fileType); // fileId.jpg
 				file.transferTo(fileSave);
+				
+				UploadFile uploadFile = new UploadFile(itemId, fileId, originName, file.getSize(), fileType);
+				uploadFiles.add(uploadFile);
 			}
 			
-			return response(1, true, HttpStatus.OK);
+			return response(uploadFileServ.insert(uploadFiles), true, HttpStatus.OK);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

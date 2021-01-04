@@ -1232,7 +1232,7 @@ export const StyledSlideUl1 = styled.ul`
     margin: 0;
     padding: 0;
     margin-left: -${(props: IStyledSlideUl1) => (props.index as number) * 100}% !important;
-    transition: 1s;
+    transition: 0.25s;
 `;
 
 export const StyledSlideLi1 = styled.li`

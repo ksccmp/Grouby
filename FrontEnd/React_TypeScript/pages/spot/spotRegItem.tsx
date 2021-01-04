@@ -22,12 +22,18 @@ import {
     StyledSlideImg1,
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined2 } from '../../api/styledAnt';
-import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
-import { goSpotItems, getTime, color3 } from '../../api/common';
-import { IItem } from '../../api/interface';
+import { StyledH4, StyledH6, StyledH7 } from '../../api/styledFont';
+import { goSpotItems, color3 } from '../../api/common';
+import { IGroup, IItem, ISpot, IUser } from '../../api/interface';
 import axios from '../../api/axios';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 const SpotRegItem = (): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
+    const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
+
     const [contents, setContents] = React.useState<string>('');
     const [slideIndex, setSlideIndex] = React.useState<number>(0);
     const [touchGab, setTouchGab] = React.useState<number>(0);
@@ -42,25 +48,44 @@ const SpotRegItem = (): JSX.Element => {
 
     // 아이템 등록
     const onRegItem = async () => {
-        const formData = new FormData();
+        const item: IItem = {
+            groupId: reduxGroup.groupId,
+            spotId: reduxSpot.spotId as number,
+            regId: reduxUser.userId,
+            contents: contents,
+        };
 
-        fileLists.forEach((file) => {
-            formData.append('uploadFiles', file);
-        });
-
-        console.log(formData);
-
-        const res = await axios.post('/common/uploadFiles', formData, {
+        const res = await axios.post('/item/regItem', item, {
+            // 아이템 생성
             headers: {
-                // 'content-type': 'multipart/form-data',
                 'user-token': localStorage.userToken,
             },
         });
 
         if (res.data.success) {
-            console.log('업로드 완료');
+            const formData = new FormData();
+
+            fileLists.forEach((file) => {
+                formData.append('multipartFiles', file);
+            });
+
+            formData.append('stringItemId', String(res.data.data));
+
+            const res1 = await axios.post('/common/uploadFiles', formData, {
+                // 생성된 아이템에 업로드 파일 저장
+                headers: {
+                    // 'content-type': 'multipart/form-data',
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (res1.data.success) {
+                goSpotItems();
+            } else {
+                alert('처리 중 오류가 발생했습니다.');
+            }
         } else {
-            console.log('업로드 실패');
+            alert('처리 중 오류가 발생했습니다.');
         }
     };
 
@@ -91,14 +116,11 @@ const SpotRegItem = (): JSX.Element => {
     };
 
     const onSavePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files);
-
         const fileList: FileList | null = e.target.files;
         const fileArray = Array.prototype.slice.call(fileList);
         const newPhotos: string[] = photos.slice();
 
         fileArray.forEach((file, index) => {
-            console.log(file);
             const reader = new FileReader();
 
             reader.onload = () => {
@@ -168,6 +190,7 @@ const SpotRegItem = (): JSX.Element => {
                                         <StyledCircle1
                                             target={slideIndex === index}
                                             onClick={() => onClickCircle(index)}
+                                            key={index}
                                         >
                                             ●
                                         </StyledCircle1>
@@ -196,9 +219,13 @@ const SpotRegItem = (): JSX.Element => {
                 </StyledDiv5>
             </StyledDiv1>
 
-            <input type="file" multiple ref={(node: HTMLInputElement) => setPhoto(node)} onChange={onSavePhoto} />
-
-            <img src="http://localhost:8080/grouby/common/getImageFile/test" width="300px" height="300px"></img>
+            <input
+                type="file"
+                style={{ display: 'none' }}
+                multiple
+                ref={(node: HTMLInputElement) => setPhoto(node)}
+                onChange={onSavePhoto}
+            />
         </>
     );
 };

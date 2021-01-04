@@ -3,74 +3,75 @@ import { StyledDiv1, StyledFlex2, StyledDiv5, StyledDiv6, StyledFlex13, StyledDi
 import { StyledPlusCircleOutlined4 } from '../../api/styledAnt';
 import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { goSpotRegItem, getTime } from '../../api/common';
-import { IGroup, IItem, ISpot } from '../../api/interface';
+import { IGroup, IItem, ISpot, IUploadFile, IUser } from '../../api/interface';
 import Item from '../../component/spot/item';
 import Comments from '../../component/spot/comments';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import axios from '../../api/axios';
 
 const SpotItems = (): JSX.Element => {
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
     const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
     const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
 
-    const [items, setItems] = React.useState<IItem[]>([
-        {
-            index: 0,
-            itemId: 1,
-            groupId: 1,
-            groupName: '수찬 커플',
-            spotId: 1,
-            spotName: '사당 요란한식당',
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            like: 5,
-            contents: '처음 작성 내용',
-            likePress: true,
-        },
-        {
-            index: 1,
-            itemId: 2,
-            groupId: 1,
-            groupName: '수찬 커플',
-            spotId: 1,
-            spotName: '사당 요란한식당',
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            like: 3,
-            contents: '저는 기요미에용',
-            likePress: true,
-        },
-        {
-            index: 2,
-            itemId: 3,
-            groupId: 1,
-            groupName: '수찬 커플',
-            spotId: 1,
-            spotName: '사당 요란한식당',
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            like: 1,
-            contents: '으에에에에에엑',
-            likePress: false,
-        },
-    ]);
+    const [items, setItems] = React.useState<IItem[]>([]);
     const [openComments, setOpenComments] = React.useState<boolean>(false);
 
+    React.useEffect(() => {
+        getItems();
+    }, []);
+
+    // 아이템 불러오기
+    const getItems = async () => {
+        const res = await axios.get('/item/selectByIds', {
+            params: {
+                groupId: reduxGroup.groupId,
+                spotId: reduxSpot.spotId,
+                regId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            const resItems: IItem[] = res.data.data;
+
+            resItems.forEach((resItem: IItem) => {
+                const resUploadFiles: IUploadFile[] = resItem.uploadFiles as IUploadFile[];
+
+                resUploadFiles.forEach((resUploadFile: IUploadFile) => {
+                    // 이미지 src 생성하기
+                    resUploadFile.src =
+                        process.env.serverURL +
+                        '/common/getImageFile/' +
+                        resUploadFile.fileId +
+                        '/' +
+                        resUploadFile.fileType;
+                });
+            });
+
+            setItems(resItems);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+        }
+    };
+
+    // 코멘트 창 열기
     const onOpenComments = () => {
         setOpenComments(!openComments);
     };
 
-    const onLikePress = (index: number) => {
+    // 하트 누르기
+    const onHeartPress = (index: number) => {
         const newItems = items.slice();
-        if (newItems[index].likePress) {
-            newItems[index].like--;
+        if (newItems[index].heartPress) {
+            (newItems[index].heart as number)--;
         } else {
-            newItems[index].like++;
+            (newItems[index].heart as number)++;
         }
-        newItems[index].likePress = !newItems[index].likePress;
+        newItems[index].heartPress = !newItems[index].heartPress;
         setItems(newItems);
     };
 
@@ -95,7 +96,7 @@ const SpotItems = (): JSX.Element => {
 
                 <div>
                     {items.map((item, key) => (
-                        <Item item={item} onLikePress={onLikePress} onOpenComments={onOpenComments} key={key} />
+                        <Item item={item} onHeartPress={onHeartPress} onOpenComments={onOpenComments} key={key} />
                     ))}
                 </div>
             </StyledDiv1>

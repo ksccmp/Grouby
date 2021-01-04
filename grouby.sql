@@ -14,8 +14,8 @@ alter table grouby_rank_comp convert to character set utf8;
 alter table grouby_tag convert to character set utf8;
 alter table grouby_spot_rank convert to character set utf8;
 alter table grouby_item convert to character set utf8;
-alter table grouby_like convert to character set utf8;
-alter table grouby_photo convert to character set utf8;
+alter table grouby_heart convert to character set utf8;
+alter table grouby_upload_file convert to character set utf8;
 
 create table grouby_user (
 	user_id varchar(50),
@@ -103,16 +103,19 @@ create table grouby_item (
     primary key(item_id)
 );
 
-create table grouby_like (
+create table grouby_heart (
 	item_id int,
     reg_id varchar(50),
     primary key(item_id, reg_id)
 );
 
-create table grouby_photo (
+create table grouby_upload_file (
 	item_id int,
-    path varchar(300),
-    primary key(item_id, path)
+    file_id varchar(100),
+    origin_name varchar(300),
+    file_size int,
+    file_type varchar(50),
+    primary key(item_id, file_id)
 );
 
 insert into grouby_spot_rank values (1, 1, 'qqq', current_timestamp(), current_timestamp());
@@ -128,6 +131,9 @@ select * from grouby_rank;
 select * from grouby_rank_comp;
 select * from grouby_tag;
 select * from grouby_spot_rank;
+select * from grouby_item;
+select * from grouby_upload_file;
+select * from grouby_heart;
 
 insert into grouby_rank_comp values (1, '음식', current_timestamp(), current_timestamp());
 insert into grouby_rank_comp values (2, '가격', current_timestamp(), current_timestamp());

@@ -81,18 +81,20 @@ export interface ISpotRank {
 }
 
 export interface IItem {
-    index?: number;
-    itemId: number;
+    itemId?: number;
     groupId: number;
-    groupName: string;
     spotId: number;
-    spotName: string;
     regId: string;
-    regDate: string;
-    modDate: string;
-    like: number;
     contents: string;
-    likePress?: boolean;
+    regDate?: string;
+    modDate?: string;
+
+    uploadFiles?: IUploadFile[];
+    groupName?: string;
+    spotName?: string;
+    index?: number;
+    heart?: number;
+    heartPress?: boolean;
 }
 
 export interface IComment {
@@ -102,4 +104,13 @@ export interface IComment {
     regDate: string;
     modDate: string;
     comments: string;
+}
+
+export interface IUploadFile {
+    itemId: number;
+    fileId: string;
+    originName: string;
+    fileSize: number;
+    fileType: string;
+    src?: string;
 }

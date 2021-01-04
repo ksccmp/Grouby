@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.grouby.uploadfilemapper">
+	<insert id="insert" parameterType="uploadFile">
+		insert
+		into grouby_upload_file
+		values (#{itemId}, #{fileId}, #{originName}, #{fileSize}, #{fileType})
+	</insert>
+	
+	<select id="selectByItemId" parameterType="int" resultType="uploadFile">
+		select *
+		from grouby_upload_file
+		where item_id = #{value}
+	</select>
+</mapper>

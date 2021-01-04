@@ -15,19 +15,20 @@ import {
     StyledFlex9,
     StyledDiv5,
     StyledDiv6,
+    StyledSlideImg1,
 } from '../../api/styled';
 import { StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
-import { IItem } from '../../api/interface';
+import { IItem, IUploadFile } from '../../api/interface';
 import { StyledHeartOutlined1, StyledHeartFilled1, StyledMessageOutlined1 } from '../../api/styledAnt';
 import { color1, color3, color4 } from '../../api/common';
 
 interface IChangeItem {
     item: IItem;
-    onLikePress: (index: number) => void;
+    onHeartPress: (index: number) => void;
     onOpenComments: () => void;
 }
 
-const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX.Element => {
+const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JSX.Element => {
     const [slideIndex, setSlideIndex] = React.useState<number>(0);
     const [touchGab, setTouchGab] = React.useState<number>(0);
 
@@ -39,7 +40,9 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
             setSlideIndex(slideIndex - 1 < 0 ? 0 : slideIndex - 1);
         } else if (val - touchGab < 0) {
             // 직후의 x축이 더 작을때 -> 왼쪽 넘김
-            setSlideIndex(slideIndex + 1 > 3 ? slideIndex : slideIndex + 1);
+            setSlideIndex(
+                slideIndex + 1 > (item.uploadFiles as IUploadFile[]).length - 1 ? slideIndex : slideIndex + 1,
+            );
         }
         setTouchGab(0);
     };
@@ -66,21 +69,23 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                     <div style={{ position: 'relative' }}>
                         <StyledSlideDiv1>
                             <StyledSlideUl1
-                                count={4}
+                                count={(item.uploadFiles as IUploadFile[]).length}
                                 index={slideIndex}
                                 onTouchStart={onBeforeTouch}
                                 onTouchEnd={onAfterTouch}
                             >
-                                <StyledSlideLi1 count={4} style={{ backgroundColor: 'red' }}></StyledSlideLi1>
-                                <StyledSlideLi1 count={4} style={{ backgroundColor: 'blue' }}></StyledSlideLi1>
-                                <StyledSlideLi1 count={4} style={{ backgroundColor: 'green' }}></StyledSlideLi1>
-                                <StyledSlideLi1 count={4} style={{ backgroundColor: 'yellow' }}></StyledSlideLi1>
+                                {(item.uploadFiles as IUploadFile[]).map((uploadFile, index) => (
+                                    <StyledSlideImg1
+                                        count={(item.uploadFiles as IUploadFile[]).length}
+                                        src={uploadFile.src}
+                                    />
+                                ))}
                             </StyledSlideUl1>
                         </StyledSlideDiv1>
 
                         <StyledSlideDiv2>
                             <StyledSlideDiv3>
-                                {[...Array(4)].map((temp, index) => {
+                                {[...Array((item.uploadFiles as IUploadFile[]).length)].map((temp, index) => {
                                     return (
                                         <StyledCircle1
                                             target={slideIndex === index}
@@ -112,7 +117,7 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                                 <StyledFlex11>
                                     <div style={{ marginRight: '5px' }}>
                                         <StyledH7 style={{ marginRight: '1px' }}>좋아요</StyledH7>
-                                        <StyledH7 style={{ color: color4 }}>{item.like}</StyledH7>
+                                        <StyledH7 style={{ color: color4 }}>{item.heart}</StyledH7>
                                     </div>
                                     <div style={{ marginRight: '5px' }}>
                                         <StyledH7 style={{ marginRight: '1px' }}>댓글</StyledH7>
@@ -130,9 +135,9 @@ const Item: React.FC<IChangeItem> = ({ item, onLikePress, onOpenComments }): JSX
                                 <StyledFlex10>
                                     <div
                                         style={{ marginRight: '5px' }}
-                                        onClick={() => onLikePress(item.index as number)}
+                                        onClick={() => onHeartPress(item.index as number)}
                                     >
-                                        {item.likePress ? <StyledHeartFilled1 /> : <StyledHeartOutlined1 />}
+                                        {item.heartPress ? <StyledHeartFilled1 /> : <StyledHeartOutlined1 />}
                                     </div>
                                     <div style={{ marginRight: '5px' }} onClick={onOpenComments}>
                                         <StyledMessageOutlined1 />
