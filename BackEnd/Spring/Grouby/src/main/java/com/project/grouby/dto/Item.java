@@ -21,4 +21,5 @@ public class Item {
 	private List<UploadFile> uploadFiles;
 	private int heart;
 	private boolean heartPress;
+	private int comment;
 }

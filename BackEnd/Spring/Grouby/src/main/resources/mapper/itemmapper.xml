@@ -12,7 +12,8 @@
 	<select id="selectByIds" parameterType="item" resultType="item">
 		select item.*,
 			   (select count(*) from grouby_heart heart where heart.item_id = item.item_id) heart,
-			   ifnull((select true from grouby_heart heart where heart.item_id = item.item_id and heart.reg_id = #{regId}), false) heart_press
+			   ifnull((select true from grouby_heart heart where heart.item_id = item.item_id and heart.reg_id = #{regId}), false) heart_press,
+			   (select count(*) from grouby_comment comment where comment.item_id = item.item_id) comment
 		from grouby_item item
 		where item.group_id = #{groupId} and item.spot_id = #{spotId}
 	</select>

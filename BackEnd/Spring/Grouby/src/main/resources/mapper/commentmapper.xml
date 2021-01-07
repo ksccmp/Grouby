@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.grouby.commentmapper">
+	<insert id="insert" parameterType="comment">
+		insert
+		into grouby_comment(item_id, reg_id, comments, reg_date, mod_date)
+		values (#{itemId}, #{regId}, #{comments}, current_timestamp(), current_timestamp())
+	</insert>
+	
+	<select id="selectByItemId" parameterType="int" resultType="comment">
+		select *
+		from grouby_comment
+		where item_id = #{value}
+	</select>
+</mapper>

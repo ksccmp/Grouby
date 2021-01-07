@@ -19,6 +19,8 @@
 		<typeAlias type="com.project.grouby.dto.SpotRank" alias="spotRank"/>
 		<typeAlias type="com.project.grouby.dto.Item" alias="item"/>
 		<typeAlias type="com.project.grouby.dto.UploadFile" alias="uploadFile"/>
+		<typeAlias type="com.project.grouby.dto.Heart" alias="heart"/>
+		<typeAlias type="com.project.grouby.dto.Comment" alias="comment"/>
 	</typeAliases>
 	
 	<mappers>
@@ -34,5 +36,6 @@
 		<mapper resource="mapper/itemmapper.xml"/>
 		<mapper resource="mapper/uploadfilemapper.xml"/>
 		<mapper resource="mapper/heartmapper.xml"/>
+		<mapper resource="mapper/commentmapper.xml"/>
 	</mappers>
 </configuration>

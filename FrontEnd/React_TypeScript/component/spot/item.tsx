@@ -1,12 +1,9 @@
 import * as React from 'react';
 import {
-    StyledBorderDiv7,
-    StyledBackgroundDiv7,
     StyledFlex8,
     StyledDiv4,
     StyledSlideDiv1,
     StyledSlideUl1,
-    StyledSlideLi1,
     StyledSlideDiv2,
     StyledSlideDiv3,
     StyledCircle1,
@@ -25,7 +22,7 @@ import { color1, color3, color4 } from '../../api/common';
 interface IChangeItem {
     item: IItem;
     onHeartPress: (index: number) => void;
-    onOpenComments: () => void;
+    onOpenComments: (itemId: number) => void;
 }
 
 const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JSX.Element => {
@@ -121,7 +118,7 @@ const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JS
                                     </div>
                                     <div style={{ marginRight: '5px' }}>
                                         <StyledH7 style={{ marginRight: '1px' }}>댓글</StyledH7>
-                                        <StyledH7 style={{ color: color3 }}>5</StyledH7>
+                                        <StyledH7 style={{ color: color3 }}>{item.comment}</StyledH7>
                                     </div>
                                 </StyledFlex11>
                                 <div>
@@ -139,7 +136,10 @@ const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JS
                                     >
                                         {item.heartPress ? <StyledHeartFilled1 /> : <StyledHeartOutlined1 />}
                                     </div>
-                                    <div style={{ marginRight: '5px' }} onClick={onOpenComments}>
+                                    <div
+                                        style={{ marginRight: '5px' }}
+                                        onClick={() => onOpenComments(item.itemId as number)}
+                                    >
                                         <StyledMessageOutlined1 />
                                     </div>
                                 </StyledFlex10>

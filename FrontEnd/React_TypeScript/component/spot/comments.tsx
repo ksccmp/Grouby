@@ -15,130 +15,78 @@ import {
 import { StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
 import { StyledH4 } from '../../api/styledFont';
 import Comment from './comment';
-import { IComment } from '../../api/interface';
+import { IComment, IUser } from '../../api/interface';
 import { getTime } from '../../api/common';
+import axios from '../../api/axios';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 interface IComments {
+    comments: IComment[];
+    setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
     openComments: boolean;
-    onOpenComments: () => void;
+    onOpenComments: (itemId: number) => void;
 }
 
-const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.Element => {
-    const [comments, setComments] = React.useState<IComment[]>([
-        {
-            commentId: 1,
-            itemId: 1,
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '아니 이집 진짜 대박이에요 여러분!!!!!',
-        },
-        {
-            commentId: 2,
-            itemId: 1,
-            regId: 'ksccmp',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '진짜입니다. 속이는거 아니에요!!',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-        {
-            commentId: 3,
-            itemId: 1,
-            regId: 'intan',
-            regDate: getTime(),
-            modDate: getTime(),
-            comments: '정말이요? 저도 여기 가야겠어요',
-        },
-    ]);
-    const [searchComment, setSearchComment] = React.useState<string>('');
+const Comments: React.FC<IComments> = ({ comments, setComments, openComments, onOpenComments }): JSX.Element => {
+    const reduxOpenItemId: number = useSelector((state: IIndexReducer) => state.ItemReducer.openItemId);
+    const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
-    React.useEffect(() => {
-        if (openComments) {
-            console.log('axios');
-        }
-    }, [openComments]);
+    const [inputComment, setInputComment] = React.useState<string>('');
 
     // 댓글 입력 시 하단으로 위치 조정
-    // React.useEffect(() => {
-    //     const fixed1: HTMLDivElement = document.getElementById('fixed1') as HTMLDivElement;
-    //     fixed1.scrollTop = fixed1.scrollHeight;
-    // }, [comments]);
+    React.useEffect(() => {
+        const fixed1: HTMLDivElement = document.getElementById('fixed1') as HTMLDivElement;
+        fixed1.scrollTop = fixed1.scrollHeight;
+    }, [comments]);
 
     // 코멘트 내용 저장
-    const onSearchComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchComment(e.target.value);
+    const onInputComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputComment(e.target.value);
     };
 
     // 코멘트 게시
-    const onSaveComment = () => {
-        setComments((prev) => [
-            ...prev,
-            {
-                commentId: 4,
-                itemId: 1,
-                regId: 'ksccmp',
-                regDate: getTime(),
-                modDate: getTime(),
-                comments: searchComment,
+    const onSaveComment = async () => {
+        let isSuccess = true;
+
+        const comment: IComment = {
+            itemId: reduxOpenItemId,
+            regId: reduxUser.userId,
+            comments: inputComment,
+        };
+
+        setInputComment('');
+
+        const res = await axios.post('/item/regComment', comment, {
+            headers: {
+                'user-token': localStorage.userToken,
             },
-        ]);
-        setSearchComment('');
+        });
+
+        if (!res.data.success) {
+            isSuccess = false;
+        }
+
+        if (isSuccess) {
+            const res1 = await axios.get('/item/selectCommentsByItemId', {
+                params: {
+                    itemId: reduxOpenItemId,
+                },
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (res1.data.success) {
+                setComments(res1.data.data);
+            } else {
+                isSuccess = false;
+            }
+        }
+
+        if (!isSuccess) {
+            alert('처리 중 오류가 발생했습니다.');
+        }
     };
 
     return (
@@ -149,7 +97,7 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
-                                    <StyledLeftOutlined2 onClick={onOpenComments} />
+                                    <StyledLeftOutlined2 onClick={() => onOpenComments(-1)} />
                                 </StyledFlex13>
                                 <div style={{ width: '100%', marginLeft: '10px' }}>
                                     <StyledH4>댓글</StyledH4>
@@ -176,8 +124,8 @@ const Comments: React.FC<IComments> = ({ openComments, onOpenComments }): JSX.El
                                         <StyledBackgroundDiv21>
                                             <StyledText4
                                                 placeholder="댓글을 입력하세요."
-                                                onChange={onSearchComment}
-                                                value={searchComment}
+                                                onChange={onInputComment}
+                                                value={inputComment}
                                             />
                                         </StyledBackgroundDiv21>
                                     </StyledBorderDiv21>

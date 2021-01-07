@@ -7,12 +7,15 @@ import GroupReducer from './groupReducer';
 import { IGroupInitState } from './groupReducer';
 import SpotReducer from './spotReducer';
 import { ISpotInitState } from './spotReducer';
+import ItemReducer from './itemReducer';
+import { IItemInitState } from './itemReducer';
 
 export interface IIndexReducer {
     UserReducer: IUserInitState;
     FriendReducer: IFriendInitState;
     GroupReducer: IGroupInitState;
     SpotReducer: ISpotInitState;
+    ItemReducer: IItemInitState;
 }
 
 const IndexReducer = combineReducers({
@@ -20,6 +23,7 @@ const IndexReducer = combineReducers({
     FriendReducer,
     GroupReducer,
     SpotReducer,
+    ItemReducer,
 });
 
 export default IndexReducer;

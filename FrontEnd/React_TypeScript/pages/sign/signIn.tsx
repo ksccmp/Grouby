@@ -13,7 +13,7 @@ import {
     StyledFlex24,
 } from '../../api/styled';
 import { StyledH6, StyledH7 } from '../../api/styledFont';
-import { goMainHome, goGroupHome, goSpotItems, goSignUp } from '../../api/common';
+import { goSignUp } from '../../api/common';
 import { IUser } from '../../api/interface';
 import { useDispatch } from 'react-redux';
 import { userSelectByUserIdAction } from '../../modules/actions';

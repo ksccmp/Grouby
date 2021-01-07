@@ -3,20 +3,24 @@ import { StyledDiv1, StyledFlex2, StyledDiv5, StyledDiv6, StyledFlex13, StyledDi
 import { StyledPlusCircleOutlined4 } from '../../api/styledAnt';
 import { StyledH4, StyledH5 } from '../../api/styledFont';
 import { goSpotRegItem, getTime } from '../../api/common';
-import { IGroup, IItem, ISpot, IUploadFile, IUser } from '../../api/interface';
+import { IComment, IGroup, IItem, ISpot, IUploadFile, IUser } from '../../api/interface';
 import Item from '../../component/spot/item';
 import Comments from '../../component/spot/comments';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import axios from '../../api/axios';
+import { itemSetOpenItemIdAction } from '../../modules/actions';
 
 const SpotItems = (): JSX.Element => {
+    const dispatch = useDispatch();
+
     const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
     const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
     const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
 
     const [items, setItems] = React.useState<IItem[]>([]);
     const [openComments, setOpenComments] = React.useState<boolean>(false);
+    const [comments, setComments] = React.useState<IComment[]>([]);
 
     React.useEffect(() => {
         getItems();
@@ -38,7 +42,7 @@ const SpotItems = (): JSX.Element => {
         if (res.data.success) {
             const resItems: IItem[] = res.data.data;
 
-            resItems.forEach((resItem: IItem) => {
+            resItems.forEach((resItem: IItem, index: number) => {
                 const resUploadFiles: IUploadFile[] = resItem.uploadFiles as IUploadFile[];
 
                 resUploadFiles.forEach((resUploadFile: IUploadFile) => {
@@ -50,29 +54,90 @@ const SpotItems = (): JSX.Element => {
                         '/' +
                         resUploadFile.fileType;
                 });
+
+                resItem.index = index;
             });
 
             setItems(resItems);
+            console.log(resItems);
         } else {
             alert('처리 중 오류가 발생했습니다.');
         }
     };
 
     // 코멘트 창 열기
-    const onOpenComments = () => {
+    const onOpenComments = async (itemId: number) => {
+        if (!openComments) {
+            dispatch(itemSetOpenItemIdAction(itemId));
+
+            const res = await axios.get('/item/selectCommentsByItemId', {
+                params: {
+                    itemId,
+                },
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (res.data.success) {
+                setComments(res.data.data);
+            } else {
+                alert('처리 중 오류가 발생했습니다.');
+            }
+        } else {
+            getItems();
+        }
+
         setOpenComments(!openComments);
     };
 
     // 하트 누르기
-    const onHeartPress = (index: number) => {
+    const onHeartPress = async (index: number) => {
+        let isSuccess = true;
         const newItems = items.slice();
         if (newItems[index].heartPress) {
             (newItems[index].heart as number)--;
+
+            const res = await axios.delete('/item/delHeart', {
+                params: {
+                    itemId: newItems[index].itemId,
+                    regId: reduxUser.userId,
+                },
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (!res.data.success) {
+                isSuccess = false;
+            }
         } else {
             (newItems[index].heart as number)++;
+
+            const res = await axios.post(
+                '/item/regHeart',
+                {
+                    itemId: newItems[index].itemId,
+                    regId: reduxUser.userId,
+                },
+                {
+                    headers: {
+                        'user-token': localStorage.userToken,
+                    },
+                },
+            );
+
+            if (!res.data.success) {
+                isSuccess = false;
+            }
         }
-        newItems[index].heartPress = !newItems[index].heartPress;
-        setItems(newItems);
+
+        if (isSuccess) {
+            newItems[index].heartPress = !newItems[index].heartPress;
+            setItems(newItems);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+        }
     };
 
     return (
@@ -101,7 +166,12 @@ const SpotItems = (): JSX.Element => {
                 </div>
             </StyledDiv1>
 
-            <Comments openComments={openComments} onOpenComments={onOpenComments} />
+            <Comments
+                comments={comments}
+                setComments={setComments}
+                openComments={openComments}
+                onOpenComments={onOpenComments}
+            />
         </>
     );
 };

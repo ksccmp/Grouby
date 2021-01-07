@@ -89,21 +89,20 @@ export interface IItem {
     regDate?: string;
     modDate?: string;
 
-    uploadFiles?: IUploadFile[];
-    groupName?: string;
-    spotName?: string;
     index?: number;
+    uploadFiles?: IUploadFile[];
     heart?: number;
     heartPress?: boolean;
+    comment?: number;
 }
 
 export interface IComment {
-    commentId: number;
+    commentId?: number;
     itemId: number;
     regId: string;
-    regDate: string;
-    modDate: string;
     comments: string;
+    regDate?: string;
+    modDate?: string;
 }
 
 export interface IUploadFile {

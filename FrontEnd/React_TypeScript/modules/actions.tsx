@@ -10,6 +10,7 @@ export const friendSetCreateGroupFriends = 'friendSetCreateGroupFriends';
 export const friendSetonCreateGroupName = 'friendSetonCreateGroupName';
 export const groupSetGroup = 'groupSetGroup';
 export const spotSetSpot = 'spotSetSpot';
+export const itemSetOpenItemId = 'itemSetOpenItemId';
 
 // saga
 export const userSelectByUserId = 'userSelectByUserId';
@@ -57,6 +58,11 @@ export interface IgroupSetGroupAction {
 export interface IspotSetSpotAction {
     type: typeof spotSetSpot;
     payload: ISpot;
+}
+
+export interface IitemSetOpenItemIdAction {
+    type: typeof itemSetOpenItemId;
+    payload: number;
 }
 
 // saga
@@ -128,6 +134,13 @@ export const spotSetSpotAction = (res: ISpot): IspotSetSpotAction => {
     };
 };
 
+export const itemSetOpenItemIdAction = (res: number): IitemSetOpenItemIdAction => {
+    return {
+        type: itemSetOpenItemId,
+        payload: res,
+    };
+};
+
 // saga
 export const userSelectByUserIdAction = (res: IUser): IuserSelectByUserIdAction => {
     return {
@@ -147,5 +160,6 @@ export type Iactions =
     | IfriendSetonCreateGroupNameAction
     | IgroupSetGroupAction
     | IspotSetSpotAction
+    | IitemSetOpenItemIdAction
     // saga
     | IuserSelectByUserIdAction;
