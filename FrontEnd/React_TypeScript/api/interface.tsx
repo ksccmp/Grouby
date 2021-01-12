@@ -48,13 +48,15 @@ export interface ISpot {
 }
 
 export interface IRank {
+    rankId?: number;
     spotId: number;
     regId?: string;
     rankCompId: number;
-    rankCompName: string;
     rankScore: number;
     regDate?: string;
     modDate?: string;
+
+    rankCompName: string;
 }
 
 export interface IRankComp {

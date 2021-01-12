@@ -25,4 +25,10 @@ public class SpotServiceImpl implements SpotService {
 	public List<Spot> selectByGroupId(int groupId) {
 		return spotRepo.selectByGroupId(groupId);
 	}
+	
+	@Override
+	@Transactional
+	public int updateSpotName(Spot spot) {
+		return spotRepo.updateSpotName(spot);
+	}
 }

@@ -21,4 +21,10 @@
 		where spot.group_id = #{value}
 		  and spot.group_id = ggroup.group_id
 	</select>
+	
+	<update id="updateSpotName" parameterType="spot">
+		update grouby_spot
+		set spot_name = #{spotName}
+		where spot_id = #{spotId}
+	</update>
 </mapper>

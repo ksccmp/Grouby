@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Rank {
+	private int rankId;
 	private int spotId;
 	private String regId;
 	private int rankCompId;

@@ -1,5 +1,6 @@
 package com.project.grouby.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.grouby.dto.ChangeRank;
 import com.project.grouby.dto.Rank;
 import com.project.grouby.dto.Spot;
 import com.project.grouby.dto.SpotRank;
@@ -120,6 +123,46 @@ public class SpotController {
 	public ResponseEntity<Map<String, Object>> selectAllRankCompByGroupId(@RequestParam int groupId) {
 		try {
 			return response(rankCompServ.selectAllByGroupId(groupId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/selectRanksBySpotId")
+	public ResponseEntity<Map<String, Object>> selectRanksBySpotId(@RequestParam int spotId) {
+		try {
+			List<Integer> rankIds = rankServ.selectRankIdBySpotId(spotId);
+			List<ChangeRank> changeRanks = new ArrayList<ChangeRank>();
+			
+			for(int i=0; i<rankIds.size(); i++) {
+				int rankId = rankIds.get(i);
+				
+				List<Rank> ranks = rankServ.selectByRankId(rankId);
+				ChangeRank changeRank = new ChangeRank(ranks.get(i).getRegId(), ranks.get(i).getModDate(), ranks);
+				
+				changeRanks.add(changeRank);
+			}
+			
+			return response(changeRanks, true, HttpStatus.OK);
+			
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/selectRankComp")
+	public ResponseEntity<Map<String, Object>> selectRankComp(@RequestParam int spotId) {
+		try {
+			return response(rankServ.selectRankComp(spotId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@PutMapping("/updateSpotName")
+	public ResponseEntity<Map<String, Object>> updateSpotName(@RequestBody Spot spot) {
+		try {
+			return response(spotServ.updateSpotName(spot), true, HttpStatus.OK);
 		} catch(RuntimeException e) {
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);
 		}

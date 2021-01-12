@@ -62,6 +62,7 @@ create table grouby_spot (
 );
 
 create table grouby_rank (
+	rank_id int,
 	spot_id int,
     reg_id varchar(50),
     rank_comp_id int,

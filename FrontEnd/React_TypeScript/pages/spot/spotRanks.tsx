@@ -8,91 +8,68 @@ import {
     StyledText2,
     StyledDiv8,
 } from '../../api/styled';
-import { StyledH4_1 } from '../../api/styledFont';
+import { StyledH4_1, StyledH5, StyledH4 } from '../../api/styledFont';
 import Rank from '../../component/spot/rank';
-import { IRank } from '../../api/interface';
+import { IGroup, IRank, ISpot } from '../../api/interface';
 import { getTime, goSpotRating } from '../../api/common';
 import { StyledCheckOutlined1, StyledEditOutlined1, StyledFileAddOutlined1 } from '../../api/styledAnt';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
+import axios from '../../api/axios';
 
 export interface IChangeRank {
     regId: string;
-    regDate: string;
+    modDate: string;
     ranks: IRank[];
 }
 
 const SpotRanks = (): JSX.Element => {
-    const [changeRanks, setChangeRanks] = React.useState<IChangeRank[]>([
-        {
-            regId: 'ksccmp',
-            regDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    regId: 'ksccmp',
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 4,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    regId: 'ksccmp',
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    regId: 'ksccmp',
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 3,
-                    regDate: getTime(),
-                },
-            ],
-        },
+    const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
+    const reduxGroup: IGroup = useSelector((state: IIndexReducer) => state.GroupReducer.group);
 
-        {
-            regId: 'intan',
-            regDate: getTime(),
-            ranks: [
-                {
-                    spotId: 1,
-                    regId: 'intan',
-                    rankCompId: 1,
-                    rankCompName: '음식',
-                    rank: 4,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    regId: 'intan',
-                    rankCompId: 2,
-                    rankCompName: '친절',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-                {
-                    spotId: 1,
-                    regId: 'intan',
-                    rankCompId: 3,
-                    rankCompName: '화장실',
-                    rank: 5,
-                    regDate: getTime(),
-                },
-            ],
-        },
-    ]);
-    const [title, setTitle] = React.useState<string>('사당 요란한식당');
+    const [changeRanks, setChangeRanks] = React.useState<IChangeRank[]>([]);
+    const [spotName, setSpotName] = React.useState<string>('');
     const [modSpotName, setModSpoName] = React.useState<boolean>(false);
 
-    const onTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
+    React.useEffect(() => {
+        setSpotName(reduxSpot.spotName);
+        getChangeRanks();
+    }, []);
+
+    // 서버에서 changeRanks 가져오기
+    const getChangeRanks = async () => {
+        const res = await axios.get('/spot/selectRanksBySpotId', {
+            params: {
+                spotId: reduxSpot.spotId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        setChangeRanks(res.data.data);
     };
 
-    const onModSpotName = () => {
+    const onSpotName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSpotName(e.target.value);
+    };
+
+    const onModSpotName = async () => {
         setModSpoName(!modSpotName);
+
+        if (modSpotName) {
+            reduxSpot.spotName = spotName;
+
+            const res = await axios.put('/spot/updateSpotName', reduxSpot, {
+                headers: {
+                    'user-token': localStorage.userToken,
+                },
+            });
+
+            if (!res.data.success) {
+                alert('처리 중 오류가 발생했습니다.');
+            }
+        }
     };
 
     return (
@@ -103,9 +80,14 @@ const SpotRanks = (): JSX.Element => {
                         <StyledFlex2>
                             <StyledDiv8>
                                 {modSpotName ? (
-                                    <StyledText2 value={title} onChange={onTitle} />
+                                    <StyledText2 value={spotName} onChange={onSpotName} />
                                 ) : (
-                                    <StyledH4_1>수찬커플/{title}</StyledH4_1>
+                                    <>
+                                        <StyledH5 style={{ opacity: '0.6', marginRight: '5px' }}>
+                                            {reduxGroup.groupName}
+                                        </StyledH5>
+                                        <StyledH4>{reduxSpot.spotName}</StyledH4>
+                                    </>
                                 )}
                             </StyledDiv8>
                             {modSpotName ? (

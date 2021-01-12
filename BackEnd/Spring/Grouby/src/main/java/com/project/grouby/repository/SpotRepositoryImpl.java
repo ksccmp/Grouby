@@ -29,4 +29,9 @@ public class SpotRepositoryImpl implements SpotRepository {
 	public List<Spot> selectByGroupId(int groupId) {
 		return session.selectList(ns + "selectByGroupId", groupId);
 	}
+	
+	@Override
+	public int updateSpotName(Spot spot) {
+		return session.update(ns + "updateSpotName", spot);
+	}
 }

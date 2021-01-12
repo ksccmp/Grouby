@@ -40,14 +40,14 @@ const Rank: React.FC<IChangeRank2> = ({ changeRank }): JSX.Element => {
                                             <StyledH6>{rank.rankCompName}</StyledH6>
                                         </StyledBackgroundDiv19_1>
                                         <StyledBackgroundDiv19_2>
-                                            {rank.rank >= 3 ? (
-                                                rank.rank === 3 ? (
-                                                    <StyledH6 style={{ color: color2 }}>{rank.rank}</StyledH6>
+                                            {rank.rankScore >= 3 ? (
+                                                rank.rankScore === 3 ? (
+                                                    <StyledH6 style={{ color: color2 }}>{rank.rankScore}</StyledH6>
                                                 ) : (
-                                                    <StyledH6 style={{ color: color5 }}>{rank.rank}</StyledH6>
+                                                    <StyledH6 style={{ color: color5 }}>{rank.rankScore}</StyledH6>
                                                 )
                                             ) : (
-                                                <StyledH6 style={{ color: color4 }}>{rank.rank}</StyledH6>
+                                                <StyledH6 style={{ color: color4 }}>{rank.rankScore}</StyledH6>
                                             )}
                                         </StyledBackgroundDiv19_2>
                                     </StyledBorderDiv19>

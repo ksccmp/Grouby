@@ -9,4 +9,6 @@ public interface SpotService {
 	public int insert(Spot spot);
 	
 	public List<Spot> selectByGroupId(int groupId);
+	
+	public int updateSpotName(Spot spot);
 }

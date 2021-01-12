@@ -4,37 +4,37 @@ import { StyledH4 } from '../../api/styledFont';
 import { StyledLeftOutlined2, StyledCheckOutlined1 } from '../../api/styledAnt';
 import { getTime, goSpotRanks } from '../../api/common';
 import StarScore from '../../component/spot/starScore';
-import { IRank } from '../../api/interface';
+import { IRank, ISpot } from '../../api/interface';
+import axios from '../../api/axios';
+import { useSelector } from 'react-redux';
+import { IIndexReducer } from '../../modules/reducer/indexReducer';
 
 const spotRating = (): JSX.Element => {
-    const [ranks, setRanks] = React.useState<IRank[]>([
-        {
-            spotId: 1,
-            rankCompId: 0,
-            rankCompName: '음식',
-            rank: 1,
-            regDate: getTime(),
-        },
-        {
-            spotId: 1,
-            rankCompId: 1,
-            rankCompName: '친절',
-            rank: 1,
-            regDate: getTime(),
-        },
-        {
-            spotId: 1,
-            rankCompId: 2,
-            rankCompName: '화장실',
-            rank: 1,
-            regDate: getTime(),
-        },
-    ]);
+    const reduxSpot: ISpot = useSelector((state: IIndexReducer) => state.SpotReducer.spot);
+
+    const [ranks, setRanks] = React.useState<IRank[]>([]);
+
+    React.useEffect(() => {
+        getRanks();
+    }, []);
+
+    const getRanks = async () => {
+        const res = await axios.get('/spot/selectRankComp', {
+            params: {
+                spotId: reduxSpot.spotId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        setRanks(res.data.data);
+    };
 
     // 별 클릭 시 해당 점수 부여
-    const onRanks = (index: number, rank: number) => {
+    const onRanks = (index: number, rankScore: number) => {
         const newRanks: IRank[] = ranks.slice();
-        newRanks[index].rank = rank;
+        newRanks[index].rankScore = rankScore;
         setRanks(newRanks);
     };
 

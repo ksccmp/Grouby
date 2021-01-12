@@ -35,4 +35,19 @@ public class RankServiceImpl implements RankService {
 	public List<Rank> selectIfTotalNoneBySpotId(int spotId) {
 		return rankRepo.selectIfTotalNoneBySpotId(spotId);
 	}
+	
+	@Override
+	public List<Integer> selectRankIdBySpotId(int spotId) {
+		return rankRepo.selectRankIdBySpotId(spotId);
+	}
+	
+	@Override
+	public List<Rank> selectByRankId(int rankId) {
+		return rankRepo.selectByRankId(rankId);
+	}
+	
+	@Override
+	public List<Rank> selectRankComp(int spotId) {
+		return rankRepo.selectRankComp(spotId);
+	}
 }

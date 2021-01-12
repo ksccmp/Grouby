@@ -12,14 +12,14 @@ import { IRank } from '../../api/interface';
 
 interface IStarScore {
     rank: IRank;
-    onRanks: (index: number, rank: number) => void;
+    onRanks: (index: number, rankScore: number) => void;
 }
 
 const StarScore: React.FC<IStarScore> = ({ rank, onRanks }): JSX.Element => {
     const stars: number[] = [0, 1, 2, 3, 4];
 
     const getStar = (index: number, key: number) => {
-        return rank.rank > index ? (
+        return rank.rankScore > index ? (
             <StyledStarFilled1
                 key={key}
                 onClick={() => {
