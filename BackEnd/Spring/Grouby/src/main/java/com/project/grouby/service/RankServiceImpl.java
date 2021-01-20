@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.project.grouby.dto.Rank;
 import com.project.grouby.repository.RankRepository;
@@ -16,9 +15,19 @@ public class RankServiceImpl implements RankService {
 	RankRepository rankRepo;
 	
 	@Override
-	@Transactional
-	public int insert(Rank rank) {
-		return rankRepo.insert(rank);
+	public int insert(List<Rank> ranks) {
+		int res = 0;
+		
+		int rankId = rankRepo.selectMaxRankId();
+		
+		for(int i=0; i<ranks.size(); i++) {
+			Rank rank = ranks.get(i);
+			rank.setRankId(rankId);;
+			
+			res = res + rankRepo.insert(rank);
+		}
+		
+		return res;
 	}
 	
 	@Override
@@ -49,5 +58,10 @@ public class RankServiceImpl implements RankService {
 	@Override
 	public List<Rank> selectRankComp(int spotId) {
 		return rankRepo.selectRankComp(spotId);
+	}
+	
+	@Override
+	public int selectRankCount(String userId) {
+		return rankRepo.selectRankCount(userId);
 	}
 }

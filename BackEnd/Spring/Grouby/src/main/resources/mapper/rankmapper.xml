@@ -5,8 +5,8 @@
 <mapper namespace="com.project.grouby.rankmapper">
 	<insert id="insert" parameterType="rank">
 		insert
-		into grouby_rank
-		values (#{spotId}, #{regId}, #{rankCompId}, #{rankScore}, current_timestamp(), current_timestamp())
+		into grouby_rank (rank_id, spot_id, reg_id, rank_comp_id, rank_score, reg_date, mod_date)
+		values (#{rankId}, #{spotId}, #{regId}, #{rankCompId}, #{rankScore}, current_timestamp(), current_timestamp())
 	</insert>
 
 	<select id="selectBySpotId" parameterType="int" resultType="rank">
@@ -43,15 +43,16 @@
 	</select>
 	
 	<select id="selectRankIdBySpotId" parameterType="int" resultType="int">
-		select rank_id
+		select distinct rank_id
 		from grouby_rank
 		where spot_id = #{value}
 	</select>
 	
 	<select id="selectByRankId" parameterType="int" resultType="rank">
-		select *
-		from grouby_rank
-		where rank_id = #{value}
+		select grank.*, rankComp.rank_comp_name 
+		from grouby_rank grank, grouby_rank_comp rankComp 
+		where grank.rank_comp_id = rankComp.rank_comp_id 
+		  and rank_id = #{value};
 	</select>
 	
 	<select id="selectRankComp" parameterType="int" resultType="rank">
@@ -61,6 +62,20 @@
 			   rankComp.rank_comp_name
 		from grouby_rank_comp rankComp, grouby_spot_rank spotRank
 		where spotRank.spot_id = #{value} 
-		  and spotRank.rank_comp_id = rankComp.rank_comp_id;
+		  and spotRank.rank_comp_id = rankComp.rank_comp_id
+	</select>
+	
+	<select id="selectMaxRankId" resultType="int">
+		select ifnull(max(rank_id)+1, 0)
+		from grouby_rank
+	</select>
+	
+	<select id="selectRankCount" parameterType="string" resultType="int">
+		select count(*)
+		from (
+				select distinct rank_id
+				from grouby_rank
+				where reg_id = #{value}
+			 ) grank
 	</select>
 </mapper>

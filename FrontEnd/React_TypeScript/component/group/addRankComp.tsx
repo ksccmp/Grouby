@@ -11,6 +11,7 @@ import {
     StyledFlex13,
     StyledFlex16,
     StyledFlex17,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledCheckCircleOutlined3, StyledCheckCircleFilled3, StyledLeftOutlined2 } from '../../api/styledAnt';
 import { StyledH5, StyledH7 } from '../../api/styledFont';
@@ -51,7 +52,7 @@ const AddRankComp: React.FC<IAddRankComp> = ({
         <>
             <StyledFixed1 open={openAddRankComp}>
                 <StyledDiv1>
-                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv10>
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
@@ -66,7 +67,7 @@ const AddRankComp: React.FC<IAddRankComp> = ({
                                 </div>
                             </StyledFlex2>
                         </StyledDiv6>
-                    </StyledDiv5>
+                    </StyledDiv10>
 
                     <StyledDiv5>
                         <StyledDiv6>

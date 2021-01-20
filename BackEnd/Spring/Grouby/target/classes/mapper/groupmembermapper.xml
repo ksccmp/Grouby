@@ -21,9 +21,16 @@
 		where group_id = #{value}
 	</select>
 	
-	<delete id="deleteMember" parameterType="string">
-		delete
+	<select id="selectGroupCount" parameterType="string" resultType="int">
+		select count(*)
 		from grouby_groupmember
 		where user_id = #{value}
+	</select>
+	
+	<delete id="deleteMember" parameterType="groupmember">
+		delete
+		from grouby_groupmember
+		where group_id = #{groupId}
+		  and user_id = #{userId}
 	</delete>
 </mapper>

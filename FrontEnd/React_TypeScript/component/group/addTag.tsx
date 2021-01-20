@@ -14,6 +14,7 @@ import {
     StyledText4,
     StyledBorderDiv21,
     StyledBackgroundDiv21,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledMinusCircleFilled2, StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
 import { StyledH5, StyledH7 } from '../../api/styledFont';
@@ -65,7 +66,7 @@ const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag, tags, setTags }):
         <>
             <StyledFixed1 open={openAddTag}>
                 <StyledDiv1>
-                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv10>
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
@@ -80,7 +81,7 @@ const AddTag: React.FC<IAddTag> = ({ openAddTag, onOpenAddTag, tags, setTags }):
                                 </div>
                             </StyledFlex2>
                         </StyledDiv6>
-                    </StyledDiv5>
+                    </StyledDiv10>
 
                     <StyledDiv5>
                         <StyledDiv6>

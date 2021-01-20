@@ -19,4 +19,8 @@ public interface RankRepository {
 	public List<Rank> selectByRankId(int rankId);
 	
 	public List<Rank> selectRankComp(int spotId);
+	
+	public int selectMaxRankId();
+	
+	public int selectRankCount(String userId);
 }

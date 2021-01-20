@@ -85,6 +85,15 @@ public class SpotController {
 		}
 	}
 	
+	@PostMapping("/createRanks")
+	public ResponseEntity<Map<String, Object>> createRanks(@RequestBody List<Rank> ranks) {
+		try {
+			return response(rankServ.insert(ranks), true, HttpStatus.CREATED);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
 	
 	@GetMapping("/selectSpotByGroupId")
 	public ResponseEntity<Map<String, Object>> selectSpotByGroupId(@RequestParam int groupId) {
@@ -154,6 +163,15 @@ public class SpotController {
 	public ResponseEntity<Map<String, Object>> selectRankComp(@RequestParam int spotId) {
 		try {
 			return response(rankServ.selectRankComp(spotId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@GetMapping("/selectRankCount")
+	public ResponseEntity<Map<String, Object>> selectRankCount(@RequestParam String userId) {
+		try {
+			return response(rankServ.selectRankCount(userId), true, HttpStatus.OK);
 		} catch(RuntimeException e) {
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);
 		}

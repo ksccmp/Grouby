@@ -99,6 +99,16 @@ public class ItemController {
 		}
 	}
 	
+	@GetMapping("/selectItemCount")
+	public ResponseEntity<Map<String, Object>> selectItemCount(@RequestParam String userId) {
+		try {
+			return response(itemServ.selectItemCount(userId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
+	
+	
 	@DeleteMapping("/delHeart")
 	public ResponseEntity<Map<String, Object>> delHeart(Heart heart) {
 		try {

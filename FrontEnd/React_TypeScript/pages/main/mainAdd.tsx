@@ -10,6 +10,7 @@ import {
     StyledTd1,
     StyledFlex16,
     StyledDiv8,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledH4, StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { StyledRightOutlined1, StyledSettingOutlined1 } from '../../api/styledAnt';
@@ -17,14 +18,73 @@ import { IUser } from '../../api/interface';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import { useSelector } from 'react-redux';
 import { color3, color4 } from '../../api/common';
+import axios from '../../api/axios';
 
 const MainAdd = (): JSX.Element => {
     const reduxUser: IUser = useSelector((state: IIndexReducer) => state.UserReducer.user);
 
+    const [groupCount, setGroupCount] = React.useState<number>(0);
+    const [itemCount, setItemCount] = React.useState<number>(0);
+    const [rankCount, setRankCount] = React.useState<number>(0);
+
+    React.useEffect(() => {
+        getCount();
+    }, []);
+
+    const getCount = async () => {
+        const res = await axios.get('/group/selectGroupCount', {
+            params: {
+                userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res.data.success) {
+            setGroupCount(res.data.data);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+            return;
+        }
+
+        const res1 = await axios.get('/item/selectItemCount', {
+            params: {
+                userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res1.data.success) {
+            setItemCount(res1.data.data);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+            return;
+        }
+
+        const res2 = await axios.get('/spot/selectRankCount', {
+            params: {
+                userId: reduxUser.userId,
+            },
+            headers: {
+                'user-token': localStorage.userToken,
+            },
+        });
+
+        if (res2.data.success) {
+            setRankCount(res2.data.data);
+        } else {
+            alert('처리 중 오류가 발생했습니다.');
+            return;
+        }
+    };
+
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
@@ -35,7 +95,7 @@ const MainAdd = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
@@ -50,7 +110,7 @@ const MainAdd = (): JSX.Element => {
                                         <StyledH5>그룹</StyledH5>
                                     </div>
                                     <div>
-                                        <StyledH5 style={{ color: '#E6951A' }}>2</StyledH5>
+                                        <StyledH5 style={{ color: '#E6951A' }}>{groupCount}</StyledH5>
                                     </div>
                                 </StyledTd1>
                                 <StyledTd1>
@@ -58,7 +118,7 @@ const MainAdd = (): JSX.Element => {
                                         <StyledH5>아이템</StyledH5>
                                     </div>
                                     <div>
-                                        <StyledH5 style={{ color: '#E6951A' }}>7</StyledH5>
+                                        <StyledH5 style={{ color: '#E6951A' }}>{itemCount}</StyledH5>
                                     </div>
                                 </StyledTd1>
                                 <StyledTd1>
@@ -66,7 +126,7 @@ const MainAdd = (): JSX.Element => {
                                         <StyledH5>평가</StyledH5>
                                     </div>
                                     <div>
-                                        <StyledH5 style={{ color: '#E6951A' }}>15</StyledH5>
+                                        <StyledH5 style={{ color: '#E6951A' }}>{rankCount}</StyledH5>
                                     </div>
                                 </StyledTd1>
                             </StyledTr1>

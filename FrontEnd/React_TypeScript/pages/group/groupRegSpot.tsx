@@ -11,6 +11,7 @@ import {
     StyledBorderDiv20,
     StyledBackgroundDiv20,
     StyledDiv8,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined5 } from '../../api/styledAnt';
 import { StyledH4, StyledH7, StyledH6 } from '../../api/styledFont';
@@ -97,7 +98,6 @@ const GroupRegSpot = (): JSX.Element => {
             });
 
             if (res.data.success) {
-                alert('스팟 생성이 완료되었습니다.');
                 goGroupHome();
             } else {
                 alert('처리 중 오류가 발생했습니다.');
@@ -108,7 +108,7 @@ const GroupRegSpot = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledFlex13>
@@ -122,7 +122,7 @@ const GroupRegSpot = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>

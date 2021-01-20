@@ -6,7 +6,7 @@ import com.project.grouby.dto.Rank;
 
 public interface RankService {
 	
-	public int insert(Rank rank);
+	public int insert(List<Rank> ranks);
 	
 	public List<Rank> selectBySpotId(int spotId);
 	
@@ -19,4 +19,6 @@ public interface RankService {
 	public List<Rank> selectByRankId(int rankId);
 	
 	public List<Rank> selectRankComp(int spotId);
+	
+	public int selectRankCount(String userId);
 }

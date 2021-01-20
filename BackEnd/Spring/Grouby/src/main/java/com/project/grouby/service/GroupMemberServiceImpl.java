@@ -32,8 +32,13 @@ public class GroupMemberServiceImpl implements GroupMemberService {
 	}
 	
 	@Override
+	public int selectGroupCount(String userId) {
+		return groupMemberRepo.selectGroupCount(userId);
+	}
+	
+	@Override
 	@Transactional
-	public int deleteMember(String userId) {
-		return groupMemberRepo.deleteMember(userId);
+	public int deleteMember(GroupMember groupMember) {
+		return groupMemberRepo.deleteMember(groupMember);
 	}
 }

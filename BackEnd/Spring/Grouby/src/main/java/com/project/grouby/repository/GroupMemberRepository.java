@@ -12,5 +12,7 @@ public interface GroupMemberRepository {
 	
 	public int selectMemberCount(int groupId);
 	
-	public int deleteMember(String userId);
+	public int selectGroupCount(String userId);
+	
+	public int deleteMember(GroupMember groupMember);
 }

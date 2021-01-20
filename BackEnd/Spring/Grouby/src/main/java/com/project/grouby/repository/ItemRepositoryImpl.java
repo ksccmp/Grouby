@@ -25,4 +25,9 @@ public class ItemRepositoryImpl implements ItemRepository {
 	public List<Item> selectByIds(Item item) {
 		return session.selectList(ns + "selectByIds", item);
 	}
+	
+	@Override
+	public int selectItemCount(String userId) {
+		return session.selectOne(ns + "selectItemCount", userId);
+	}
 }

@@ -83,6 +83,15 @@ public class GroupController {
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);
 		}
 	}
+
+	@GetMapping("/selectGroupCount")
+	public ResponseEntity<Map<String, Object>> selectGroupCount(@RequestParam String userId) {
+		try {
+			return response(groupMemberServ.selectGroupCount(userId), true, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return response(e.getMessage(), false, HttpStatus.CONFLICT);
+		}
+	}
 	
 	@PutMapping("/updateGroupName")
 	public ResponseEntity<Map<String, Object>> updateGroupName(@RequestBody Group group) {
@@ -94,9 +103,9 @@ public class GroupController {
 	}
 	
 	@DeleteMapping("/deleteMember")
-	public ResponseEntity<Map<String, Object>> deleteMember(@RequestParam String userId) {
+	public ResponseEntity<Map<String, Object>> deleteMember(GroupMember groupMember) {
 		try {
-			return response(groupMemberServ.deleteMember(userId), true, HttpStatus.OK);
+			return response(groupMemberServ.deleteMember(groupMember), true, HttpStatus.OK);
 		} catch(RuntimeException e) {
 			return response(e.getMessage(), false, HttpStatus.CONFLICT);
 		}

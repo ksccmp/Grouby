@@ -17,7 +17,7 @@ import {
 import { StyledH5, StyledH6, StyledH7 } from '../../api/styledFont';
 import { IItem, IUploadFile } from '../../api/interface';
 import { StyledHeartOutlined1, StyledHeartFilled1, StyledMessageOutlined1 } from '../../api/styledAnt';
-import { color1, color3, color4 } from '../../api/common';
+import { color1, color3, color4, getTime } from '../../api/common';
 
 interface IChangeItem {
     item: IItem;
@@ -56,7 +56,7 @@ const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JS
     return (
         <>
             <StyledFlex9>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv5 style={{ marginBottom: '5px' }}>
                     <StyledDiv6>
                         <StyledFlex8>
                             <StyledH5>{item.regId}</StyledH5>
@@ -122,7 +122,7 @@ const Item: React.FC<IChangeItem> = ({ item, onHeartPress, onOpenComments }): JS
                                     </div>
                                 </StyledFlex11>
                                 <div>
-                                    <StyledH7 style={{ opacity: '0.6' }}>{item.regDate}</StyledH7>
+                                    <StyledH7 style={{ opacity: '0.6' }}>{getTime(item.regDate as string)}</StyledH7>
                                 </div>
                             </StyledFlex11>
                         </div>

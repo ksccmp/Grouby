@@ -13,12 +13,13 @@ import {
     StyledFlex19,
     StyledDiv7,
     StyledDiv8,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledSearchOutlined1, StyledAppstoreAddOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import SpotCard from '../../component/group/spotCard';
 import { ISpot, IRank, IRankComp, IGroup, ITag } from '../../api/interface';
-import { goGroupRegSpot, getTime, color3 } from '../../api/common';
+import { goGroupRegSpot, color3 } from '../../api/common';
 import FilterRankComp from '../../component/group/filterRankComp';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
@@ -165,7 +166,7 @@ const GroupHome = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
@@ -185,9 +186,7 @@ const GroupHome = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
 
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>
                         <StyledFlex19>
                             <StyledBorderDiv4 onClick={onOpenFilterRankComp}>
@@ -207,7 +206,7 @@ const GroupHome = (): JSX.Element => {
                             </StyledBorderDiv4>
                         </StyledFlex19>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5>
                     <StyledDiv6>

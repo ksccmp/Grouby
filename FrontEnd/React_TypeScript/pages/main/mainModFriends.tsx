@@ -9,12 +9,12 @@ import {
     StyledBorderDiv18,
     StyledBackgroundDiv18,
     StyledText3,
+    StyledDiv10,
 } from '../../api/styled';
-import { StyledLeftOutlined2, StyledCheckOutlined1, StyledSearchOutlined1 } from '../../api/styledAnt';
+import { StyledLeftOutlined2, StyledSearchOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
-import Other from '../../component/main/other';
-import { IFriend, IUser } from '../../api/interface';
-import { getTime, goMainRegGroup, color3 } from '../../api/common';
+import { IUser } from '../../api/interface';
+import { goMainRegGroup, color3 } from '../../api/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
 import Friend from '../../component/main/friend';
@@ -113,7 +113,7 @@ const MainModFriends = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledFlex13>
@@ -135,7 +135,7 @@ const MainModFriends = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5>
                     <StyledDiv6>

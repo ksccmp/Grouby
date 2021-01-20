@@ -11,6 +11,7 @@ import {
     StyledBorderDiv21,
     StyledBackgroundDiv21,
     StyledPassword2,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import {
@@ -164,7 +165,7 @@ const SignUp = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledFlex13>
@@ -178,7 +179,7 @@ const SignUp = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5>
                     <StyledDiv6>

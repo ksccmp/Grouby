@@ -25,4 +25,9 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> selectByIds(Item item) {
 		return itemRepo.selectByIds(item);
 	}
+	
+	@Override
+	public int selectItemCount(String userId) {
+		return itemRepo.selectItemCount(userId);
+	}
 }

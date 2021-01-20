@@ -14,6 +14,7 @@ import {
     StyledNavUl2,
     StyledNavLi2,
     StyledButton4,
+    StyledDiv10,
 } from '../../api/styled';
 import {
     StyledCheckCircleOutlined3,
@@ -87,7 +88,7 @@ const FilterRankComp: React.FC<IFilterRankComp> = ({
         <>
             <StyledFixed1 open={openFilterRankComp}>
                 <StyledDiv1>
-                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv10>
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
@@ -98,7 +99,7 @@ const FilterRankComp: React.FC<IFilterRankComp> = ({
                                 </div>
                             </StyledFlex2>
                         </StyledDiv6>
-                    </StyledDiv5>
+                    </StyledDiv10>
 
                     <StyledDiv5>
                         <StyledDiv6>

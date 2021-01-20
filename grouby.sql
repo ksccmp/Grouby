@@ -68,7 +68,8 @@ create table grouby_rank (
     rank_comp_id int,
     rank_score int,
     reg_date datetime,
-    mod_date datetime
+    mod_date datetime,
+    primary key(rank_id, spot_id, reg_id, rank_comp_id)
 );
 
 create table grouby_rank_comp (

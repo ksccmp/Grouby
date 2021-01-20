@@ -17,4 +17,10 @@
 		from grouby_item item
 		where item.group_id = #{groupId} and item.spot_id = #{spotId}
 	</select>
+	
+	<select id="selectItemCount" parameterType="string" resultType="int">
+		select count(*)
+		from grouby_item
+		where reg_id = #{value}
+	</select>
 </mapper>

@@ -11,12 +11,12 @@ import {
     StyledBorderDiv21,
     StyledBackgroundDiv21,
     StyledText4,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledPlusCircleFilled1 } from '../../api/styledAnt';
 import { StyledH4 } from '../../api/styledFont';
 import Comment from './comment';
 import { IComment, IUser } from '../../api/interface';
-import { getTime } from '../../api/common';
 import axios from '../../api/axios';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
@@ -93,7 +93,7 @@ const Comments: React.FC<IComments> = ({ comments, setComments, openComments, on
         <>
             <StyledFixed1 open={openComments} id="fixed1">
                 <StyledDiv1 style={{ paddingBottom: '30px', position: 'relative' }}>
-                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv10>
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
@@ -104,7 +104,7 @@ const Comments: React.FC<IComments> = ({ comments, setComments, openComments, on
                                 </div>
                             </StyledFlex2>
                         </StyledDiv6>
-                    </StyledDiv5>
+                    </StyledDiv10>
 
                     <StyledDiv5>
                         <StyledDiv6>

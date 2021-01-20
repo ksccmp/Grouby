@@ -9,6 +9,7 @@ import {
     StyledBackgroundDiv18,
     StyledText3,
     StyledFlex13,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledLeftOutlined2 } from '../../api/styledAnt';
 import { StyledH7 } from '../../api/styledFont';
@@ -129,7 +130,7 @@ const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => 
         <>
             <StyledFixed1 open={openOthers}>
                 <StyledDiv1>
-                    <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                    <StyledDiv10>
                         <StyledDiv6>
                             <StyledFlex2>
                                 <StyledFlex13>
@@ -144,7 +145,7 @@ const Others: React.FC<IOther> = ({ openOthers, onOpenOthers }): JSX.Element => 
                                 </div>
                             </StyledFlex2>
                         </StyledDiv6>
-                    </StyledDiv5>
+                    </StyledDiv10>
 
                     <StyledDiv5>
                         <StyledDiv6>

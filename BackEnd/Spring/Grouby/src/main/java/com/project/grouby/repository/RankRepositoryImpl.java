@@ -49,4 +49,14 @@ public class RankRepositoryImpl implements RankRepository {
 	public List<Rank> selectRankComp(int spotId) {
 		return session.selectList(ns + "selectRankComp", spotId);
 	}
+	
+	@Override
+	public int selectMaxRankId() {
+		return session.selectOne(ns + "selectMaxRankId");
+	}
+	
+	@Override
+	public int selectRankCount(String userId) {
+		return session.selectOne(ns + "selectRankCount", userId);
+	}
 }

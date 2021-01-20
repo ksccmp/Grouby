@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyledDiv1, StyledFlex2, StyledDiv5, StyledDiv6, StyledFlex13, StyledDiv8 } from '../../api/styled';
+import { StyledDiv1, StyledFlex2, StyledDiv10, StyledDiv6, StyledFlex13, StyledDiv8 } from '../../api/styled';
 import { StyledPlusCircleOutlined4 } from '../../api/styledAnt';
 import { StyledH4, StyledH5 } from '../../api/styledFont';
-import { goSpotRegItem, getTime } from '../../api/common';
+import { goSpotRegItem } from '../../api/common';
 import { IComment, IGroup, IItem, ISpot, IUploadFile, IUser } from '../../api/interface';
 import Item from '../../component/spot/item';
 import Comments from '../../component/spot/comments';
@@ -143,7 +143,7 @@ const SpotItems = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
@@ -157,7 +157,7 @@ const SpotItems = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <div>
                     {items.map((item, key) => (

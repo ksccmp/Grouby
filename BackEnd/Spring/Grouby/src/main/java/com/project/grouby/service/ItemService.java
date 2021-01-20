@@ -9,4 +9,6 @@ public interface ItemService {
 	public int insert(Item item);
 	
 	public List<Item> selectByIds(Item item);
+	
+	public int selectItemCount(String userId);
 }

@@ -8,6 +8,7 @@ import {
     StyledBackgroundDiv18,
     StyledText3,
     StyledFlex13,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledSearchOutlined1, StyledUsergroupAddOutlined1 } from '../../api/styledAnt';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
@@ -130,7 +131,7 @@ const MainFriends = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <div style={{ width: '100%', marginRight: '10px' }}>
@@ -150,7 +151,7 @@ const MainFriends = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5>
                     <StyledDiv6>

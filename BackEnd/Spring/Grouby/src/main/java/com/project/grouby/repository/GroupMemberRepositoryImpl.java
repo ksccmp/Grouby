@@ -32,7 +32,12 @@ public class GroupMemberRepositoryImpl implements GroupMemberRepository {
 	}
 	
 	@Override
-	public int deleteMember(String userId) {
-		return session.delete(ns + "deleteMember", userId);
+	public int selectGroupCount(String userId) {
+		return session.selectOne(ns + "selectGroupCount", userId);
+	}
+	
+	@Override
+	public int deleteMember(GroupMember groupMember) {
+		return session.delete(ns + "deleteMember", groupMember);
 	}
 }

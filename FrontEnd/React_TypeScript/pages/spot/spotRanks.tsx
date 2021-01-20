@@ -2,16 +2,16 @@ import * as React from 'react';
 import {
     StyledDiv1,
     StyledFlex2,
-    StyledDiv5,
+    StyledDiv10,
     StyledDiv6,
     StyledFlex13,
     StyledText2,
     StyledDiv8,
 } from '../../api/styled';
-import { StyledH4_1, StyledH5, StyledH4 } from '../../api/styledFont';
+import { StyledH5, StyledH4 } from '../../api/styledFont';
 import Rank from '../../component/spot/rank';
 import { IGroup, IRank, ISpot } from '../../api/interface';
-import { getTime, goSpotRating } from '../../api/common';
+import { goSpotRating } from '../../api/common';
 import { StyledCheckOutlined1, StyledEditOutlined1, StyledFileAddOutlined1 } from '../../api/styledAnt';
 import { useSelector } from 'react-redux';
 import { IIndexReducer } from '../../modules/reducer/indexReducer';
@@ -75,7 +75,7 @@ const SpotRanks = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
@@ -102,7 +102,7 @@ const SpotRanks = (): JSX.Element => {
                             )}
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <div>
                     {changeRanks.map((changeRank, key) => (

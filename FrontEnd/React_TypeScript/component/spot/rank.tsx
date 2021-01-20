@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
     StyledFlex8,
     StyledFlex9,
-    StyledDiv5,
+    StyledDiv10,
     StyledDiv6,
     StyledBorderDiv19,
     StyledBackgroundDiv19_1,
@@ -22,12 +22,12 @@ const Rank: React.FC<IChangeRank2> = ({ changeRank }): JSX.Element => {
     return (
         <>
             <StyledFlex9>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledDiv9>
                             <StyledFlex8>
                                 <StyledH5>{changeRank.regId}</StyledH5>
-                                <StyledH7 style={{ opacity: '0.6' }}>{getTime()}</StyledH7>
+                                <StyledH7 style={{ opacity: '0.6' }}>{getTime(changeRank.modDate)}</StyledH7>
                             </StyledFlex8>
 
                             <StyledFlex20>
@@ -55,7 +55,7 @@ const Rank: React.FC<IChangeRank2> = ({ changeRank }): JSX.Element => {
                             </StyledFlex20>
                         </StyledDiv9>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
             </StyledFlex9>
         </>
     );

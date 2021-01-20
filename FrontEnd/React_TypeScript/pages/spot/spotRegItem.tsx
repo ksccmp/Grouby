@@ -20,6 +20,7 @@ import {
     StyledFlex22,
     StyledFlex9,
     StyledSlideImg1,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledLeftOutlined2, StyledCheckOutlined1, StyledPlusCircleOutlined2 } from '../../api/styledAnt';
 import { StyledH4, StyledH6, StyledH7 } from '../../api/styledFont';
@@ -46,46 +47,62 @@ const SpotRegItem = (): JSX.Element => {
         setContents(e.target.value);
     };
 
+    const onCheckValid = () => {
+        if (fileLists.length === 0) {
+            alert('적어도 1개의 사진이 필요합니다.');
+            return false;
+        }
+
+        if (contents.length === 0) {
+            alert('적어도 1글자의 리뷰내용이 필요합니다.');
+            return false;
+        }
+
+        return true;
+    };
+
     // 아이템 등록
     const onRegItem = async () => {
-        const item: IItem = {
-            groupId: reduxGroup.groupId,
-            spotId: reduxSpot.spotId as number,
-            regId: reduxUser.userId,
-            contents: contents,
-        };
+        if (onCheckValid()) {
+            const item: IItem = {
+                groupId: reduxGroup.groupId,
+                spotId: reduxSpot.spotId as number,
+                regId: reduxUser.userId,
+                contents: contents,
+            };
 
-        const res = await axios.post('/item/regItem', item, {
-            // 아이템 생성
-            headers: {
-                'user-token': localStorage.userToken,
-            },
-        });
-
-        if (res.data.success) {
-            const formData = new FormData();
-
-            fileLists.forEach((file) => {
-                formData.append('multipartFiles', file);
-            });
-
-            formData.append('stringItemId', String(res.data.data));
-
-            const res1 = await axios.post('/common/uploadFiles', formData, {
-                // 생성된 아이템에 업로드 파일 저장
+            const res = await axios.post('/item/regItem', item, {
+                // 아이템 생성
                 headers: {
-                    // 'content-type': 'multipart/form-data',
                     'user-token': localStorage.userToken,
                 },
             });
 
-            if (res1.data.success) {
-                goSpotItems();
+            if (res.data.success) {
+                const formData = new FormData();
+
+                fileLists.forEach((file) => {
+                    formData.append('multipartFiles', file);
+                });
+
+                formData.append('stringItemId', String(res.data.data));
+
+                const res1 = await axios.post('/common/uploadFiles', formData, {
+                    // 생성된 아이템에 업로드 파일 저장
+                    headers: {
+                        // 'content-type': 'multipart/form-data',
+                        'user-token': localStorage.userToken,
+                    },
+                });
+
+                if (res1.data.success) {
+                    goSpotItems();
+                } else {
+                    alert('처리 중 오류가 발생했습니다.');
+                }
             } else {
                 alert('처리 중 오류가 발생했습니다.');
             }
-        } else {
-            alert('처리 중 오류가 발생했습니다.');
         }
     };
 
@@ -107,14 +124,17 @@ const SpotRegItem = (): JSX.Element => {
         setTouchGab(e.targetTouches[0].screenX);
     };
 
+    // 서클 인덱스에 해당하는 이미지로 이동
     const onClickCircle = (index: number) => {
         setSlideIndex(index);
     };
 
+    // 파일탐색 오픈
     const onAddPhoto = () => {
         (photo as HTMLInputElement).click();
     };
 
+    // 파일 저장
     const onSavePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList: FileList | null = e.target.files;
         const fileArray = Array.prototype.slice.call(fileList);
@@ -140,7 +160,7 @@ const SpotRegItem = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledFlex13>
@@ -154,7 +174,7 @@ const SpotRegItem = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
                     <StyledDiv6>

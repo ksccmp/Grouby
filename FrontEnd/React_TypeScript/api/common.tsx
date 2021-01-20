@@ -80,6 +80,29 @@ export const goSpotRating = (): void => {
 // moment
 moment.locale('ko');
 
-export const getTime = (): string => {
-    return moment(new Date()).format('ll');
+export const getTime = (date: string): string => {
+    const time = new Date().getTime() - new Date(date).getTime();
+
+    const second = Math.floor(time / 1000);
+    const minute = Math.floor(time / 1000 / 60);
+    const hour = Math.floor(time / 1000 / 60 / 60);
+    const day = Math.floor(time / 1000 / 60 / 60 / 24);
+
+    if (day > 1) {
+        return moment(date).format('lll');
+    }
+
+    if (day > 0) {
+        return '하루 전';
+    }
+
+    if (hour > 0) {
+        return `${hour}시간 전`;
+    }
+
+    if (minute > 0) {
+        return `${minute}분 전`;
+    }
+
+    return `${second}초 전`;
 };

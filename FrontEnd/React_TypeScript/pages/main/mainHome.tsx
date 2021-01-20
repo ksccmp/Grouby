@@ -9,6 +9,7 @@ import {
     StyledBorderDiv18,
     StyledBackgroundDiv18,
     StyledDiv8,
+    StyledDiv10,
 } from '../../api/styled';
 import { StyledH4, StyledH7 } from '../../api/styledFont';
 import { StyledPlusCircleOutlined4, StyledSearchOutlined1 } from '../../api/styledAnt';
@@ -77,7 +78,7 @@ const MainHome = (): JSX.Element => {
     return (
         <>
             <StyledDiv1>
-                <StyledDiv5 style={{ marginBottom: '0.5rem' }}>
+                <StyledDiv10>
                     <StyledDiv6>
                         <StyledFlex2>
                             <StyledDiv8>
@@ -97,7 +98,7 @@ const MainHome = (): JSX.Element => {
                             </StyledFlex13>
                         </StyledFlex2>
                     </StyledDiv6>
-                </StyledDiv5>
+                </StyledDiv10>
 
                 <StyledDiv5>
                     <StyledDiv6>

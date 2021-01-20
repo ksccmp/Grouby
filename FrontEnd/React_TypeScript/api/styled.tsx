@@ -168,6 +168,14 @@ export const StyledDiv9 = styled.div`
     }
 `;
 
+export const StyledDiv10 = styled.div`
+    background-color: #ffffff;
+    margin-bottom: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+`;
+
 export const StyledToggleDiv1 = styled.div`
     width: 2.2rem;
     height: 1.1rem;
@@ -1171,7 +1179,7 @@ export const StyledFixed1 = styled.div`
     width: 100%;
     height: 100%;
     transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
-    z-index: 2;
+    z-index: 20;
     overflow: auto;
 `;
 
