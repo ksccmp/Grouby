@@ -26,10 +26,6 @@ const GroupCard: React.FC<IGroupCard> = ({ group, groupMembers }): JSX.Element =
                     <StyledH5 style={{ marginRight: '5px' }}>{group.groupName}</StyledH5>
                     <StyledH6 style={{ color: color2 }}>{groupMembers.length}</StyledH6>
                 </StyledFlex15>
-
-                <div>
-                    <StyledH6 style={{ color: 'red', opacity: '0.7' }}>99+</StyledH6>
-                </div>
             </StyledFlex14>
         </>
     );
